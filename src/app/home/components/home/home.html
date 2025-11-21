@@ -1,0 +1,20 @@
+<div class="p-6 max-w-[50vw] h-[95vh] mx-auto mt-5 bg-stone-800 rounded-4xl">
+  <div class="flex justify-center items-center text-3xl text-neutral-300 font-extrabold h-[10vh]">
+    {{ title }}
+  </div>
+  <div class="mx-auto grid grid-cols-3 gap-4 justify-items-center content-start">
+    @for (board of boards; track board.id) {
+      <div
+        class="p-2 w-[15vw] h-[15vh] border rounded-2xl wrap-break-word"
+        [style.background]="getColorForBoard(board)"
+        [routerLink]="['/board', board.id]"
+      >
+        {{ board.title }}
+      </div>
+    }
+    <div class="p-2 w-[15vw] h-[15vh] border rounded-2xl break-word bg-gray-200">
+      + Створити дошку
+    </div>
+  </div>
+</div>
+

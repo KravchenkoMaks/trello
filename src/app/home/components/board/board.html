@@ -1,0 +1,17 @@
+<div class="mx-20 grid gap-5">
+  <header class="grid h-20 grid-cols-[1fr_6fr_1fr] items-center">
+    <button routerLink="/" class="h-8 rounded-sm border px-2">&lt; Додому</button>
+    <div class="flex justify-center">{{ board.title }}</div>
+  </header>
+
+  <section class="flex gap-5">
+    @for (list of board.lists; track list.id) {
+    <div class="h-150 border p-2">
+      <tr-list [title]="list.title" [cards]="list.cards"></tr-list>
+    </div>
+    }
+
+    <button class="h-8 rounded-sm border px-2">+ Додати список</button>
+  </section>
+</div>
+
