@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Layout } from './home/components/layout/layout';
 import { Home } from './home/components/home/home';
 import { boardResolver } from './home/resolvers/board-resolver';
+import { boardsResolver } from './home/resolvers/boards-resolver';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,7 @@ export const routes: Routes = [
         path: '',
         component: Home,
         title: 'trello home',
+        resolve: { boards: boardsResolver },
       },
       {
         path: 'board/:id',

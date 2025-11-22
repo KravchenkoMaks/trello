@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { List } from '../list/list';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { IBoard } from '../../interfaces/i-board';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'tr-board',
@@ -10,7 +11,12 @@ import { IBoard } from '../../interfaces/i-board';
   styleUrl: './board.css',
 })
 export class Board {
+  board?: IBoard;
   private route = inject(ActivatedRoute);
 
-  board: IBoard = this.route.snapshot.data['board'] as IBoard;
+  constructor() {
+    this.route.data.pipe(takeUntilDestroyed()).subscribe(({ board }) => {
+      this.board = board;
+    });
+  }
 }

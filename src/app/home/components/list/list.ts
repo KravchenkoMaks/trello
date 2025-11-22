@@ -1,9 +1,10 @@
 import { Component, input } from '@angular/core';
 import { ICard } from '../../interfaces/i-card';
+import { Card } from '../card/card';
 
 @Component({
   selector: 'tr-list',
-  imports: [],
+  imports: [Card],
   templateUrl: './list.html',
   styleUrl: './list.css',
 })

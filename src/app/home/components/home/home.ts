@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IBoard } from '../../interfaces/i-board';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'tr-home',
@@ -9,14 +10,16 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './home.css',
 })
 export class Home {
+  route = inject(ActivatedRoute);
+  boards: IBoard[] = [];
   title = 'Мої дошки';
 
-  boards: IBoard[] = [
-    { id: 1, title: 'покупки' },
-    { id: 2, title: 'підготовка до весілля' },
-    { id: 3, title: 'розробка интернет-магазину' },
-    { id: 4, title: 'курс з просування в соціальних мережах' },
-  ];
+  constructor() {
+    this.route.data.pipe(takeUntilDestroyed()).subscribe(({ boards }) => {
+      console.log(boards);
+      this.boards = boards;
+    });
+  }
 
   getColorForBoard(board: IBoard): string {
     const key = `board-color-${board.id}`;
