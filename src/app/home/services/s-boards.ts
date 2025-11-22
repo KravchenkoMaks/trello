@@ -10,10 +10,19 @@ import { HttpClient } from '@angular/common/http';
 export class SBoards {
   httpClient = inject(HttpClient);
   apiUrl = environment.baseURL;
+  boardUrl = `${this.apiUrl}/board`;
+
+  private get headers() {
+    return { Authorization: 'Bearer 123' };
+  }
 
   getBoards(): Observable<IBoard[]> {
     return this.httpClient
-      .get<{ boards: IBoard[] }>(`${this.apiUrl}/board`, { headers: { Authorization: 'Bearer 123' } })
+      .get<{ boards: IBoard[] }>(this.boardUrl, { headers: this.headers })
       .pipe(map((resp) => resp.boards));
+  }
+
+  getBoard(id: number): Observable<IBoard> {
+    return this.httpClient.get<IBoard>(`${this.boardUrl}/${id}`, { headers: this.headers });
   }
 }

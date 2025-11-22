@@ -16,6 +16,7 @@ export class Board {
 
   constructor() {
     this.route.data.pipe(takeUntilDestroyed()).subscribe(({ board }) => {
+      console.log(board);
       this.board = board;
     });
   }
