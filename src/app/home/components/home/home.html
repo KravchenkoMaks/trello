@@ -1,20 +1,21 @@
-<div class="p-6 max-w-[50vw] h-[95vh] mx-auto mt-5 bg-stone-800 rounded-4xl">
-  <div class="flex justify-center items-center text-3xl text-neutral-300 font-extrabold h-[10vh]">
-    {{ title }}
-  </div>
-  <div class="mx-auto grid grid-cols-3 gap-4 justify-items-center content-start">
-    @for (board of boards; track board.id) {
-      <div
-        class="p-2 w-[15vw] h-[15vh] border rounded-2xl wrap-break-word"
-        [style.background]="getColorForBoard(board)"
-        [routerLink]="['/board', board.id]"
-      >
-        {{ board.title }}
-      </div>
-    }
-    <div class="p-2 w-[15vw] h-[15vh] border rounded-2xl break-word bg-gray-200">
-      + Створити дошку
+<div class="mx-auto my-4 flex flex-col max-w-[85vw] items-center gap-10 rounded-xl bg-zinc-900 p-6">
+  <div class="text-2xl font-extrabold text-orange-400">{{ title }}</div>
+
+  <div class="flex flex-wrap justify-center gap-4">
+    @for (board of boards(); track board.id) {
+    <div
+      class="h-[8vh] w-[15vw] cursor-pointer rounded-md p-2 wrap-break-word transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:scale-102 hover:shadow-lg"
+      [ngStyle]="{ background: board.custom?.['color'] || '#fff' }"
+      [routerLink]="['/board', board.id]"
+    >
+      {{ board.title }}
     </div>
+    }
+    <button
+      class="h-[8vh] w-[15vw] cursor-pointer rounded-md bg-zinc-200 transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:scale-102 hover:text-green-600 hover:shadow-lg focus:outline-none"
+      (click)="openModal()"
+    >
+      + Створити дошку
+    </button>
   </div>
 </div>
-

@@ -1,17 +1,54 @@
-<div class="mx-20 grid gap-5">
-  <header class="grid h-20 grid-cols-[1fr_6fr_1fr] items-center">
-    <button routerLink="/" class="h-8 rounded-sm border px-2">&lt; Додому</button>
-    <div class="flex justify-center">{{ board?.title }}</div>
-  </header>
+<div class="container mx-auto w-[80vw] rounded-2xl bg-zinc-900 text-neutral-400">
+  <div class="m-8 grid gap-5 pb-6" >
+    <header class="grid h-20 grid-cols-[1fr_10fr_1fr] items-center px-2">
+      <button routerLink="/" class="h-8 min-w-0 cursor-pointer truncate rounded-md bg-zinc-800 hover:bg-zinc-700">
+        &lt; Додому
+      </button>
+      <form [formGroup]="form" class="flex min-w-0 justify-center text-xl font-bold">
+        <div class="flex flex-col">
+          @if (!isEditing()) {
+          <button
+            class="block min-w-0 cursor-pointer truncate overflow-hidden rounded-md text-orange-400 hover:bg-zinc-800 hover:px-3"
+            (click)="enableEdit()"
+          >
+            {{ board?.title }}
+          </button>
+          } @else {
+          <input
+            type="text"
+            formControlName="title"
+            class="focus: rounded-md bg-zinc-800 px-2 mt-5 text-center text-base ring-zinc-700 focus:ring-1 focus:outline-none"
+            (blur)="saveEdit()"
+            (keydown.enter)="saveEdit()"
+            #inputRef
+          />
+          <div class="min-h-5 text-xs text-red-400 text-center">
+            @if (form.controls['title']?.dirty || form.controls['title']?.touched) {
+            @if(form.controls['title']?.errors?.['required']) {
+            <small>Назва дошки обов'язкова</small>
+            } @if (form.controls['title']?.errors?.['pattern']) {
+            <small>Назва недійсна</small>
+            } } @else {
+            <small class="invisible"> </small>
+            }
+          </div>
+          }
+        </div>
+      </form>
+    </header>
 
-  <section class="flex gap-5">
-    @for (list of board?.lists; track list.id) {
-    <div class="h-150 border p-2">
-      <tr-list [title]="list.title" [cards]="list.cards"></tr-list>
+    <div class="flex justify-center">
+      <section class="flex gap-5">
+        @for (list of board?.lists; track list.id) {
+        <div class="rounded-md bg-zinc-800 p-2 px-2">
+          <tr-list [title]="list.title" [cards]="list.cards"></tr-list>
+        </div>
+        }
+
+        <button class="h-8 cursor-pointer rounded-md bg-zinc-800 px-2 hover:bg-zinc-700 hover:text-violet-400">
+          + Додати список
+        </button>
+      </section>
     </div>
-    }
-
-    <button class="h-8 rounded-sm border px-2">+ Додати список</button>
-  </section>
+  </div>
 </div>
-

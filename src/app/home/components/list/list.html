@@ -1,10 +1,10 @@
 <div class="list grid gap-3">
-  {{ title() }}
+  <div class="font-bold text-orange-300">{{ title() }}</div>
 
   <div class="grid gap-3">
     @for (card of cards(); track card.id) {
     <tr-card [title]="card.title"></tr-card>
     }
-    <button class="h-10 border">+ Додати картку</button>
+    <button class="h-10 rounded-md bg-zinc-900  px-2 hover:text-violet-400 hover:bg-zinc-200">+ Додати картку</button>
   </div>
 </div>
