@@ -5,11 +5,11 @@ import { IBoard } from '../../interfaces/i-board';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SBoards } from '../../services/s-boards';
-import { BoardHeader } from '../board-header/board-header';
+import { BoardHeaderForm } from '../forms/board-header-form/board-header-form';
 
 @Component({
   selector: 'tr-board',
-  imports: [RouterOutlet, List, RouterLink, ReactiveFormsModule, BoardHeader],
+  imports: [RouterOutlet, List, RouterLink, ReactiveFormsModule, BoardHeaderForm],
   templateUrl: './board.html',
   styleUrl: './board.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,7 +32,6 @@ export class Board {
     this.boardId = Number(this.route.snapshot.paramMap.get('id'));
 
     this.route.data.pipe(takeUntilDestroyed()).subscribe(({ board }) => {
-      console.log(board);
       this.board.set({ ...board, id: this.boardId });
     });
   }
@@ -55,6 +54,5 @@ export class Board {
       },
       error: (err) => console.error('Помилка при PUT:', err),
     });
-    console.log('gggg');
   }
 }

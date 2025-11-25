@@ -4,7 +4,7 @@
       <button routerLink="/" class="cursor-pointer truncate rounded-md bg-zinc-800 py-1 text-xs hover:bg-zinc-700">
         &lt; Додому
       </button>
-      <tr-board-header [board]="board" [form]="form" (titleUpdated)="updateTitle($event)"></tr-board-header>
+      <tr-board-header-form [board]="board()" [form]="form" (titleUpdated)="updateTitle($event)"></tr-board-header-form>
     </header>
 
     <div class="flex justify-center">
