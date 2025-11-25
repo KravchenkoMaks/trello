@@ -3,7 +3,7 @@ import { IBoard } from '../../interfaces/i-board';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Dialog } from '@angular/cdk/dialog';
-import { CreateBoardModal } from '../create-board-modal/create-board-modal';
+import { CreateBoardModal } from '../modals/create-board-modal/create-board-modal';
 import { NgStyle } from '@angular/common';
 
 @Component({

@@ -1,0 +1,11 @@
+<div class="bg-zinc-800 rounded-xl flex flex-col gap-2">
+  <tr-title-form (titleSubmitted)="onTitleSubmitted($event)"></tr-title-form>
+  
+  <button
+    type="button"
+    (click)="closeModal()"
+    class="mb-4 text-stone-400 text-xs underline hover:text-stone-200 block mx-auto"
+  >
+    Закрити
+  </button>
+</div>
