@@ -1,0 +1,33 @@
+<form [formGroup]="form" class="flex min-w-0 justify-center text-xl font-bold">
+  <div class="flex flex-col w-full max-w-[60%]">
+    @if (!isEditing()) {
+      <button
+        class="w-full truncate rounded-md text-orange-400 hover:bg-zinc-800 hover:px-3 cursor-pointer"
+        (click)="enableEdit()"
+      >
+        {{ board()?.title }}
+      </button>
+    } @else {
+      <input
+        type="text"
+        formControlName="title"
+        class="rounded-md bg-zinc-800 px-2 mt-5 text-center text-base ring-zinc-700 focus:ring-1 focus:outline-none"
+        (blur)="saveEdit()"
+        (keydown.enter)="saveEdit()"
+        #inputRef
+      />
+      <div class="min-h-5 text-xs text-red-400 text-center">
+        @if (form.controls['title']?.dirty || form.controls['title']?.touched) {
+          @if(form.controls['title']?.errors?.['required']){
+           <small>Назва дошки обов'язкова</small> 
+          } 
+          @if(form.controls['title']?.errors?.['pattern']){
+            <small>Назва недійсна</small>
+          } 
+        } @else {
+          <small class="invisible"> </small>
+        }
+      </div>
+    }
+  </div>
+</form>
