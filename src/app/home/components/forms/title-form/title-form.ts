@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class TitleForm {
   titleSubmitted = output<string>();
+  modalTitle = input<string>('');
+  label = input<string>('');
+  placeholder = input<string>('');
 
   private fb = new FormBuilder();
 
@@ -18,6 +21,7 @@ export class TitleForm {
   });
 
   onSubmit(): void {
+    if (this.form.invalid) return;
     const title = this.form.controls['title'].value?.trim();
     if (!title) return;
 
