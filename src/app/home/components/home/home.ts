@@ -5,7 +5,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Dialog } from '@angular/cdk/dialog';
 import { CreateBoardModal } from '../modals/create-board-modal/create-board-modal';
 import { NgStyle } from '@angular/common';
-import { delay, EMPTY, finalize, switchMap } from 'rxjs';
+import { EMPTY, finalize, switchMap } from 'rxjs';
 import { SBoards } from '../../services/s-boards';
 
 @Component({

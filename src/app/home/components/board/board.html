@@ -11,11 +11,11 @@
       <section class="flex gap-5">
         @for (list of board()?.lists ?? []; track list.id) {
         <div class="rounded-md bg-zinc-800 p-2 px-2">
-          <tr-list [title]="list.title" [cards]="list.cards"></tr-list>
+          <tr-list [id]="list.id" [title]="list.title" [cards]="list.cards"></tr-list>
         </div>
         }
         <button
-          class="cursor-pointer rounded-md bg-zinc-800 px-2 py-1 text-xs hover:bg-zinc-700 hover:text-violet-400 disabled:opacity-50  disabled:cursor-not-allowed"
+          class=" h-8 cursor-pointer rounded-md bg-zinc-800 px-2 pb-1 text-xs hover:bg-zinc-700 hover:text-violet-400 disabled:opacity-50  disabled:cursor-not-allowed"
           (click)="createList()"
           [disabled]="isLoading()"
         >

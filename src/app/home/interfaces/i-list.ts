@@ -1,7 +1,7 @@
 import { ICard } from './i-card';
 
 export interface IList {
-  id: number;
+  id?: number;
   title: string;
-  cards: ICard[];
+  cards?: ICard[];
 }

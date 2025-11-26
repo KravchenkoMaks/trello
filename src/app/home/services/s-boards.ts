@@ -3,6 +3,9 @@ import { map, Observable } from 'rxjs';
 import { IBoard } from '../interfaces/i-board';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { IResponse } from '../interfaces/i-response';
+import { IList } from '../interfaces/i-list';
+import { ICreateListDto } from '../interfaces/i-create-list-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -24,13 +27,17 @@ export class SBoards {
     return this.httpClient.get<IBoard>(`${this.boardUrl}/${id}`, { headers: this.headers });
   }
 
-  createBoard(title: string): Observable<IBoard> {
+  createBoard(title: string): Observable<IResponse> {
     const color = this.getRandomColor();
-    return this.httpClient.post<IBoard>(this.boardUrl, { title, custom: { color } }, { headers: this.headers });
+    return this.httpClient.post<IResponse>(this.boardUrl, { title, custom: { color } }, { headers: this.headers });
   }
 
-  updateBoard(id: number, updateData: Partial<IBoard>): Observable<void> {
-    return this.httpClient.put<void>(`${this.boardUrl}/${id}`, updateData, { headers: this.headers });
+  updateBoard(id: number, updateData: Partial<IBoard>): Observable<IResponse> {
+    return this.httpClient.put<IResponse>(`${this.boardUrl}/${id}`, updateData, { headers: this.headers });
+  }
+
+  createList(id: number, dto: ICreateListDto): Observable<IResponse> {
+    return this.httpClient.post<IResponse>(`${this.boardUrl}/${id}/list`, dto, { headers: this.headers });
   }
 
   private getRandomColor(): string {

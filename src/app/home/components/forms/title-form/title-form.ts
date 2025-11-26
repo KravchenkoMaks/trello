@@ -9,10 +9,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   styleUrl: './title-form.css',
 })
 export class TitleForm {
-  titleSubmitted = output<string>();
   modalTitle = input<string>('');
   label = input<string>('');
   placeholder = input<string>('');
+
+  titleSubmitted = output<string>();
 
   private fb = new FormBuilder();
 
@@ -26,9 +27,5 @@ export class TitleForm {
     if (!title) return;
 
     this.titleSubmitted.emit(title);
-  }
-
-  onKeydown(event: KeyboardEvent) {
-    if (event.key === 'Enter') this.onSubmit();
   }
 }

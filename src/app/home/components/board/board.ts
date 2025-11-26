@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { List } from '../list/list';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { IBoard } from '../../interfaces/i-board';
@@ -8,14 +8,14 @@ import { SBoards } from '../../services/s-boards';
 import { BoardHeaderForm } from '../forms/board-header-form/board-header-form';
 import { Dialog } from '@angular/cdk/dialog';
 import { CreateListModal } from '../modals/create-list-modal/create-list-modal';
-import { delay, EMPTY, finalize, of, pipe, switchMap, tap } from 'rxjs';
+import { EMPTY, finalize, switchMap, tap } from 'rxjs';
+import { ICreateListDto } from '../../interfaces/i-create-list-dto';
 
 @Component({
   selector: 'tr-board',
   imports: [RouterOutlet, List, RouterLink, ReactiveFormsModule, BoardHeaderForm],
   templateUrl: './board.html',
   styleUrl: './board.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Board {
   private route = inject(ActivatedRoute);
@@ -42,24 +42,27 @@ export class Board {
     });
   }
 
-  updateTitle(newTitle: string) {
-    if (this.saveTriggered || this.form.invalid) {
-      return;
-    }
+  updateTitle(newTitle: string): void {
+    if (this.saveTriggered || this.form.invalid) return;
+
     this.saveTriggered = true;
     setTimeout(() => (this.saveTriggered = false), 500);
 
-    const id = this.board()?.id ?? this.boardId;
+    const boardId = this.boardId ?? this.board()?.id;
+    if (!boardId) return;
 
-    this.boardsService.updateBoard(id, { title: newTitle }).subscribe({
-      next: () => {
-        this.boardsService.getBoard(id).subscribe({
-          next: (updatedBoard) => this.board.set({ ...updatedBoard, id }),
-          error: (err) => console.error('Помилка при GET:', err),
-        });
-      },
-      error: (err) => console.error('Помилка при PUT:', err),
-    });
+    this.isLoading.set(true);
+
+    this.boardsService
+      .updateBoard(boardId, { title: newTitle })
+      .pipe(
+        switchMap(() => this.boardsService.getBoard(boardId)),
+        tap((updatedBoard) => this.board.set({ ...updatedBoard, id: boardId })),
+        finalize(() => this.isLoading.set(false))
+      )
+      .subscribe({
+        error: (err) => console.error('Помилка при оновленні назви:', err),
+      });
   }
 
   createList(): void {
@@ -67,21 +70,26 @@ export class Board {
       .open<string>(CreateListModal)
       .closed.pipe(
         takeUntilDestroyed(this.destroyRef),
-        switchMap((t) => {
-          if (!t) return EMPTY;
+        switchMap((title) => {
+          if (!title) return EMPTY;
+
+          const boardId = this.boardId ?? this.board()?.id;
+          if (!boardId) return EMPTY;
+
+          const position = this.board()?.lists?.length ?? 0;
+          const dto: ICreateListDto = { title, position };
+
           this.isLoading.set(true);
 
-          return of(55).pipe(
-            tap(() => console.log('🔹 Діалог закрито, чекаємо 10 секунд...')),
-            delay(10000),
+          return this.boardsService.createList(boardId, dto).pipe(
+            switchMap(() => this.boardsService.getBoard(boardId)),
+            tap((updatedBoard) => this.board.set({ ...updatedBoard, id: boardId })),
             finalize(() => this.isLoading.set(false))
           );
         })
       )
-      .subscribe((title) => {
-        if (title) {
-          console.log('Отримано назву:', title);
-        }
+      .subscribe({
+        error: (err) => console.error('Помилка при створенні списку:', err),
       });
   }
 }
