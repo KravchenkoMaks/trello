@@ -7,6 +7,8 @@ import { CreateBoardModal } from '../modals/create-board-modal/create-board-moda
 import { NgStyle } from '@angular/common';
 import { EMPTY, finalize, switchMap } from 'rxjs';
 import { SBoards } from '../../services/s-boards';
+import { TitleModal } from '../modals/title-modal/title-modal';
+import { ITitleModal } from '../../interfaces/i-title-modal';
 
 @Component({
   selector: 'tr-home',
@@ -24,6 +26,12 @@ export class Home {
   protected boards = signal<IBoard[]>([]);
   protected isLoading = signal(false);
 
+  private titleModalData: ITitleModal = {
+    modalTitle: 'Створити дошку',
+    label: 'Назва дошки',
+    placeholder: 'Введіть назву дошки',
+  };
+
   constructor() {
     this.route.data.pipe(takeUntilDestroyed()).subscribe(({ boards }) => {
       this.boards.set(boards);
@@ -32,7 +40,7 @@ export class Home {
 
   createBoard(): void {
     this.dialog
-      .open<string>(CreateBoardModal)
+      .open<string>(TitleModal, { data: this.titleModalData })
       .closed.pipe(
         takeUntilDestroyed(this.destroyRef),
         switchMap((title) => {

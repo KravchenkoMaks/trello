@@ -7,14 +7,16 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { SBoards } from '../../services/s-boards';
 import { BoardHeaderForm } from '../forms/board-header-form/board-header-form';
 import { Dialog } from '@angular/cdk/dialog';
-import { CreateListModal } from '../modals/create-list-modal/create-list-modal';
 import { EMPTY, finalize, switchMap, tap } from 'rxjs';
 import { ICreateListDto } from '../../interfaces/i-create-list-dto';
+import { TitleModal } from '../modals/title-modal/title-modal';
+import { ITitleModal } from '../../interfaces/i-title-modal';
 
 @Component({
   selector: 'tr-board',
   imports: [RouterOutlet, List, RouterLink, ReactiveFormsModule, BoardHeaderForm],
-  templateUrl: './board.html',
+  import { TitleModal } from './../modals/title-modal/title-modal';
+templateUrl: './board.html',
   styleUrl: './board.css',
 })
 export class Board {
@@ -65,9 +67,15 @@ export class Board {
       });
   }
 
+  private titleModalData: ITitleModal = {
+    modalTitle: 'Створити список',
+    label: 'Назва списка',
+    placeholder: 'Введіть назву списка',
+  };
+
   createList(): void {
     this.dialog
-      .open<string>(CreateListModal)
+      .open<string>(TitleModal, { data: this.titleModalData })
       .closed.pipe(
         takeUntilDestroyed(this.destroyRef),
         switchMap((title) => {
