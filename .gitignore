@@ -1,3 +1,7 @@
+# =========================
+# ✅ ANGULAR PROJECT GITIGNORE
+# =========================
+
 # === Angular build output ===
 /dist
 /tmp
@@ -12,8 +16,15 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# === Environment files (локальні) ===
-src/environments/environment*.ts
+# === Environment files (локальні конфіги) ===
+# зберігаємо production варіант, але локальні — ні
+src/environments/environment.ts
+src/environments/environment.dev.ts
+src/environments/environment.local.ts
+*.env
+.env.local
+.env.development
+.env.production
 
 # === Testing & coverage ===
 /coverage
@@ -22,39 +33,65 @@ src/environments/environment*.ts
 /__screenshots__/
 *.lcov
 
-# === IDEs & editors ===
+# === IDEs & editors (локальні налаштування) ===
 .idea/
 .vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
 .history/
 *.iml
+*.sublime-workspace
+*.sublime-project
+.project
+.classpath
+.settings/
+.c9/
+.vscode-test/
 
-# === Husky ===
+# === Git hooks (локальні Husky) ===
 /husky/
+.husky/
+.huskyrc
+.huskyrc.json
+.huskyrc.js
+.huskyrc.yaml
 
-# === Miscellaneous ===
+# === Lint, cache, build tools ===
+.eslintcache
+.cache/
 .sass-cache/
+.stylelintcache
 connect.lock
 libpeerconnection.log
-typings/
-__pycache__/
+
+# === Temporary, logs, backups ===
+*.log
+*.tmp
+*.bak
 *.swp
 *.swo
-*.tmp
 *.temp
-*.bak
+*.tgz
 
 # === OS generated files ===
 .DS_Store
 Thumbs.db
 desktop.ini
+ehthumbs.db
+Icon?
+$RECYCLE.BIN/
+
+# === Misc build & deploy artifacts ===
+/build
+/scripts/tmp
+/scripts/dist
+/__pycache__/
+*.gz
+*.zip
+
+# === Random leftover temp files ===
+gbienmcz
+htgjpsn
 
