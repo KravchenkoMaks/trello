@@ -1,36 +1,60 @@
-
+# === Angular build output ===
 /dist
 /tmp
 /out-tsc
 /bazel-out
 /.angular/cache
 
+# === Node dependencies ===
 /node_modules
-npm-debug.log
-yarn-error.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
+# === Environment files (локальні) ===
 src/environments/environment*.ts
 
+# === Testing & coverage ===
+/coverage
+/test-results
+/testem.log
+/__screenshots__/
+*.lcov
+
+# === IDEs & editors ===
 .idea/
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 .project
 .classpath
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
+.history/
+*.iml
 
-.vscode/
-.history/*
-.husky/
+# === Husky ===
+/husky/
 
-/.angular/cache
+# === Miscellaneous ===
 .sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-__screenshots__/
+connect.lock
+libpeerconnection.log
+typings/
+__pycache__/
+*.swp
+*.swo
+*.tmp
+*.temp
+*.bak
 
+# === OS generated files ===
 .DS_Store
 Thumbs.db
+desktop.ini
+
