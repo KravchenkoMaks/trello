@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { IResponse } from '../interfaces/i-response';
 import { ICreateListDto } from '../interfaces/i-create-list-dto';
+import { ICard } from '../interfaces/i-card';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +38,10 @@ export class SBoards {
 
   createList(id: number, dto: ICreateListDto): Observable<IResponse> {
     return this.httpClient.post<IResponse>(`${this.boardUrl}/${id}/list`, dto, { headers: this.headers });
+  }
+
+  createCard(id: number, dto: ICard): Observable<IResponse> {
+    return this.httpClient.post<IResponse>(`${this.boardUrl}/${id}/card`, dto, { headers: this.headers });
   }
 
   private getRandomColor(): string {

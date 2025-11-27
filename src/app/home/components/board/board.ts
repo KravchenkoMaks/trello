@@ -15,8 +15,7 @@ import { ITitleModal } from '../../interfaces/i-title-modal';
 @Component({
   selector: 'tr-board',
   imports: [RouterOutlet, List, RouterLink, ReactiveFormsModule, BoardHeaderForm],
-  import { TitleModal } from './../modals/title-modal/title-modal';
-templateUrl: './board.html',
+  templateUrl: './board.html',
   styleUrl: './board.css',
 })
 export class Board {
@@ -28,9 +27,16 @@ export class Board {
 
   form: FormGroup;
   board = signal<IBoard | undefined>(undefined);
+  protected isLoading = signal(false);
+
   private boardId: number;
   private saveTriggered = false;
-  protected isLoading = signal(false);
+
+  private titleModalData: ITitleModal = {
+    modalTitle: 'Створити список',
+    label: 'Назва списка',
+    placeholder: 'Введіть назву списка',
+  };
 
   constructor() {
     this.form = this.fb.group({
@@ -57,21 +63,12 @@ export class Board {
 
     this.boardsService
       .updateBoard(boardId, { title: newTitle })
-      .pipe(
-        switchMap(() => this.boardsService.getBoard(boardId)),
-        tap((updatedBoard) => this.board.set({ ...updatedBoard, id: boardId })),
-        finalize(() => this.isLoading.set(false))
-      )
+      .pipe(switchMap(() => this.loadBoard(boardId)))
       .subscribe({
-        error: (err) => console.error('Помилка при оновленні назви:', err),
+        next: () => console.log(`Назву дошки id#${boardId} оновлено.`),
+        error: (err) => console.error('Помилка при оновленні назви дошки:', err),
       });
   }
-
-  private titleModalData: ITitleModal = {
-    modalTitle: 'Створити список',
-    label: 'Назва списка',
-    placeholder: 'Введіть назву списка',
-  };
 
   createList(): void {
     this.dialog
@@ -89,15 +86,30 @@ export class Board {
 
           this.isLoading.set(true);
 
-          return this.boardsService.createList(boardId, dto).pipe(
-            switchMap(() => this.boardsService.getBoard(boardId)),
-            tap((updatedBoard) => this.board.set({ ...updatedBoard, id: boardId })),
-            finalize(() => this.isLoading.set(false))
-          );
+          return this.boardsService.createList(boardId, dto).pipe(switchMap(() => this.loadBoard(boardId)));
         })
       )
       .subscribe({
         error: (err) => console.error('Помилка при створенні списку:', err),
       });
+  }
+
+  refreshBoard() {
+    const boardId = this.board()?.id;
+    if (!boardId) return;
+    this.loadBoard(boardId).subscribe({
+      error: (err) => console.error('Помилка при оновленні дошки:', err),
+    });
+  }
+
+  private loadBoard(boardId: number) {
+    this.isLoading.set(true);
+    return this.boardsService.getBoard(boardId).pipe(
+      tap((updatedBoard) => {
+        this.board.set({ ...updatedBoard, id: boardId });
+        console.log('Дошку оновлено');
+      }),
+      finalize(() => this.isLoading.set(false))
+    );
   }
 }
