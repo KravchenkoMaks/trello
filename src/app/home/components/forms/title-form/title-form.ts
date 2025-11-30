@@ -6,7 +6,7 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
   selector: 'tr-title-form',
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './title-form.html',
-  styleUrl: './title-form.css',
+  styles: ``,
 })
 export class TitleForm {
   modalTitle = input<string>('');

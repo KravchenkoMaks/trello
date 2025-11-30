@@ -5,7 +5,7 @@ import { ICard } from '../../interfaces/i-card';
   selector: 'tr-card',
   imports: [],
   templateUrl: './card.html',
-  styleUrl: './card.css',
+  styles: ``,
 })
 export class Card {
   card = input<ICard>();

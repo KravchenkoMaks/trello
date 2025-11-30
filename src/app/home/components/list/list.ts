@@ -14,7 +14,7 @@ import { IBoard } from '../../interfaces/i-board';
   selector: 'tr-list',
   imports: [Card],
   templateUrl: './list.html',
-  styleUrl: './list.css',
+  styles: ``,
 })
 export class List {
   private dialog = inject(Dialog);

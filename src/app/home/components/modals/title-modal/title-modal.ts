@@ -8,7 +8,7 @@ import { ITitleModal } from '../../../interfaces/i-title-modal';
   selector: 'tr-title-modal',
   imports: [TitleForm, CloseModalBtn],
   templateUrl: './title-modal.html',
-  styleUrl: './title-modal.css',
+  styles: ``,
 })
 export class TitleModal {
   private dialogRef = inject(DialogRef<string>);

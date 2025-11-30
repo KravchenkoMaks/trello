@@ -6,7 +6,7 @@ import { IBoard } from '../../../interfaces/i-board';
   selector: 'tr-board-header-form',
   imports: [ReactiveFormsModule],
   templateUrl: './board-header-form.html',
-  styleUrl: './board-header-form.css',
+  styles: ``,
 })
 export class BoardHeaderForm {
   board = input<IBoard | undefined>(undefined);

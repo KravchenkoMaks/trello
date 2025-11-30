@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'tr-layout',
   imports: [RouterOutlet],
   templateUrl: './layout.html',
-  styleUrl: './layout.css',
+  styles: ``,
 })
 export class Layout {}
 // TODO Unused component

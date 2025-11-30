@@ -16,7 +16,7 @@ import { ITitleModal } from '../../interfaces/i-title-modal';
   selector: 'tr-board',
   imports: [RouterOutlet, List, RouterLink, ReactiveFormsModule, BoardHeaderForm],
   templateUrl: './board.html',
-  styleUrl: './board.css',
+  styles: ``,
 })
 export class Board {
   private route = inject(ActivatedRoute);
@@ -29,7 +29,7 @@ export class Board {
   board = signal<IBoard | undefined>(undefined);
   protected isLoading = signal(false);
 
-  private boardId: number;
+  private boardId?: number;
   private saveTriggered = false;
 
   private titleModalData: ITitleModal = {
@@ -44,11 +44,11 @@ export class Board {
     });
 
     // TODO use observable version instead (as you do with resolved data below)
-    this.boardId = Number(this.route.snapshot.paramMap.get('id'));
-    // this.route.paramMap.subscribe((params) => {
-    //   const id = params.get('id');
-    //   this.boardId = id;
-    // });
+    // this.boardId = Number(this.route.snapshot.paramMap.get('id'));
+    this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
+      const id = Number(params.get('id'));
+      this.boardId = id;
+    });
 
     this.route.data.pipe(takeUntilDestroyed()).subscribe(({ board }) => {
       this.board.set({ ...board, id: this.boardId });

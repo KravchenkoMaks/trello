@@ -13,7 +13,7 @@ import { ITitleModal } from '../../interfaces/i-title-modal';
   selector: 'tr-home',
   imports: [RouterLink, RouterOutlet, NgStyle],
   templateUrl: './home.html',
-  styleUrl: './home.css',
+  styles: ``,
 })
 export class Home {
   private route = inject(ActivatedRoute);
