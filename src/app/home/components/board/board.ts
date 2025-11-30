@@ -43,7 +43,12 @@ export class Board {
       title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_]+$/)]],
     });
 
+    // TODO use observable version instead (as you do with resolved data below)
     this.boardId = Number(this.route.snapshot.paramMap.get('id'));
+    // this.route.paramMap.subscribe((params) => {
+    //   const id = params.get('id');
+    //   this.boardId = id;
+    // });
 
     this.route.data.pipe(takeUntilDestroyed()).subscribe(({ board }) => {
       this.board.set({ ...board, id: this.boardId });
@@ -54,7 +59,7 @@ export class Board {
     if (this.saveTriggered || this.form.invalid) return;
 
     this.saveTriggered = true;
-    setTimeout(() => (this.saveTriggered = false), 500);
+    setTimeout(() => (this.saveTriggered = false), 500); // TODO What should it do?
 
     const boardId = this.boardId ?? this.board()?.id;
     if (!boardId) return;

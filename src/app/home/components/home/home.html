@@ -3,13 +3,14 @@
 
   <div class="flex flex-wrap justify-center gap-4">
     @for (board of boards(); track board.id) {
-    <div
+    <a
       class="h-[8vh] w-[15vw] cursor-pointer rounded-md p-2 wrap-break-word transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:scale-102 hover:shadow-lg"
       [ngStyle]="{ background: board.custom?.['color'] || '#fff' }"
       [routerLink]="['/board', board.id]"
     >
       {{ board.title }}
-    </div>
+    </a>
+<!-- Why the `color` property is not described in the board.custom interface? -->
     }
     <button
       class="h-[8vh] w-[15vw] cursor-pointer rounded-md bg-zinc-200 transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:scale-102 hover:text-green-600 hover:shadow-lg focus:outline-none disabled:opacity-50  disabled:cursor-not-allowed"

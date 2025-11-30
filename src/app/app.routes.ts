@@ -11,7 +11,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: Home,
+        component: Home, // This includes the Home component and all inside to the initial chunk
         title: 'trello home',
         resolve: { boards: boardsResolver },
       },

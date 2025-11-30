@@ -23,7 +23,7 @@ export class Home {
 
   protected title = 'Мої дошки';
   protected boards = signal<IBoard[]>([]);
-  protected isLoading = signal(false);
+  protected isLoading = signal(false); // I would make it more explicit and change the "loading" word to "pending", for ex. "isBoardPending" or "isBoardCreating"
 
   private titleModalData: ITitleModal = {
     modalTitle: 'Створити дошку',
@@ -45,11 +45,11 @@ export class Home {
         switchMap((title) => {
           if (!title) return EMPTY;
           this.isLoading.set(true);
-          return this.boardsService.createBoard(title).pipe(
-            switchMap(() => this.boardsService.getBoards()),
-            finalize(() => this.isLoading.set(false))
-          );
-        })
+          // TODO I would move the the pipe to the parent pipe.
+          return this.boardsService.createBoard(title);
+        }),
+        switchMap(() => this.boardsService.getBoards()),
+        finalize(() => this.isLoading.set(false))
       )
       .subscribe({
         next: (boards) => this.boards.set(boards),

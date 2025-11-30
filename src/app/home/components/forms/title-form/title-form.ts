@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'tr-title-form',
@@ -20,6 +20,10 @@ export class TitleForm {
   readonly form = this.fb.group({
     title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_]+$/)]],
   });
+
+  get titleControl(): FormControl {
+    return this.form.controls.title;
+  }
 
   onSubmit(): void {
     if (this.form.invalid) return;

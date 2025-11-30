@@ -22,9 +22,9 @@ export class List {
   private boardsService = inject(SBoards);
 
   cardCreated = output<void>();
-  board = input<IBoard>();
+  board = input<IBoard>(); // TODO You don't need the whole board here, only board ID.
   list = input<IList>();
-  isLoading = signal(false);
+  isLoading = signal(false); // `isCardCreating`
 
   private titleModalData: ITitleModal = {
     modalTitle: 'Створити картку',
@@ -32,13 +32,14 @@ export class List {
     placeholder: 'Введіть назву картки',
   };
 
+  // TODO It is better to move the logic to the board component (this would simplify the list component and make this component reusable. Also it will remove the `board` prop.
   createCard() {
     this.dialog
       .open<string>(TitleModal, { data: this.titleModalData })
       .closed.pipe(
         takeUntilDestroyed(this.destroyRef),
         switchMap((title) => {
-          if (!title) return EMPTY;
+          if (!title) return EMPTY; // TODO it is good practice to console.error in such places, as you did for the board id and list id below.
 
           const boardId = this.board()?.id;
           const listId = this.list()?.id;
@@ -60,7 +61,7 @@ export class List {
           return this.boardsService.createCard(boardId, dto).pipe(
             tap(() => {
               console.log('Картку створено');
-              this.cardCreated.emit();
+              this.cardCreated.emit(); // TODO It is better to provide the logic in the service
             }),
             finalize(() => this.isLoading.set(false))
           );

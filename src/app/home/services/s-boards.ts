@@ -7,6 +7,7 @@ import { IResponse } from '../interfaces/i-response';
 import { ICreateListDto } from '../interfaces/i-create-list-dto';
 import { ICard } from '../interfaces/i-card';
 
+// I am used to service names like "BoardService", "AuthService", etc.
 @Injectable({
   providedIn: 'root',
 })
@@ -44,6 +45,7 @@ export class SBoards {
     return this.httpClient.post<IResponse>(`${this.boardUrl}/${id}/card`, dto, { headers: this.headers });
   }
 
+  // TODO move to utils
   private getRandomColor(): string {
     let hue: number;
     let attempts = 0;

@@ -6,17 +6,21 @@
   <h2 class="text-center pt-6 font-semibold text-stone-300">{{modalTitle()}}</h2>
 
   <label class="flex flex-col">
-    <span class="mb-0.5 text-xs text-stone-400">{{label()}}</span>
+<!-- TODO <label htmlFor=  -->
+<!--    <span class="mb-0.5 text-xs text-stone-400">{{label()}}</span>-->
+<!-- TODO Create a reusable component -->
+    <label for="title-input">{{label()}}</label>
     <input
       type="text"
+      id="title-input"
       placeholder={{placeholder()}}
       class="rounded-sm bg-zinc-900 px-2 py-1 text-xs placeholder-stone-500 focus:ring-1 focus:ring-stone-400 focus:outline-none"
       formControlName="title"
-    
     />
 
     <div class="min-h-4 text-center text-xs text-red-400">
-      @if (form.controls['title']?.dirty || form.controls['title']?.touched) {
+<!-- TODO You could create a getter `titleControl` to use it here  -->
+      @if (titleControl.dirty || form.controls['title']?.touched) {
       @if(form.controls['title']?.errors?.['required']) {
       <small>Поле обов’язкове</small>
       } @if (form.controls['title']?.errors?.['pattern']) {
