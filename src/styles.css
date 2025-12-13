@@ -1,6 +1,79 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-body{
-  background: #27272a;
+@theme {
+  --color-primary: oklch(62.3% 0.214 259.815); /* blue-500 */
+  --color-success: oklch(72.3% 0.219 149.579); /* green-500 */
+  --color-unsuccess: #fb2c36; /* red-500 */
+  --color-gray-1: #a1a1a1; /* neutral-400 */
+
+  --color-dark-1: #3f3f46; /* zinc-700 */
+  --color-dark-2: #27272a; /* zinc-800 */
+  --color-dark-3: #18181b; /* zinc-900 */
+  --color-dark-4: #09090b; /* zinc-950 */
+  --color-light: #ffffff;
+
+  --color-title-light: oklch(83.7% 0.128 66.29); /* orange-300 */
+  --color-title: oklch(75% 0.183 55.934); /* orange-400 */
+  --color-violet-1: oklch(70.2% 0.183 293.541); /* violet-400 */
 }
 
+@layer components {
+  .home-link {
+    @apply bg-dark-2 hover:bg-dark-1 rounded-md px-4 py-1 text-xl font-semibold;
+  }
+
+  .board-link {
+    @apply bg-dark-1 hover:bg-dark-1 rounded-md p-2  text-black text-xl;
+  }
+
+  .board-size {
+    @apply h-25 w-45;
+  }
+
+  .list-w{
+    @apply w-50
+  }
+  .card-h {
+    @apply h-15;
+  }
+}
+
+@layer utilities {
+  .scrollbar-modern {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+
+  .scrollbar-modern::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .scrollbar-modern::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 0 40px;
+  }
+
+  .scrollbar-modern::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 9999px;
+    transition: background-color 0.3s ease;
+  }
+
+  .scrollbar-modern:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+body {
+  background: var(--color-dark-2);
+  color: var(--color-gray-1);
+}
+
+h1 {
+  font-size: 1.875rem;
+  color: var(--color-title);
+}
+h3 {
+  font-size: 1.25rem;
+  color: var(--color-title-light);
+}

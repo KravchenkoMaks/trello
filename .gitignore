@@ -9,6 +9,9 @@
 /bazel-out
 /.angular/cache
 
+/notes
+/temp
+
 # === Node dependencies ===
 /node_modules
 npm-debug.log*

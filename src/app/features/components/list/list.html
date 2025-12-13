@@ -1,0 +1,10 @@
+<div class="list-w bg-dark-2 flex flex-col gap-5 rounded-md p-2">
+  <h3>{{title()}}</h3>
+
+  <div class="flex flex-col gap-1.5">
+    @for(card of cards(); track card.id){
+    <tr-card [title]="card.title"></tr-card>
+    }
+    <tr-btn [type]="'newCard'" [label]="'new card'"></tr-btn>
+  </div>
+</div>

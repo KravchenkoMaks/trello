@@ -1,0 +1,14 @@
+<div class="bg-dark-3 container mx-auto mt-8 w-[80vw] rounded-2xl">
+  <div class="grid gap-6 py-8">
+    <h1 class="text-center font-bold">{{ title }}</h1>
+
+    <div class="flex flex-wrap justify-center gap-4">
+      @for (board of boards(); track board.id){
+      <a class="board-link board-size"
+       [ngStyle]="{background: board.custom.color}"
+       [routerLink]="['/board', board.id]"> {{board.title}} </a>
+      }
+      <tr-btn [label]="'Add new board'" [type]="'newBoard'" [action]="createBoard" [loading]="isCreateBoard()"></tr-btn>
+    </div>
+  </div>
+</div>
