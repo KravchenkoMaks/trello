@@ -1,0 +1,24 @@
+<form class="flex flex-col gap-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <tr-text-input
+      formControlName="title"
+      [type]="'text'"
+      [placeholder]="placeholder()"
+      [label]="label()"
+      [control]="titleControl"
+    ></tr-text-input>
+
+    <div class="min-h-4 text-xs text-red-400">
+      @if (titleControl.dirty || titleControl.touched) { @if(titleControl.errors?.['required']) {
+      <small>Обов’язкове поле </small>
+      } @if (titleControl.errors?.['pattern']) {
+      <small>Присутні невалідні символи</small>
+      } } @else {
+      <small class="invisible"> </small>
+      }
+    </div>
+  </div>
+
+  <tr-btn [type]="'submit'" [role]="'create'" [disabled]="form.invalid" [label]="'Створити'" 
+  ></tr-btn>
+</form>

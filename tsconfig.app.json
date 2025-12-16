@@ -12,9 +12,10 @@
       "@components/*": ["./src/app/features/components/*"],
       "@stores/*": ["./src/app/features/stores/*"],
       "@services/*": ["./src/app/features/services/*"],
-      "@models/*": ["./src/app/features/models/*"],
       "@pages/*": ["./src/app/features/pages/*"],
-      "@interfaces/*": ["./src/app/features/interfaces/*"],
+      // "@interfaces/*": ["./src/app/features/models/interfaces/*"],
+      // "@tr-types/*": ["./src/app/features/models/types/*"],
+      "@models/*": ["./src/app/features/models/*"],
     }
   },
   "include": ["src/**/*.ts"],

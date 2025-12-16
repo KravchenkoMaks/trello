@@ -1,38 +1,62 @@
-import { Component, inject, signal } from '@angular/core';
-import { IBoard } from '@interfaces/i-board';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Btn } from '@shared/btn/btn';
 import { NgStyle } from '@angular/common';
+import { BoardStore } from '@stores/board-store';
+
+import { filter, switchMap } from 'rxjs';
+import { SDialog } from '@services/s-dialog';
 
 @Component({
   selector: 'tr-home',
   imports: [RouterLink, Btn, NgStyle],
   templateUrl: './home.html',
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {
   private route = inject(ActivatedRoute);
-  // private dialog = inject(Dialog);
-  // private destroyRef = inject(DestroyRef);
-  // private boardsService = inject(SBoards);
+  private dialog = inject(SDialog);
+  private destroyRef = inject(DestroyRef);
 
-  protected title = 'My Boards';
-  protected boards = signal<IBoard[]>([]);
+  store = inject(BoardStore);
 
-  isCreateBoard = signal(false);
+  protected title = 'Мої дошки';
 
   constructor() {
     this.route.data.pipe(takeUntilDestroyed()).subscribe(({ boards }) => {
-      this.boards.set(boards);
+      this.store.setBoards(boards);
     });
   }
 
-  createBoard = () => {
-    console.log('Hello');
-    this.isCreateBoard.set(true);
-    setTimeout(() => {
-      this.isCreateBoard.set(false);
-    }, 2000);
+  createBoard = (): void => {
+    this.dialog
+      .openCreateModal('board')
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter(Boolean),
+        switchMap((title) => this.store.createBoard(title))
+      )
+      .subscribe({
+        error: (err) => console.error('Error creating board', err),
+      });
+  };
+
+  getDeleteBoardCallback(boardId: number): () => void {
+    return () => this.deleteBoard(boardId);
+  }
+
+  deleteBoard = (boardId: number): void => {
+    this.dialog
+      .openDeleteModal('board')
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter((confirmed) => confirmed),
+        switchMap(() => this.store.deleteBoard(boardId))
+      )
+      .subscribe({
+        error: (err) => console.error('Error deleting board', err),
+      });
   };
 }

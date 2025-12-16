@@ -1,11 +1,11 @@
 <button
-  type="button"
-  [ngClass]="btnClass + ' cursor-pointer rounded-md px-2 py-1 font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center hover:bg-dark-1 hover:text-violet-1'"
+  [type]="type()"
+  [ngClass]="[btnClass()]"
   (click)="handleClick()"
   [disabled]="disabled() || loading()"
 >
   @if (loading()) {
-   <tr-loader></tr-loader>
+  <tr-loader></tr-loader>
   } @else {
   <span>{{ label() }}</span>
   }

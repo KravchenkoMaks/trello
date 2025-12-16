@@ -1,0 +1,17 @@
+<label class="flex flex-col gap-1">
+  <span class="mb-0.5 text-xs text-stone-400">{{ label() }}</span>
+  <input
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [value]="value"
+    [disabled]="disabled"
+    (input)="onInput($event)"
+    (blur)="markAsTouched()"
+    [ngClass]="{
+      'ring-unsuccess focus:ring-unsuccess': control()?.invalid && (control()?.touched || control()?.dirty),
+      'ring-primary focus:ring-primary': control()?.valid,
+    }"
+    class="bg-dark-3 text-gray-1 ring-1 rounded-sm px-2 py-1 placeholder-stone-500 focus:outline-none"
+  />
+</label>
+

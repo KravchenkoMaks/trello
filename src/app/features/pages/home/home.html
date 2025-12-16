@@ -3,12 +3,32 @@
     <h1 class="text-center font-bold">{{ title }}</h1>
 
     <div class="flex flex-wrap justify-center gap-4">
-      @for (board of boards(); track board.id){
-      <a class="board-link board-size"
-       [ngStyle]="{background: board.custom.color}"
-       [routerLink]="['/board', board.id]"> {{board.title}} </a>
+      @for (board of store.boards(); track board.id){
+      <div class="relative">
+        <a
+          [ngStyle]="{background: board.custom.color}"
+          [routerLink]="['/board', board.id]"
+          class="board-size block truncate rounded-md p-2 text-black opacity-90 hover:opacity-100 wrap-break-word"
+        >
+          {{ board.title }}
+        </a>
+        <tr-btn
+          [label]="'delete'"
+          [role]="'delete'"
+          [action]="getDeleteBoardCallback(board.id)"
+          [disabled]="store.boardCreating() || store.boardDeleting()"
+          class="absolute bottom-1 right-1 p-0 text-xs"
+        >
+        </tr-btn>
+      </div>
       }
-      <tr-btn [label]="'Add new board'" [type]="'newBoard'" [action]="createBoard" [loading]="isCreateBoard()"></tr-btn>
+      <tr-btn
+        [label]="'+ Створити дошку'"
+        [role]="'createBoard'"
+        [action]="createBoard"
+        [loading]="store.boardCreating()"
+        [disabled]="store.boardCreating()"
+      ></tr-btn>
     </div>
   </div>
 </div>

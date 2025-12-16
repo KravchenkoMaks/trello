@@ -1,4 +1,4 @@
-import { ICard } from '@interfaces/i-card';
+import { ICard } from './i-card';
 export interface IList {
   id: number;
   title: string;

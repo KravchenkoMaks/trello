@@ -1,15 +1,18 @@
 <div class="bg-dark-3 container mx-auto mt-8 w-[80vw] rounded-2xl pb-8">
   <a class="home-link mt-8 ml-8 inline-block" routerLink="/">&lt; Home</a>
 
-  @if (board(); as b) {
+  @if (store.currentBoard(); as b) {
   <div class="flex flex-col gap-8">
     <h1 class="text-center font-bold">{{b.title}}</h1>
+
+    <tr-btn [role]="'title'" [label]="b.title"></tr-btn> 
+    
 
     <div class="scrollbar-modern flex gap-4 overflow-x-auto scroll-smooth px-4 pb-2">
       @for (list of b.lists; track list.id) {
       <tr-list [title]="list.title" [cards]="list.cards"></tr-list>
       }
-      <tr-btn [type]="'newList'" [label]="'New List'"></tr-btn>
+      <tr-btn [role]="'createList'" [label]="'New List'"></tr-btn>
     </div>
   </div>
   } @else {

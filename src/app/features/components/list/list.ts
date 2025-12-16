@@ -1,6 +1,6 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Card } from '@components/card/card';
-import { ICard } from '@interfaces/i-card';
+import { ICard } from '@models/interfaces/i-card';
 import { Btn } from '@shared/btn/btn';
 
 @Component({
@@ -8,6 +8,7 @@ import { Btn } from '@shared/btn/btn';
   imports: [Card, Btn],
   templateUrl: './list.html',
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class List {
   title = input<string>();

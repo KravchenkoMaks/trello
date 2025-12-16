@@ -1,0 +1,8 @@
+  <div class="p-4 text-center text-white">
+      <p>Ви впевнені, що хочете видалити {{ typeText }}?</p>
+
+      <div class="mt-4 flex justify-center gap-4">
+        <tr-btn [label]="'Скасувати'" [role]="'cancel'" [action]="close"></tr-btn>
+        <tr-btn [label]="'Видалити'" [role]="'delete'" [action]="confirm"></tr-btn>
+      </div>
+    </div>

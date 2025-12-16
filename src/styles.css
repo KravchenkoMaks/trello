@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary: oklch(62.3% 0.214 259.815); /* blue-500 */
+  --color-primary: oklch(54.6% 0.245 262.881); /* blue-600 */
   --color-success: oklch(72.3% 0.219 149.579); /* green-500 */
   --color-unsuccess: #fb2c36; /* red-500 */
   --color-gray-1: #a1a1a1; /* neutral-400 */
@@ -22,58 +22,57 @@
     @apply bg-dark-2 hover:bg-dark-1 rounded-md px-4 py-1 text-xl font-semibold;
   }
 
-  .board-link {
-    @apply bg-dark-1 hover:bg-dark-1 rounded-md p-2  text-black text-xl;
-  }
-
   .board-size {
-    @apply h-25 w-45;
+    @apply h-24 w-48 text-xs;
   }
 
-  .list-w{
-    @apply w-50
+  .list-w {
+    @apply w-50;
   }
   .card-h {
     @apply h-15;
   }
-}
 
-@layer utilities {
-  .scrollbar-modern {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  @layer utilities {
+    .scrollbar-modern {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    }
+
+    .scrollbar-modern::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .scrollbar-modern::-webkit-scrollbar-track {
+      background: transparent;
+      margin: 0 40px;
+    }
+
+    .scrollbar-modern::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 9999px;
+      transition: background-color 0.3s ease;
+    }
+
+    .scrollbar-modern:hover::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    
   }
 
-  .scrollbar-modern::-webkit-scrollbar {
-    height: 6px;
+  body {
+    background: var(--color-dark-2);
+    color: var(--color-gray-1);
   }
 
-  .scrollbar-modern::-webkit-scrollbar-track {
-    background: transparent;
-    margin: 0 40px;
+  h1 {
+    font-size: 1.875rem;
+    color: var(--color-title);
+  }
+  h3 {
+    font-size: 1.25rem;
+    color: var(--color-title-light);
   }
 
-  .scrollbar-modern::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 9999px;
-    transition: background-color 0.3s ease;
-  }
-
-  .scrollbar-modern:hover::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.6);
-  }
-}
-
-body {
-  background: var(--color-dark-2);
-  color: var(--color-gray-1);
-}
-
-h1 {
-  font-size: 1.875rem;
-  color: var(--color-title);
-}
-h3 {
-  font-size: 1.25rem;
-  color: var(--color-title-light);
 }
