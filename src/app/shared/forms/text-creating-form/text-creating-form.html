@@ -9,17 +9,8 @@
       [control]="titleControl"
     ></tr-text-input>
 
-    <div class="min-h-4 text-xs text-red-400">
-      @if (titleControl.dirty || titleControl.touched) { @if(titleControl.errors?.['required']) {
-      <small>Обов’язкове поле </small>
-      } @if (titleControl.errors?.['pattern']) {
-      <small>Присутні невалідні символи</small>
-      } } @else {
-      <small class="invisible"> </small>
-      }
-    </div>
+    <small class="min-h-4 text-xs text-red-400"> {{ titleControl | validationMessages }} </small>
   </div>
 
-  <tr-btn [type]="'submit'" [role]="'create'" [disabled]="form.invalid" [label]="'Створити'" 
-  ></tr-btn>
+  <tr-btn [type]="'submit'" [role]="'create'" [disabled]="form.invalid" [label]="'Створити'"></tr-btn>
 </form>

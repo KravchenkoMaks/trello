@@ -95,10 +95,8 @@ export class TextInput implements ControlValueAccessor {
       const ctrl = this.control();
 
       if (ctrl?.invalid) {
-        console.log(3333);
         validationClasses = 'ring-1 ring-red-500 focus:ring-red-500';
       } else if (ctrl?.valid) {
-        console.log(4444);
         validationClasses = 'ring-1 ring-blue-600  focus:ring-blue-600';
       }
     }

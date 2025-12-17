@@ -11,14 +11,8 @@
     (keydown.enter)="saveEdit('enter')"
     (blurEvent)="saveEdit('blur')"
   ></tr-text-input>
-  <div class="min-h-4 text-xs text-red-400">
-    @if (textControl.dirty || textControl.touched) { @if(textControl.errors?.['required']) {
-    <small>Обов’язкове поле </small>
-    } @if (textControl.errors?.['pattern']) {
-    <small>Присутні невалідні символи</small>
-    } } @else {
-    <small class="invisible"> </small>
-    }
-  </div>
+
+  <small class="min-h-4 text-xs text-red-400"> {{ textControl | validationMessages }} </small>
+
   }
 </form>

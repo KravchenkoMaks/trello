@@ -3,10 +3,11 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 import { FormBuilder, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { TextInput } from '@shared/inputs/text-input/text-input';
 import { Btn } from '@shared/btn/btn';
+import { ValidationMessagesPipe } from '@shared/pipes/validation-messages-pipe';
 
 @Component({
   selector: 'tr-text-creating-form',
-  imports: [ReactiveFormsModule, CommonModule, TextInput, Btn],
+  imports: [ReactiveFormsModule, CommonModule, TextInput, Btn, ValidationMessagesPipe],
   templateUrl: './text-creating-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

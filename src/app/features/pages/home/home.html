@@ -13,7 +13,7 @@
           {{ board.title }}
         </a>
         <tr-btn
-          [label]="'delete'"
+          [label]="'видалити'"
           [role]="'delete'"
           [action]="getDeleteBoardCallback(board.id, board.title)"
           [disabled]="store.boardCreating() || store.boardDeleting()"

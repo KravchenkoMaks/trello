@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, effect, inject, input, output, sign
 import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Btn } from '@shared/btn/btn';
 import { TextInput } from '@shared/inputs/text-input/text-input';
+import { ValidationMessagesPipe } from '@shared/pipes/validation-messages-pipe';
 
 @Component({
   selector: 'tr-text-changing-form',
-  imports: [ReactiveFormsModule, Btn, TextInput],
+  imports: [ReactiveFormsModule, Btn, TextInput, ValidationMessagesPipe],
   templateUrl: './text-changing-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
