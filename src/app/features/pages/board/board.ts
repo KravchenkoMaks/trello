@@ -29,6 +29,6 @@ export class Board {
   }
 
   updateTitle(newTitle: string): void {
-    console.log('from board: updateTitle', newTitle);
+    this.store.updateTitle(newTitle).subscribe(() => console.log('Назву дошки оновлено'));
   }
 }

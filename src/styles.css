@@ -56,12 +56,12 @@
 
     .scrollbar-modern:hover::-webkit-scrollbar-thumb {
       background-color: rgba(255, 255, 255, 0.6);
-    }
-
-    
+    }    
   }
 
-  body {
+}
+
+ body {
     background: var(--color-dark-2);
     color: var(--color-gray-1);
   }
@@ -75,4 +75,15 @@
     color: var(--color-title-light);
   }
 
+.snack-bar-success {
+  background: var(--color-dark-1);
+    color: var(--color-gray-1);
 }
+
+.snack-bar-error {
+  background-color: rgb(161, 78, 72);
+  color: white;
+}
+
+
+

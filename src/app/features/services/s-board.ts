@@ -29,7 +29,11 @@ export class SBoards {
     return this.httpClient.post<IResponse>(`${this.apiUrl}/board`, newBoard, { headers: this.headers });
   }
 
-  deleteBoard(boardId: number): Observable<IResponse> {
-    return this.httpClient.delete<IResponse>(`${this.apiUrl}/board/${boardId}`, { headers: this.headers });
+  deleteBoard(id: number): Observable<IResponse> {
+    return this.httpClient.delete<IResponse>(`${this.apiUrl}/board/${id}`, { headers: this.headers });
+  }
+
+  updateBoard(id: number, updateData: Partial<IBoard>): Observable<IResponse> {
+    return this.httpClient.put<IResponse>(`${this.apiUrl}/board/${id}`, updateData, { headers: this.headers });
   }
 }
