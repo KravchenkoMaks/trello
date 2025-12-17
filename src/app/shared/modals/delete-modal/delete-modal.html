@@ -1,8 +1,14 @@
-  <div class="p-4 text-center text-white">
-      <p>Ви впевнені, що хочете видалити {{ typeText }}?</p>
+<div class="text-gray-1 bg-dark-2 grid justify-items-center gap-3 rounded-xl p-4 text-xs">
+  <p>Ви впевнені, що хочете видалити {{ typeText }}?</p>
 
-      <div class="mt-4 flex justify-center gap-4">
-        <tr-btn [label]="'Скасувати'" [role]="'cancel'" [action]="close"></tr-btn>
-        <tr-btn [label]="'Видалити'" [role]="'delete'" [action]="confirm"></tr-btn>
-      </div>
-    </div>
+  <p class="mt-1 flex font-bold text-orange-400">
+    &apos;
+    <span class="line-clamp-1 max-w-48 truncate">{{ name }}</span>
+    &apos;
+  </p>
+
+  <div class="mt-1 flex justify-center gap-4">
+    <tr-btn [label]="'Скасувати'" [role]="'cancel'" [action]="close"></tr-btn>
+    <tr-btn [label]="'Видалити'" [role]="'delete'" [action]="confirm"></tr-btn>
+  </div>
+</div>

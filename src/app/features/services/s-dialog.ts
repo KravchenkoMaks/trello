@@ -17,10 +17,10 @@ export class SDialog {
     }).closed;
   }
 
-  openDeleteModal(type: TModal): Observable<boolean> {
+  openDeleteModal(type: TModal, name: string): Observable<boolean> {
     return this.dialog
       .open<boolean>(DeleteModal, {
-        data: { type },
+        data: { type, name },
       })
       .closed.pipe(map((result) => !!result));
   }

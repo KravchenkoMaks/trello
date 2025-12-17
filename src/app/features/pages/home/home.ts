@@ -43,13 +43,13 @@ export class Home {
       });
   };
 
-  getDeleteBoardCallback(boardId: number): () => void {
-    return () => this.deleteBoard(boardId);
+  getDeleteBoardCallback(boardId: number, boardTitle: string): () => void {
+    return () => this.deleteBoard(boardId, boardTitle);
   }
 
-  deleteBoard = (boardId: number): void => {
+  deleteBoard = (boardId: number, boardTitle: string): void => {
     this.dialog
-      .openDeleteModal('board')
+      .openDeleteModal('board', boardTitle)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         filter((confirmed) => confirmed),

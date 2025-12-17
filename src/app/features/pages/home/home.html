@@ -8,16 +8,16 @@
         <a
           [ngStyle]="{background: board.custom.color}"
           [routerLink]="['/board', board.id]"
-          class="board-size block truncate rounded-md p-2 text-black opacity-90 hover:opacity-100 wrap-break-word"
+          class="board-size block truncate rounded-md p-2 wrap-break-word text-black opacity-90 hover:opacity-100"
         >
           {{ board.title }}
         </a>
         <tr-btn
           [label]="'delete'"
           [role]="'delete'"
-          [action]="getDeleteBoardCallback(board.id)"
+          [action]="getDeleteBoardCallback(board.id, board.title)"
           [disabled]="store.boardCreating() || store.boardDeleting()"
-          class="absolute bottom-1 right-1 p-0 text-xs"
+          class="absolute right-1 bottom-1 p-0 text-xs"
         >
         </tr-btn>
       </div>

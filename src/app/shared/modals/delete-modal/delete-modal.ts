@@ -12,7 +12,7 @@ import { Btn } from '@shared/btn/btn';
 })
 export class DeleteModal {
   private dialogRef = inject(DialogRef<boolean>);
-  private data = inject(DIALOG_DATA) as { type: TModal };
+  private data = inject(DIALOG_DATA) as { type: TModal; name: string };
 
   get typeText() {
     const map: Record<TModal, string> = {
@@ -22,6 +22,10 @@ export class DeleteModal {
       element: 'елемент',
     };
     return map[this.data.type] ?? 'елемент';
+  }
+
+  get name() {
+    return this.data.name;
   }
 
   confirm = (): void => this.dialogRef.close(true);

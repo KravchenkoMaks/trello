@@ -29,6 +29,6 @@ export class Board {
   }
 
   updateTitle(newTitle: string): void {
-    console.log('from board: updateTitle');
+    console.log('from board: updateTitle', newTitle);
   }
 }

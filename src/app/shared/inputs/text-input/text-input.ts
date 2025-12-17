@@ -1,14 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  ElementRef,
-  forwardRef,
-  inject,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, output } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { TInputRole } from '@models/types/t-input-role';
 
