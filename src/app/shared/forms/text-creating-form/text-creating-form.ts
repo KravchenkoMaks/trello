@@ -5,9 +5,9 @@ import { TextInput } from '@shared/inputs/text-input/text-input';
 import { Btn } from '@shared/btn/btn';
 
 @Component({
-  selector: 'tr-create-title-form',
+  selector: 'tr-text-creating-form',
   imports: [ReactiveFormsModule, CommonModule, TextInput, Btn],
-  templateUrl: './create-title-form.html',
+  templateUrl: './text-creating-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -19,7 +19,7 @@
 
 @layer components {
   .home-link {
-    @apply bg-dark-2 hover:bg-dark-1 rounded-md px-4 py-1 text-xl font-semibold;
+    @apply bg-dark-2 hover:bg-dark-1 rounded-md px-2 py-1 text-xs font-semibold;
   }
 
   .board-size {

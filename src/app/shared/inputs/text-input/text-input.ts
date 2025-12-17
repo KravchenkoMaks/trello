@@ -1,6 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  forwardRef,
+  inject,
+  input,
+  output,
+} from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { TInputRole } from '@models/types/t-input-role';
 
 const noop = () => {
   // no-op
@@ -21,8 +31,12 @@ const noop = () => {
   ],
 })
 export class TextInput implements ControlValueAccessor {
+  private el = inject(ElementRef);
+  blurEvent = output<void>();
+
   control = input<FormControl>();
   label = input<string>('');
+  role = input<TInputRole>();
   placeholder = input<string>('');
   type = input<'text' | 'email' | 'password'>('text');
 
@@ -49,6 +63,11 @@ export class TextInput implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
+  handleBlur(): void {
+    this.markAsTouched();
+    this.blurEvent.emit();
+  }
+
   markAsTouched() {
     if (!this.touched) {
       this.onTouched();
@@ -56,9 +75,43 @@ export class TextInput implements ControlValueAccessor {
     }
   }
 
+  focus(): void {
+    const inputEl = this.el.nativeElement.querySelector('input');
+    inputEl?.focus();
+  }
+
   onInput(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.value = inputElement.value;
     this.onChange(this.value);
+  }
+
+  baseClasses = 'text-stone-500 rounded-sm px-2 py-1 placeholder-stone-500 focus:outline-none';
+
+  private readonly inputClassMap: Record<TInputRole, string> = {
+    createBoard: 'bg-zinc-900 ',
+    changeTitle: 'bg-zinc-800 ',
+  };
+
+  getInputClasses(): string {
+    const role = this.role();
+
+    const inputClasses = role ? this.inputClassMap[role] : '';
+
+    let validationClasses = '';
+
+    if (role === 'createBoard' && this.control()) {
+      const ctrl = this.control();
+
+      if (ctrl?.invalid) {
+        console.log(3333);
+        validationClasses = 'ring-1 ring-red-500 focus:ring-red-500';
+      } else if (ctrl?.valid) {
+        console.log(4444);
+        validationClasses = 'ring-1 ring-blue-600  focus:ring-blue-600';
+      }
+    }
+
+    return `${this.baseClasses} ${inputClasses} ${validationClasses}`.trim();
   }
 }

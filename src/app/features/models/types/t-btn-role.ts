@@ -1,1 +1,1 @@
-export type TBtnRole = 'createBoard' | 'createList' | 'createCard' | 'delete' | 'cancel' | 'create' | 'title';
+export type TBtnRole = 'createBoard' | 'createList' | 'createCard' | 'delete' | 'cancel' | 'create' | 'changeTitle';

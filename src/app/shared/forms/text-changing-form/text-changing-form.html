@@ -1,1 +1,24 @@
-<p>text-changing-form works!</p>
+<form [formGroup]="form">
+  @if (!isEditing()) {
+  <tr-btn [role]="'changeTitle'" [label]="currentText()" [action]="enableEdit"></tr-btn>
+  } @else{
+  <tr-text-input
+    #inputRef
+    formControlName="inputText"
+    [control]="textControl"
+    [type]="'text'"
+    [role]="'changeTitle'"
+    (keydown.enter)="saveEdit('enter')"
+    (blurEvent)="saveEdit('blur')"
+  ></tr-text-input>
+  <div class="min-h-4 text-xs text-red-400">
+    @if (textControl.dirty || textControl.touched) { @if(textControl.errors?.['required']) {
+    <small>Обов’язкове поле </small>
+    } @if (textControl.errors?.['pattern']) {
+    <small>Присутні невалідні символи</small>
+    } } @else {
+    <small class="invisible"> </small>
+    }
+  </div>
+  }
+</form>

@@ -3,10 +3,12 @@
 
   @if (store.currentBoard(); as b) {
   <div class="flex flex-col gap-8">
-    <h1 class="text-center font-bold">{{b.title}}</h1>
-
-    <tr-btn [role]="'title'" [label]="b.title"></tr-btn> 
-    
+    <div class="flex justify-center">
+      <tr-text-changing-form 
+      [currentText]="b.title"
+      (updatedText) = "updateTitle($event)"
+      ></tr-text-changing-form>
+    </div>
 
     <div class="scrollbar-modern flex gap-4 overflow-x-auto scroll-smooth px-4 pb-2">
       @for (list of b.lists; track list.id) {

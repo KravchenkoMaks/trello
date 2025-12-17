@@ -6,10 +6,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest } from 'rxjs';
 import { Loader } from '@shared/loader/loader';
 import { BoardStore } from '@stores/board-store';
+import { TextChangingForm } from '@shared/forms/text-changing-form/text-changing-form';
 
 @Component({
   selector: 'tr-board',
-  imports: [List, RouterLink, Btn, Loader],
+  imports: [List, RouterLink, Btn, Loader, TextChangingForm],
   templateUrl: './board.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,5 +28,7 @@ export class Board {
       });
   }
 
- 
+  updateTitle(newTitle: string): void {
+    console.log('from board: updateTitle');
+  }
 }

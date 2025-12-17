@@ -1,13 +1,12 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Btn } from '@shared/btn/btn';
 import { IModalData } from '@models/interfaces/i-modal-data';
 import { TModal } from '@models/types/t-modal';
-import { CreateTitleForm } from '@shared/forms/create-title-form/create-title-form';
+import { CreateTitleForm } from '@shared/forms/text-creating-form/text-creating-form';
 
 @Component({
   selector: 'tr-create-modal',
-  imports: [Btn, CreateTitleForm],
+  imports: [CreateTitleForm],
   templateUrl: './create-modal.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

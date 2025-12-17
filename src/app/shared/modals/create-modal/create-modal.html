@@ -2,7 +2,11 @@
   <h3 class="mt-4 text-center">{{ modalName }}</h3>
 
   <div class="m-4 grid gap-3">
-    <tr-create-title-form [label]="label" [placeholder]="placeholder" (newTitle)="submit($event)"></tr-create-title-form>
+    <tr-text-creating-form
+      [label]="label"
+      [placeholder]="placeholder"
+      (newTitle)="submit($event)"
+    ></tr-text-creating-form>
 
     <!-- <tr-btn [role]="'cancel'" [label]="'Cancel'" [action]="closeModal"></tr-btn> -->
   </div>
