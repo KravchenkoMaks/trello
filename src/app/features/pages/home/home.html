@@ -16,20 +16,22 @@
           [label]="'видалити'"
           [role]="'delete'"
           [action]="getDeleteBoardCallback(board.id, board.title)"
-          [loading]="store.boardCreating()"
-          [disabled]="store.boardCreating()"
+          [disabled]="store.isBoardDeleting()"
           class="absolute right-1 bottom-1 p-0 text-xs"
         >
         </tr-btn>
       </div>
-      }
-      <tr-btn
-        [label]="'+ Створити дошку'"
-        [role]="'createBoard'"
-        [action]="createBoard"
-        [loading]="store.boardCreating()"
-        [disabled]="store.boardCreating()"
-      ></tr-btn>
-    </div>
+    }
+    <tr-btn
+    [label]="'+ Створити дошку'"
+    [role]="'createBoard'"
+    [action]="createBoard"
+    [loading]="store.isBoardCreating()"
+    [disabled]="store.isBoardCreating()"
+    ></tr-btn>
   </div>
 </div>
+</div>
+@if (store.isBoardDeleting()) {
+  <tr-loader [size]="'sm'" [text]="'Видалення дошки'"></tr-loader>
+}

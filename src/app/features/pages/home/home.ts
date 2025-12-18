@@ -7,10 +7,12 @@ import { BoardStore } from '@stores/board-store';
 
 import { filter, switchMap } from 'rxjs';
 import { DialogService } from '@services/dialog-service';
+import { ToastService } from '@services/toast-service';
+import { Loader } from '@shared/loader/loader';
 
 @Component({
   selector: 'tr-home',
-  imports: [RouterLink, Btn, NgStyle],
+  imports: [RouterLink, Btn, NgStyle, Loader],
   templateUrl: './home.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,8 +21,8 @@ export class Home {
   private route = inject(ActivatedRoute);
   private dialog = inject(DialogService);
   private destroyRef = inject(DestroyRef);
-
   store = inject(BoardStore);
+  toast = inject(ToastService);
 
   protected title = 'Мої дошки';
 
@@ -39,7 +41,7 @@ export class Home {
         switchMap((title) => this.store.createBoard(title))
       )
       .subscribe({
-        error: (err) => console.error('Error creating board', err),
+        error: (err) => console.error('Помилка при створенні дошки', err),
       });
   };
 
@@ -56,7 +58,8 @@ export class Home {
         switchMap(() => this.store.deleteBoard(boardId))
       )
       .subscribe({
-        error: (err) => console.error('Error deleting board', err),
+        next: () => this.toast.showSuccess(`Дошка '${boardTitle}' видалена`),
+        error: (err) => console.error('Помилка при видаленні дошки', err),
       });
   };
 }

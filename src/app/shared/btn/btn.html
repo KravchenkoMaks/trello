@@ -5,7 +5,7 @@
   [disabled]="disabled() || loading()"
 >
   @if (loading()) {
-  <tr-loader></tr-loader>
+  <tr-loader [size]="'sm'"></tr-loader>
   } @else {
   <span>{{ label() }}</span>
   }

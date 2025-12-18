@@ -20,8 +20,8 @@ export class BoardStore {
   readonly boards = this.boardsSignal.asReadonly();
   readonly currentBoard = this.currentBoardSignal.asReadonly();
 
-  readonly boardCreating = computed(() => this.creatingCount() > 0);
-  readonly boardDeleting = computed(() => this.deletingCount() > 0);
+  readonly isBoardCreating = computed(() => this.creatingCount() > 0);
+  readonly isBoardDeleting = computed(() => this.deletingCount() > 0);
   isBoardUpdating = signal(false);
 
   setBoards(boards: IBoard[]) {
