@@ -6,7 +6,7 @@ import { NgStyle } from '@angular/common';
 import { BoardStore } from '@stores/board-store';
 
 import { filter, switchMap } from 'rxjs';
-import { SDialog } from '@services/s-dialog';
+import { DialogService } from '@services/dialog-service';
 
 @Component({
   selector: 'tr-home',
@@ -17,7 +17,7 @@ import { SDialog } from '@services/s-dialog';
 })
 export class Home {
   private route = inject(ActivatedRoute);
-  private dialog = inject(SDialog);
+  private dialog = inject(DialogService);
   private destroyRef = inject(DestroyRef);
 
   store = inject(BoardStore);

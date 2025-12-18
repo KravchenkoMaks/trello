@@ -9,7 +9,7 @@ import { map, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class SBoards {
+export class BoardService {
   httpClient = inject(HttpClient);
   apiUrl = environment.baseURL;
   private headers = { Authorization: 'Bearer 123' };

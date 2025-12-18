@@ -1,15 +1,15 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { IBoard } from '@models/interfaces/i-board';
 import { INewBoard } from '@models/interfaces/i-new-board';
-import { SBoards } from '@services/s-board';
+import { BoardService } from '@services/board-service';
 import { getRandomColor } from '@shared/utils/colors';
-import { catchError, delay, EMPTY, finalize, Observable, of, switchMap, tap, throwError } from 'rxjs';
+import { catchError, EMPTY, finalize, Observable, of, switchMap, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardStore {
-  private boardsService = inject(SBoards);
+  private boardService = inject(BoardService);
 
   private boardsSignal = signal<IBoard[]>([]);
   private currentBoardSignal = signal<IBoard | null>(null);
@@ -40,8 +40,8 @@ export class BoardStore {
     const color = getRandomColor();
     const newBoard: INewBoard = { title, custom: { color } };
 
-    return this.boardsService.createBoard(newBoard).pipe(
-      switchMap(() => this.boardsService.getBoards()),
+    return this.boardService.createBoard(newBoard).pipe(
+      switchMap(() => this.boardService.getBoards()),
       tap((boards) => this.setBoards(boards)),
       finalize(() => this.creatingCount.update((c) => Math.max(0, c - 1)))
     );
@@ -52,8 +52,8 @@ export class BoardStore {
 
     this.deletingCount.update((c) => c + 1);
 
-    return this.boardsService.deleteBoard(boardId).pipe(
-      switchMap(() => this.boardsService.getBoards()),
+    return this.boardService.deleteBoard(boardId).pipe(
+      switchMap(() => this.boardService.getBoards()),
       tap((boards) => this.setBoards(boards)),
       finalize(() => this.deletingCount.update((c) => Math.max(0, c - 1)))
     );
@@ -69,8 +69,8 @@ export class BoardStore {
 
     this.isBoardUpdating.set(true);
 
-    return this.boardsService.updateBoard(id, { title }).pipe(
-      switchMap(() => this.boardsService.getBoard(id)),
+    return this.boardService.updateBoard(id, { title }).pipe(
+      switchMap(() => this.boardService.getBoard(id)),
       tap((board) => {
         this.setCurrentBoard({ ...board, id });
         this.setBoards(this.boards().map((b) => (b.id === id ? board : b)));

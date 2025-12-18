@@ -8,7 +8,7 @@ import { map, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class SDialog {
+export class DialogService {
   private dialog = inject(Dialog);
 
   openCreateModal(type: TModal): Observable<string | undefined> {
