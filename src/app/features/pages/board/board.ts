@@ -7,6 +7,7 @@ import { combineLatest } from 'rxjs';
 import { Loader } from '@shared/loader/loader';
 import { BoardStore } from '@stores/board-store';
 import { TextChangingForm } from '@shared/forms/text-changing-form/text-changing-form';
+import { ToastService } from '@services/toast-service';
 
 @Component({
   selector: 'tr-board',
@@ -18,6 +19,7 @@ import { TextChangingForm } from '@shared/forms/text-changing-form/text-changing
 export class Board {
   private route = inject(ActivatedRoute);
   store = inject(BoardStore);
+  toast = inject(ToastService);
 
   constructor() {
     combineLatest([this.route.paramMap, this.route.data])
@@ -28,7 +30,10 @@ export class Board {
       });
   }
 
-  updateTitle(newTitle: string): void {
-    this.store.updateTitle(newTitle).subscribe(() => console.log('Назву дошки оновлено'));
+  updateTitle(newTitle: string) {
+    this.store.updateTitle(newTitle).subscribe({
+      next: () => this.toast.showSuccess('Назву дошки оновлено'),
+      error: () => this.toast.showError('Помилка при оновленні дошки'),
+    });
   }
 }

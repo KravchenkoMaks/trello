@@ -3,15 +3,13 @@ import { IBoard } from '@models/interfaces/i-board';
 import { INewBoard } from '@models/interfaces/i-new-board';
 import { SBoards } from '@services/s-board';
 import { getRandomColor } from '@shared/utils/colors';
-import { catchError, EMPTY, finalize, Observable, of, switchMap, tap } from 'rxjs';
-import { ToastService } from '@services/toast-service';
+import { catchError, delay, EMPTY, finalize, Observable, of, switchMap, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardStore {
   private boardsService = inject(SBoards);
-  private toastService = inject(ToastService);
 
   private boardsSignal = signal<IBoard[]>([]);
   private currentBoardSignal = signal<IBoard | null>(null);
@@ -24,7 +22,7 @@ export class BoardStore {
 
   readonly boardCreating = computed(() => this.creatingCount() > 0);
   readonly boardDeleting = computed(() => this.deletingCount() > 0);
-  isBoardUpdating = false;
+  isBoardUpdating = signal(false);
 
   setBoards(boards: IBoard[]) {
     this.boardsSignal.set(boards);
@@ -65,28 +63,23 @@ export class BoardStore {
     const id = this.currentBoard()?.id;
     const title = newTitle.trim();
 
-    if (!id || !title || this.isBoardUpdating) {
+    if (!id || !title || this.isBoardUpdating()) {
       return EMPTY;
     }
 
-    this.isBoardUpdating = true;
+    this.isBoardUpdating.set(true);
 
     return this.boardsService.updateBoard(id, { title }).pipe(
-      switchMap(() => this.boardsService.getBoard(8)),
+      switchMap(() => this.boardsService.getBoard(id)),
       tap((board) => {
         this.setCurrentBoard({ ...board, id });
         this.setBoards(this.boards().map((b) => (b.id === id ? board : b)));
       }),
-      tap(() => {
-        console.log('Назву дошки зміненою');
-        this.toastService.showSuccess('Назву дошки зміненою');
-      }),
       catchError((err) => {
         console.error('Помилка при оновленні дошки:', err);
-        this.toastService.showError('Помилка при оновленні дошки');
-        return EMPTY;
+        return throwError(() => err);
       }),
-      finalize(() => (this.isBoardUpdating = false))
+      finalize(() => this.isBoardUpdating.set(false))
     );
   }
 }

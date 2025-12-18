@@ -1,6 +1,6 @@
 <form [formGroup]="form">
   @if (!isEditing()) {
-  <tr-btn [role]="'changeTitle'" [label]="currentText()" [action]="enableEdit"></tr-btn>
+  <tr-btn [role]="'changeTitle'" [label]="currentText()" [action]="enableEdit" [disabled]="isDisabled()"></tr-btn>
   } @else{
   <tr-text-input
     #inputRef
@@ -8,6 +8,7 @@
     [control]="textControl"
     [type]="'text'"
     [role]="'changeTitle'"
+    [disabled]="isDisabled()"
     (keydown.enter)="saveEdit('enter')"
     (blurEvent)="saveEdit('blur')"
   ></tr-text-input>
@@ -15,3 +16,7 @@
   <small class="min-h-4 text-xs text-red-400"> {{ textControl | validationMessages }} </small>
   }
 </form>
+
+@if (isDisabled()) {
+<tr-loader></tr-loader>
+}

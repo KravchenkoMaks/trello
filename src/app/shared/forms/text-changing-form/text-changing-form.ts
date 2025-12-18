@@ -1,25 +1,40 @@
-import { ChangeDetectionStrategy, Component, effect, inject, input, output, signal, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Btn } from '@shared/btn/btn';
 import { TextInput } from '@shared/inputs/text-input/text-input';
+import { Loader } from '@shared/loader/loader';
 import { ValidationMessagesPipe } from '@shared/pipes/validation-messages-pipe';
+import { BoardStore } from '@stores/board-store';
 
 @Component({
   selector: 'tr-text-changing-form',
-  imports: [ReactiveFormsModule, Btn, TextInput, ValidationMessagesPipe],
+  imports: [ReactiveFormsModule, Btn, TextInput, ValidationMessagesPipe, Loader],
   templateUrl: './text-changing-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextChangingForm {
   private fb = inject(FormBuilder);
-  private lastSaveSource: 'enter' | 'blur' | null = null;
+  store = inject(BoardStore);
 
   currentText = input<string>('');
   updatedText = output<string>();
 
   @ViewChild('inputRef') inputRef!: TextInput;
+
+  private lastSaveSource: 'enter' | 'blur' | null = null;
   isEditing = signal<boolean>(false);
+  readonly isDisabled = computed(() => this.store.isBoardUpdating());
 
   readonly form = this.fb.group({
     inputText: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_]+$/)]],

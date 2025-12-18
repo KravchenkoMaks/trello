@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { TextInput } from '@shared/inputs/text-input/text-input';
 import { Btn } from '@shared/btn/btn';
@@ -13,11 +13,11 @@ import { ValidationMessagesPipe } from '@shared/pipes/validation-messages-pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateTitleForm {
+  private fb = inject(FormBuilder);
+
   label = input<string>('');
   placeholder = input<string>('');
   newTitle = output<string>();
-
-  private fb = new FormBuilder();
 
   readonly form = this.fb.group({
     title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_]+$/)]],
