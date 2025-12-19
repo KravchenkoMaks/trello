@@ -59,7 +59,7 @@ export class Home {
       )
       .subscribe({
         next: () => this.toast.showSuccess(`Дошка '${boardTitle}' видалена`),
-        error: (err) => console.error('Помилка при видаленні дошки', err),
+        error: (err) => this.toast.showError('Помилка при видаленні дошки', err),
       });
   };
 }

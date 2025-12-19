@@ -6,15 +6,15 @@
     <div class="flex justify-center">
       <tr-text-changing-form 
       [currentText]="b.title"
-      (updatedText) = "updateTitle($event)"
+      (updatedText) = "changeBoardTitle($event)"
       ></tr-text-changing-form>
     </div>
 
-    <div class="scrollbar-modern flex gap-4 overflow-x-auto scroll-smooth px-4 pb-2">
+    <div class="scrollbar-modern flex gap-4 overflow-x-auto scroll-smooth px-4 py-2">
       @for (list of b.lists; track list.id) {
       <tr-list [title]="list.title" [cards]="list.cards"></tr-list>
       }
-      <tr-btn [role]="'createList'" [label]="'New List'"></tr-btn>
+      <tr-btn [role]="'createList'" [label]="'Створити список'" [action]="createList" [loading]="store.isListCreating()" ></tr-btn>
     </div>
   </div>
   } @else {

@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { List } from '@components/list/list';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Btn } from '@shared/btn/btn';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { combineLatest } from 'rxjs';
+import { combineLatest, filter, switchMap } from 'rxjs';
 import { Loader } from '@shared/loader/loader';
 import { BoardStore } from '@stores/board-store';
 import { TextChangingForm } from '@shared/forms/text-changing-form/text-changing-form';
 import { ToastService } from '@services/toast-service';
+import { DialogService } from '@services/dialog-service';
 
 @Component({
   selector: 'tr-board',
@@ -18,6 +19,8 @@ import { ToastService } from '@services/toast-service';
 })
 export class Board {
   private route = inject(ActivatedRoute);
+  dialog = inject(DialogService);
+  destroyRef = inject(DestroyRef);
   store = inject(BoardStore);
   toast = inject(ToastService);
 
@@ -30,10 +33,24 @@ export class Board {
       });
   }
 
-  updateTitle(newTitle: string) {
-    this.store.updateTitle(newTitle).subscribe({
+  changeBoardTitle(newTitle: string) {
+    this.store.changeBoardTitle(newTitle).subscribe({
       next: () => this.toast.showSuccess('Назву дошки оновлено'),
       error: () => this.toast.showError('Помилка при оновленні дошки'),
     });
   }
+
+  createList = (): void => {
+    this.dialog
+      .openCreateModal('list')
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter(Boolean),
+        switchMap((title) => this.store.createList(title))
+      )
+      .subscribe({
+        next: () => this.toast.showSuccess(`Створено новий список '.`),
+        error: () => this.toast.showError('Помилка при створенні списку'),
+      });
+  };
 }
