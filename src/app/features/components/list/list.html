@@ -1,9 +1,9 @@
 <div class="list-w bg-dark-2 flex flex-col gap-5 rounded-md p-2">
-  <h3>{{title()}}</h3>
+  <h3>{{list().title}}</h3>
 
   <div class="flex flex-col gap-1.5">
-    @for(card of cards(); track card.id){
-    <tr-card [title]="card.title"></tr-card>
+    @for(card of list().cards; track card.id){
+    <tr-card [card]="card"></tr-card>
     }
     <tr-btn [role]="'createCard'" [label]="'+ Додати картку'" [disabled]="isCardCreating()" [action]="createCard"></tr-btn>
   </div>

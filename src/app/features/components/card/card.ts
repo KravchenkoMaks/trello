@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ICard } from '@models/interfaces/i-card';
 
 @Component({
   selector: 'tr-card',
@@ -8,5 +9,5 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Card {
-  title = input<string>();
+  card = input.required<ICard>();
 }

@@ -4,23 +4,22 @@
   @if (store.currentBoard(); as b) {
   <div class="flex flex-col gap-8">
     <div class="flex justify-center">
-      <tr-text-changing-form 
-      [currentText]="b.title"
-      (updatedText) = "changeBoardTitle($event)"
-      ></tr-text-changing-form>
+      <tr-text-changing-form [currentText]="b.title" (updatedText)="changeBoardTitle($event)"></tr-text-changing-form>
     </div>
 
     <div class="scrollbar-modern flex gap-4 overflow-x-auto scroll-smooth px-4 py-2">
       @for (list of b.lists; track list.id) {
-      <tr-list [title]="list.title" [cards]="list.cards" [listId] ="list.id"></tr-list>
+      <tr-list [list]="list"></tr-list>
       }
-      <tr-btn [role]="'createList'" [label]="'Створити список'" [action]="createList" [disabled]="isListCreating()" ></tr-btn>
+      <tr-btn
+        [role]="'createList'"
+        [label]="'Створити список'"
+        [action]="createList"
+        [disabled]="isListCreating()"
+      ></tr-btn>
     </div>
   </div>
   } @else {
   <tr-custom-loading-overlay [size]="'sm'" [text]="'Завантаження дошки'"></tr-custom-loading-overlay>
   }
 </div>
-
-
-
