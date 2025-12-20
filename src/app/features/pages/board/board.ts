@@ -25,7 +25,6 @@ export class Board {
   toast = inject(ToastService);
 
   isListCreating = computed(() => this.store.isListCreating());
-  isCardCreating = computed(() => this.store.isCardCreating());
 
   constructor() {
     combineLatest([this.route.paramMap, this.route.data])

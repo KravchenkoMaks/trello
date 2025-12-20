@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
-import { Loader } from '@shared/loader/loader';
 import { TBtn } from '@models/types/t-btn';
 import { TBtnRole } from '@models/types/t-btn-role';
 
 @Component({
   selector: 'tr-btn',
-  imports: [NgClass, CommonModule, Loader],
+  imports: [NgClass, CommonModule],
   templateUrl: './btn.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,11 +15,10 @@ export class Btn {
   role = input<TBtnRole>();
   type = input<TBtn>('button');
   disabled = input<boolean>(false);
-  loading = input<boolean>(false);
   action = input<() => void>();
 
   handleClick() {
-    if (!this.disabled() && !this.loading()) {
+    if (!this.disabled()) {
       this.action()?.();
     }
   }

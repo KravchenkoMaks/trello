@@ -4,15 +4,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Btn } from '@shared/btn/btn';
 import { NgStyle } from '@angular/common';
 import { BoardsStore } from '@stores/boards-store';
-
 import { filter, switchMap } from 'rxjs';
 import { DialogService } from '@services/dialog-service';
 import { ToastService } from '@services/toast-service';
-import { Loader } from '@shared/loader/loader';
 
 @Component({
   selector: 'tr-home',
-  imports: [RouterLink, Btn, NgStyle, Loader],
+  imports: [RouterLink, Btn, NgStyle],
   templateUrl: './home.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

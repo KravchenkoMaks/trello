@@ -6,12 +6,11 @@ import { DialogService } from '@services/dialog-service';
 import { Btn } from '@shared/btn/btn';
 import { BoardsStore } from '@stores/boards-store';
 import { switchMap, filter } from 'rxjs';
-import { Loader } from '@shared/loader/loader';
 import { ToastService } from '@services/toast-service';
 
 @Component({
   selector: 'tr-list',
-  imports: [Card, Btn, Loader],
+  imports: [Card, Btn],
   templateUrl: './list.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,8 +36,8 @@ export class List {
         switchMap((title) => this.store.addCard(this.listId(), title))
       )
       .subscribe({
-        next: () => this.toast.showSuccess(`Створено новий список '.`),
-        error: () => this.toast.showError('Помилка при створенні списку'),
+        next: () => this.toast.showSuccess(`Створено нова картка.`),
+        error: () => this.toast.showError('Помилка при створенні картки'),
       });
   };
 }

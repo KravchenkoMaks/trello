@@ -18,14 +18,9 @@
     </div>
   </div>
   } @else {
-  <tr-loader></tr-loader>
+  <tr-loader [size]="'sm'" [text]="'Завантаження дошки'"></tr-loader>
   }
 </div>
 
-@if(isListCreating()){
-  <tr-loader [size]="'sm'" [text]="'Створення нового списку'"></tr-loader>
-}
-@if(isCardCreating()){
-  <tr-loader [size]="'sm'" [text]="'Створення нової картки'"></tr-loader>
-}
+
 

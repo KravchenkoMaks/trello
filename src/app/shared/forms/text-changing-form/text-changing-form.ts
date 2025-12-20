@@ -12,13 +12,12 @@ import {
 import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Btn } from '@shared/btn/btn';
 import { TextInput } from '@shared/inputs/text-input/text-input';
-import { Loader } from '@shared/loader/loader';
 import { ValidationMessagesPipe } from '@shared/pipes/validation-messages-pipe';
 import { BoardsStore } from '@stores/boards-store';
 
 @Component({
   selector: 'tr-text-changing-form',
-  imports: [ReactiveFormsModule, Btn, TextInput, ValidationMessagesPipe, Loader],
+  imports: [ReactiveFormsModule, Btn, TextInput, ValidationMessagesPipe],
   templateUrl: './text-changing-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
