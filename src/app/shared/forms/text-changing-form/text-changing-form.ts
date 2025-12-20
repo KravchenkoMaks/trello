@@ -13,7 +13,7 @@ import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angu
 import { Btn } from '@shared/btn/btn';
 import { TextInput } from '@shared/inputs/text-input/text-input';
 import { ValidationMessagesPipe } from '@shared/pipes/validation-messages-pipe';
-import { BoardsStore } from '@stores/boards-store';
+import { BoardStore } from '@stores/board-store';
 
 @Component({
   selector: 'tr-text-changing-form',
@@ -24,7 +24,7 @@ import { BoardsStore } from '@stores/boards-store';
 })
 export class TextChangingForm {
   private fb = inject(FormBuilder);
-  store = inject(BoardsStore);
+  store = inject(BoardStore);
 
   currentText = input<string>('');
   updatedText = output<string>();

@@ -3,10 +3,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Card } from '@components/card/card';
 import { DialogService } from '@services/dialog-service';
 import { Btn } from '@shared/btn/btn';
-import { BoardsStore } from '@stores/boards-store';
 import { switchMap, filter } from 'rxjs';
 import { ToastService } from '@services/toast-service';
 import { IList } from '@models/interfaces/i-list';
+import { BoardStore } from '@stores/board-store';
 
 @Component({
   selector: 'tr-list',
@@ -16,7 +16,7 @@ import { IList } from '@models/interfaces/i-list';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class List {
-  store = inject(BoardsStore);
+  store = inject(BoardStore);
   dialog = inject(DialogService);
   destroyRef = inject(DestroyRef);
   toast = inject(ToastService);
@@ -25,7 +25,7 @@ export class List {
 
   isCardCreating = computed(() => this.store.isCardCreating());
 
-  createCard = (): void => {
+  addCard = (): void => {
     this.dialog
       .openCreateModal('card')
       .pipe(

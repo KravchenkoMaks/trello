@@ -5,6 +5,6 @@
     @for(card of list().cards; track card.id){
     <tr-card [card]="card"></tr-card>
     }
-    <tr-btn [role]="'createCard'" [label]="'+ Додати картку'" [disabled]="isCardCreating()" [action]="createCard"></tr-btn>
+    <tr-btn [role]="'createCard'" [label]="'+ Додати картку'" [disabled]="isCardCreating()" [action]="addCard"></tr-btn>
   </div>
 </div>

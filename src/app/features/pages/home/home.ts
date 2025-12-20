@@ -30,30 +30,30 @@ export class Home {
     });
   }
 
-  createBoard = (): void => {
+  addBoard = (): void => {
     this.dialog
       .openCreateModal('board')
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         filter(Boolean),
-        switchMap((title) => this.store.createBoard(title))
+        switchMap((title) => this.store.addBoard(title))
       )
       .subscribe({
         error: (err) => console.error('Помилка при створенні дошки', err),
       });
   };
 
-  getDeleteBoardCallback(boardId: number, boardTitle: string): () => void {
-    return () => this.deleteBoard(boardId, boardTitle);
+  getRemoveBoardCallback(boardId: number, boardTitle: string): () => void {
+    return () => this.removeBoard(boardId, boardTitle);
   }
 
-  deleteBoard = (boardId: number, boardTitle: string): void => {
+  removeBoard = (boardId: number, boardTitle: string): void => {
     this.dialog
       .openDeleteModal('board', boardTitle)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         filter((confirmed) => confirmed),
-        switchMap(() => this.store.deleteBoard(boardId))
+        switchMap(() => this.store.removeBoard(boardId))
       )
       .subscribe({
         next: () => this.toast.showSuccess(`Дошка '${boardTitle}' видалена`),

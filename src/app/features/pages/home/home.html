@@ -15,7 +15,7 @@
         <tr-btn
           [label]="'видалити'"
           [role]="'delete'"
-          [action]="getDeleteBoardCallback(board.id, board.title)"
+          [action]="getRemoveBoardCallback(board.id, board.title)"
           [disabled]="store.isBoardDeleting()"
           class="absolute right-1 bottom-1 p-0 text-xs"
         >
@@ -25,7 +25,7 @@
     <tr-btn
     [label]="'+ Створити дошку'"
     [role]="'createBoard'"
-    [action]="createBoard"
+    [action]="addBoard"
     [disabled]="store.isBoardCreating()"
     ></tr-btn>
   </div>
