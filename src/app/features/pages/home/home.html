@@ -26,12 +26,15 @@
     [label]="'+ Створити дошку'"
     [role]="'createBoard'"
     [action]="createBoard"
-    [loading]="store.isBoardCreating()"
     [disabled]="store.isBoardCreating()"
     ></tr-btn>
   </div>
 </div>
 </div>
+
+@if (store.isBoardCreating()) {
+  <tr-loader [size]="'sm'" [text]="'Створення дошки'"></tr-loader>
+}
 @if (store.isBoardDeleting()) {
   <tr-loader [size]="'sm'" [text]="'Видалення дошки'"></tr-loader>
 }

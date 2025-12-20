@@ -1,15 +1,16 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { IBoard } from '@models/interfaces/i-board';
 import { INewBoard } from '@models/interfaces/i-new-board';
-import { BoardService } from '@services/board-service';
+import { INewCard } from '@models/interfaces/new-card';
+import { BoardsService } from '@services/boards-service';
 import { getRandomColor } from '@shared/utils/colors';
 import { catchError, EMPTY, finalize, Observable, of, switchMap, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BoardStore {
-  private boardService = inject(BoardService);
+export class BoardsStore {
+  private boardsService = inject(BoardsService);
 
   private boardsSignal = signal<IBoard[]>([]);
   private currentBoardSignal = signal<IBoard | null>(null);
@@ -19,8 +20,9 @@ export class BoardStore {
 
   isBoardCreating = signal(false);
   isBoardDeleting = signal(false);
-  isListCreating = signal(false);
   isBoardUpdating = signal(false);
+  isListCreating = signal(false);
+  isCardCreating = signal(false);
 
   setBoards(boards: IBoard[]) {
     this.boardsSignal.set(boards);
@@ -38,8 +40,8 @@ export class BoardStore {
     const color = getRandomColor();
     const newBoard: INewBoard = { title, custom: { color } };
 
-    return this.boardService.createBoard(newBoard).pipe(
-      switchMap(() => this.boardService.getBoards()),
+    return this.boardsService.createBoard(newBoard).pipe(
+      switchMap(() => this.boardsService.getBoards()),
       tap((boards) => this.setBoards(boards)),
       catchError((err) => {
         console.error('Помилка при створенні дошки:', err);
@@ -54,8 +56,8 @@ export class BoardStore {
 
     this.isBoardDeleting.set(true);
 
-    return this.boardService.deleteBoard(boardId).pipe(
-      switchMap(() => this.boardService.getBoards()),
+    return this.boardsService.deleteBoard(boardId).pipe(
+      switchMap(() => this.boardsService.getBoards()),
       tap((boards) => this.setBoards(boards)),
       catchError((err) => {
         console.error('Помилка при видаленні дошки:', err);
@@ -76,8 +78,8 @@ export class BoardStore {
     this.isBoardUpdating.set(true);
 
     const id = board.id;
-    return this.boardService.updateBoard(id, { title }).pipe(
-      switchMap(() => this.boardService.getBoard(id)),
+    return this.boardsService.updateBoard(id, { title }).pipe(
+      switchMap(() => this.boardsService.getBoard(id)),
       tap((board) => this.refreshBoard(id, board)),
       catchError((err) => {
         console.error('Помилка при оновленні дошки:', err);
@@ -99,8 +101,8 @@ export class BoardStore {
     const boardId = currentBoard.id;
     const position = currentBoard.lists.length + 1;
 
-    return this.boardService.createList(boardId, { title, position }).pipe(
-      switchMap(() => this.boardService.getBoard(boardId)),
+    return this.boardsService.createList(boardId, { title, position }).pipe(
+      switchMap(() => this.boardsService.getBoard(boardId)),
       tap((board) => this.refreshBoard(boardId, board)),
       catchError((err) => {
         console.error('Помилка при створенні списку:', err);
@@ -110,7 +112,66 @@ export class BoardStore {
     );
   }
 
+  addCard(listId: number, newTitle: string): Observable<IBoard> {
+    const board = this.currentBoard();
+    const title = newTitle.trim();
+
+    console.group(`addCard(listId: ${listId})`);
+
+    if (!board) {
+      console.error('Не знайдено поточну дошку (currentBoard is null).');
+      console.groupEnd();
+      return EMPTY;
+    }
+
+    if (!title) {
+      console.warn('Назва картки порожня — створення скасовано.');
+      console.groupEnd();
+      return EMPTY;
+    }
+
+    if (this.isCardCreating()) {
+      console.warn('Створення картки вже триває, очікуємо завершення.');
+      console.groupEnd();
+      return EMPTY;
+    }
+
+    const list = board.lists.find((l) => l.id === listId);
+    if (!list) {
+      console.error(`Не знайдено список з ID #${listId}.`);
+      console.groupEnd();
+      return EMPTY;
+    }
+
+    this.isCardCreating.set(true);
+
+    const boardId = board.id;
+    const position = list.cards.length + 1;
+
+    const dto: INewCard = {
+      title,
+      list_id: listId,
+      position,
+    };
+
+    return this.boardsService.createCard(boardId, dto).pipe(
+      tap(() => console.info('Картку успішно створено на сервері.')),
+      switchMap(() => this.boardsService.getBoard(boardId)),
+      tap((board) => this.refreshBoard(boardId, board)),
+      catchError((err) => {
+        console.error('Помилка при створенні картки:', err);
+        return throwError(() => err);
+      }),
+      finalize(() => {
+        this.isCardCreating.set(false);
+        console.groupEnd();
+        console.info('Завершено процес створення картки.');
+      })
+    );
+  }
+
   refreshBoard(id: number, board: IBoard) {
+    console.info('Оновлення даних дошки після створення картки.');
     this.setCurrentBoard({ ...board, id });
     this.setBoards(this.boards().map((b) => (b.id === id ? board : b)));
   }

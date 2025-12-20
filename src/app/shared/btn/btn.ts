@@ -31,7 +31,7 @@ export class Btn {
   private readonly btnClassMap: Record<TBtnRole, string> = {
     createBoard: 'bg-dark-2 board-size  hover:bg-dark-1',
     createList: 'bg-dark-2 list-w hover:bg-dark-1',
-    createCard: 'bg-dark-3 w-full card-h hover:bg-dark-1 hover:text-violet-1',
+    createCard: 'bg-dark-3 hover:bg-dark-1',
     cancel: ' w-full text-primary hover:text-light hover:bg-primary',
     delete: 'text-unsuccess hover:text-light hover:bg-unsuccess',
     create: 'w-full bg-primary text-gray-1 disabled:bg-dark-1',

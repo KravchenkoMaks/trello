@@ -11,7 +11,7 @@ import { map, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class BoardService {
+export class BoardsService {
   httpClient = inject(HttpClient);
   apiUrl = environment.baseURL;
   private headers = { Authorization: 'Bearer 123' };

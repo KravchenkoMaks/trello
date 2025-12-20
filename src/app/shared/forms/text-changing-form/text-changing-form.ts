@@ -14,7 +14,7 @@ import { Btn } from '@shared/btn/btn';
 import { TextInput } from '@shared/inputs/text-input/text-input';
 import { Loader } from '@shared/loader/loader';
 import { ValidationMessagesPipe } from '@shared/pipes/validation-messages-pipe';
-import { BoardStore } from '@stores/board-store';
+import { BoardsStore } from '@stores/boards-store';
 
 @Component({
   selector: 'tr-text-changing-form',
@@ -25,7 +25,7 @@ import { BoardStore } from '@stores/board-store';
 })
 export class TextChangingForm {
   private fb = inject(FormBuilder);
-  store = inject(BoardStore);
+  store = inject(BoardsStore);
 
   currentText = input<string>('');
   updatedText = output<string>();

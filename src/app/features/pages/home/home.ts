@@ -3,7 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Btn } from '@shared/btn/btn';
 import { NgStyle } from '@angular/common';
-import { BoardStore } from '@stores/board-store';
+import { BoardsStore } from '@stores/boards-store';
 
 import { filter, switchMap } from 'rxjs';
 import { DialogService } from '@services/dialog-service';
@@ -21,7 +21,7 @@ export class Home {
   private route = inject(ActivatedRoute);
   private dialog = inject(DialogService);
   private destroyRef = inject(DestroyRef);
-  store = inject(BoardStore);
+  store = inject(BoardsStore);
   toast = inject(ToastService);
 
   protected title = 'Мої дошки';

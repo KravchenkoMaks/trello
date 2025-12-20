@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
 import { IBoard } from '@models/interfaces/i-board';
-import { BoardService } from '@services/board-service';
+import { BoardsService } from '@services/boards-service';
 
 export const boardsResolver: ResolveFn<IBoard[]> = () => {
-  const bs = inject(BoardService);
+  const bs = inject(BoardsService);
   return bs.getBoards();
 };

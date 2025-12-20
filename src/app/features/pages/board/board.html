@@ -12,12 +12,20 @@
 
     <div class="scrollbar-modern flex gap-4 overflow-x-auto scroll-smooth px-4 py-2">
       @for (list of b.lists; track list.id) {
-      <tr-list [title]="list.title" [cards]="list.cards"></tr-list>
+      <tr-list [title]="list.title" [cards]="list.cards" [listId] ="list.id"></tr-list>
       }
-      <tr-btn [role]="'createList'" [label]="'Створити список'" [action]="createList" [loading]="store.isListCreating()" ></tr-btn>
+      <tr-btn [role]="'createList'" [label]="'Створити список'" [action]="createList" [disabled]="isListCreating()" ></tr-btn>
     </div>
   </div>
   } @else {
   <tr-loader></tr-loader>
   }
 </div>
+
+@if(isListCreating()){
+  <tr-loader [size]="'sm'" [text]="'Створення нового списку'"></tr-loader>
+}
+@if(isCardCreating()){
+  <tr-loader [size]="'sm'" [text]="'Створення нової картки'"></tr-loader>
+}
+

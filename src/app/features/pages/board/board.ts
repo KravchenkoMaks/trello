@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject } from '@angular/core';
 import { List } from '@components/list/list';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Btn } from '@shared/btn/btn';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest, filter, switchMap } from 'rxjs';
 import { Loader } from '@shared/loader/loader';
-import { BoardStore } from '@stores/board-store';
+import { BoardsStore } from '@stores/boards-store';
 import { TextChangingForm } from '@shared/forms/text-changing-form/text-changing-form';
 import { ToastService } from '@services/toast-service';
 import { DialogService } from '@services/dialog-service';
@@ -21,8 +21,11 @@ export class Board {
   private route = inject(ActivatedRoute);
   dialog = inject(DialogService);
   destroyRef = inject(DestroyRef);
-  store = inject(BoardStore);
+  store = inject(BoardsStore);
   toast = inject(ToastService);
+
+  isListCreating = computed(() => this.store.isListCreating());
+  isCardCreating = computed(() => this.store.isCardCreating());
 
   constructor() {
     combineLatest([this.route.paramMap, this.route.data])
