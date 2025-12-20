@@ -1,7 +1,9 @@
+@if (loading.loading()) {
+<tr-progress-bar/>
+}
+
 <router-outlet></router-outlet>
 
-@if (loading.loading()) {
-<div class="loading-overlay">
-  <div class="spinner"></div>
-</div>
-}
+
+
+

@@ -1,0 +1,10 @@
+<div class="text-gray-1 flex flex-col items-center justify-center">
+  <div
+    class="border-gray-1 h-4 w-4 animate-spin rounded-full border-2 border-t-transparent"
+    [ngClass]="[
+          sizeClass(),
+          colorClass()
+        ]"
+  ></div>
+  <p>{{ text() }}</p>
+</div>

@@ -4,15 +4,15 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Btn } from '@shared/btn/btn';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest, filter, switchMap } from 'rxjs';
-import { Loader } from '@shared/loader/loader';
 import { BoardsStore } from '@stores/boards-store';
 import { TextChangingForm } from '@shared/forms/text-changing-form/text-changing-form';
 import { ToastService } from '@services/toast-service';
 import { DialogService } from '@services/dialog-service';
+import { CustomLoadingOverlay } from '@shared/loading/custom-loading-overlay/custom-loading-overlay';
 
 @Component({
   selector: 'tr-board',
-  imports: [List, RouterLink, Btn, Loader, TextChangingForm],
+  imports: [List, RouterLink, Btn, TextChangingForm, CustomLoadingOverlay],
   templateUrl: './board.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

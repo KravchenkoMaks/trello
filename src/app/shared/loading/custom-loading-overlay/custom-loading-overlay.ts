@@ -2,13 +2,13 @@ import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
-  selector: 'tr-loader',
+  selector: 'tr-custom-loading-overlay',
   imports: [NgClass],
-  templateUrl: './loader.html',
+  templateUrl: './custom-loading-overlay.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Loader {
+export class CustomLoadingOverlay {
   text = input<string>('');
   size = input<'sm' | 'md' | 'lg'>();
   color = input<'primary' | 'success' | 'error' | 'gray'>();
