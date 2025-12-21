@@ -1,0 +1,29 @@
+<form class="flex w-96 flex-col gap-4" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <div class="flex flex-col gap-2">
+    <tr-text-input
+      formControlName="title"
+      [type]="'text'"
+      [placeholder]="placeholderT"
+      [label]="labelT"
+      [ring]="'color'"
+      [bg]="'dark'"
+      [control]="titleControl()"
+    ></tr-text-input>
+    <small class="block min-h-4 text-xs text-red-400"> {{ titleControl() | validationMessages }} </small>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <tr-text-input
+      formControlName="description"
+      [type]="'textarea'"
+      [placeholder]="placeholderD"
+      [label]="labelD"
+      [ring]="'mono'"
+      [bg]="'dark'"
+      [control]="descriptionControl()"
+    ></tr-text-input>
+    <small class="block min-h-4 text-xs text-red-400" >{{ descriptionControl() | validationMessages }}</small>
+  </div>
+
+  <tr-btn [type]="'submit'" [role]="'create'" [disabled]="formGroup.invalid" [label]="'Створити'"></tr-btn>
+</form>

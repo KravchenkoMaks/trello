@@ -1,11 +1,17 @@
 <div class="bg-dark-2 flex flex-col gap-2 rounded-xl">
-  <h3 class="mt-4 text-center">{{ modalName }}</h3>
+  <h3 class="mt-4 text-center">{{ modalName() }}</h3>
 
+  @if(!isMultiForm()){
   <div class="m-4 grid gap-3">
     <tr-text-creating-form
-      [label]="label"
-      [placeholder]="placeholder"
+      [label]="label()"
+      [placeholder]="placeholder()"
       (newTitle)="submit($event)"
     ></tr-text-creating-form>
   </div>
+  }@else {
+  <div class="m-4 grid gap-3">
+    <tr-multi-form></tr-multi-form>
+  </div>
+  }
 </div>

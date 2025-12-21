@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
-import { TBtn } from '@models/types/t-btn';
-import { TBtnRole } from '@models/types/t-btn-role';
+
+export type TBtnRole = 'createBoard' | 'createList' | 'createCard' | 'delete' | 'cancel' | 'create' | 'changeTitle';
 
 @Component({
   selector: 'tr-btn',
@@ -13,7 +13,7 @@ import { TBtnRole } from '@models/types/t-btn-role';
 export class Btn {
   label = input<string>('');
   role = input<TBtnRole>();
-  type = input<TBtn>('button');
+  type = input<'button' | 'submit'>('button');
   disabled = input<boolean>(false);
   action = input<() => void>();
 

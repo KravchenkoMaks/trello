@@ -1,3 +1,4 @@
+@if (type() === 'text') {
 <label class="flex flex-col gap-1">
   <span class="mb-0.5 text-xs text-stone-400">{{ label() }}</span>
   <input
@@ -10,4 +11,17 @@
     [ngClass]="getInputClasses()"
   />
 </label>
-
+}@else {
+<label class="flex flex-col gap-1">
+  <span class="mb-0.5 text-xs text-stone-400">{{ label() }}</span>
+  <textarea
+    [placeholder]="placeholder()"
+    [value]="value"
+    [disabled]="disabled"
+    (input)="onInput($event)"
+    (blur)="handleBlur()"
+    [ngClass]="getInputClasses()"
+    rows="3"
+  ></textarea>
+</label>
+}

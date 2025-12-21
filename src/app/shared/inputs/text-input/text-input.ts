@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, output } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { TInputRole } from '@models/types/t-input-role';
+
+export type TInputBg = 'darkLight' | 'darkMedium' | 'dark';
 
 const noop = () => {
   // no-op
@@ -27,9 +28,10 @@ export class TextInput implements ControlValueAccessor {
 
   control = input<FormControl>();
   label = input<string>('');
-  role = input<TInputRole>();
   placeholder = input<string>('');
-  type = input<'text' | 'email' | 'password'>('text');
+  bg = input<TInputBg>('dark');
+  ring = input<'color' | 'mono'>('color');
+  type = input<'text' | 'email' | 'password' | 'textarea'>('text');
 
   value = '';
   disabled = false;
@@ -79,26 +81,29 @@ export class TextInput implements ControlValueAccessor {
 
   baseClasses = 'text-stone-500 rounded-sm px-2 py-1 placeholder-stone-500 focus:outline-none';
 
-  private readonly inputClassMap: Record<TInputRole, string> = {
-    createBoard: 'bg-zinc-900 ',
-    changeTitle: 'bg-zinc-800 ',
+  private readonly inputBgClassMap: Record<TInputBg, string> = {
+    darkLight: 'bg-dark-1',
+    darkMedium: 'bg-dark-2 ',
+    dark: 'bg-dark-3 ',
   };
 
   getInputClasses(): string {
-    const role = this.role();
+    const inputBg = this.bg();
 
-    const inputClasses = role ? this.inputClassMap[role] : '';
+    const inputClasses = inputBg ? this.inputBgClassMap[inputBg] : '';
 
     let validationClasses = '';
 
-    if (role === 'createBoard' && this.control()) {
-      const ctrl = this.control();
-
-      if (ctrl?.invalid) {
+    const ctrl = this.control();
+    if (this.ring() === 'color' && ctrl) {
+      if (ctrl.invalid) {
         validationClasses = 'ring-1 ring-red-500 focus:ring-red-500';
-      } else if (ctrl?.valid) {
+      } else {
         validationClasses = 'ring-1 ring-blue-600  focus:ring-blue-600';
       }
+    }
+    if (this.type() === 'textarea') {
+      validationClasses = 'focus-visible:ring-1 focus-visible:ring-dark-1';
     }
 
     return `${this.baseClasses} ${inputClasses} ${validationClasses}`.trim();

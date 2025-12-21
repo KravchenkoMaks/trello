@@ -1,4 +1,4 @@
-import { TModal } from '@models/types/t-modal';
+import { TModal } from '@services/dialog-service';
 
 export interface IModalData {
   type: TModal;

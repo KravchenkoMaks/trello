@@ -1,9 +1,10 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { inject, Injectable } from '@angular/core';
-import { TModal } from '@models/types/t-modal';
 import { CreateModal } from '@shared/modals/create-modal/create-modal';
 import { DeleteModal } from '@shared/modals/delete-modal/delete-modal';
 import { map, Observable } from 'rxjs';
+
+export type TModal = 'board' | 'list' | 'card' | 'element';
 
 @Injectable({
   providedIn: 'root',

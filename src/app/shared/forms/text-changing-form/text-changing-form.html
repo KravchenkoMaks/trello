@@ -7,8 +7,8 @@
     formControlName="inputText"
     [control]="textControl"
     [type]="'text'"
-    [role]="'changeTitle'"
-    [disabled]="isDisabled()"
+    [ring]="'mono'" 
+    [bg]="'darkMedium'"   
     (keydown.enter)="saveEdit('enter')"
     (blurEvent)="saveEdit('blur')"
   ></tr-text-input>
