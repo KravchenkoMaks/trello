@@ -10,7 +10,6 @@
 /.angular/cache
 
 /notes
-/temp
 
 # === Node dependencies ===
 /node_modules

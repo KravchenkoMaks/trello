@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
-
-export type TBtnRole = 'createBoard' | 'createList' | 'createCard' | 'delete' | 'cancel' | 'create' | 'changeTitle';
+import { TBtnAction } from '@types';
 
 @Component({
   selector: 'tr-btn',
@@ -12,7 +11,7 @@ export type TBtnRole = 'createBoard' | 'createList' | 'createCard' | 'delete' | 
 })
 export class Btn {
   label = input<string>('');
-  role = input<TBtnRole>();
+  role = input<TBtnAction>();
   type = input<'button' | 'submit'>('button');
   disabled = input<boolean>(false);
   action = input<() => void>();
@@ -26,7 +25,7 @@ export class Btn {
   baseClasses =
     'cursor-pointer rounded-md px-2 py-1 font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center';
 
-  private readonly btnClassMap: Record<TBtnRole, string> = {
+  private readonly btnClassMap: Record<TBtnAction, string> = {
     createBoard: 'bg-dark-2 board-size  hover:bg-dark-1',
     createList: 'bg-dark-2 list-w hover:bg-dark-1',
     createCard: 'bg-dark-3 hover:bg-dark-1',

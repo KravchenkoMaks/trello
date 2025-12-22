@@ -2,7 +2,7 @@ import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, inject, computed, signal } from '@angular/core';
 import { BoardCreatingForm, CardCreatingForm, ListCreatingForm } from '@forms';
 import { IModalData } from '@interfaces';
-import { TModal } from '@services';
+import { TItem } from '@types';
 
 @Component({
   selector: 'tr-create-modal',
@@ -16,7 +16,7 @@ export class CreateModal {
   private data = inject<IModalData>(DIALOG_DATA, { optional: true });
 
   readonly modalName = computed(() => `Create ${this.type()}`);
-  readonly type = signal<TModal>(this.data?.type ?? 'element');
+  readonly type = signal<TItem>(this.data?.type ?? 'item');
 
   protected submit(title: string): void {
     this.dialogRef.close(title);

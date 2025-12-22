@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Btn } from '@button/btn/btn';
-import { ValidationError } from '@errors/validation-error/validation-error';
-import { TextInput } from '@inputs/text-input/text-input';
+import { Btn } from '@buttons';
+import { ValidationError } from '@errors';
+import { TextInput } from '@inputs';
 
 @Component({
   selector: 'tr-list-creating-form',

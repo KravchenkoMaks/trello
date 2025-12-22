@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, output } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-
-export type TInputBg = 'darkLight' | 'darkMedium' | 'dark';
+import { TBgColor } from '@types';
 
 const noop = () => {
   // no-op
@@ -29,7 +28,7 @@ export class TextInput implements ControlValueAccessor {
   control = input<FormControl>();
   label = input<string>('');
   placeholder = input<string>('');
-  bg = input<TInputBg>('dark');
+  bg = input<TBgColor>('dark');
   ring = input<'color' | 'mono' | 'none'>('color');
   type = input<'text' | 'email' | 'password' | 'textarea'>('text');
 
@@ -81,7 +80,7 @@ export class TextInput implements ControlValueAccessor {
 
   baseClasses = 'text-stone-500 rounded-sm px-2 py-1 placeholder-stone-500 focus:outline-none';
 
-  private readonly inputBgClassMap: Record<TInputBg, string> = {
+  private readonly inputBgClassMap: Record<TBgColor, string> = {
     darkLight: 'bg-dark-1',
     darkMedium: 'bg-dark-2 ',
     dark: 'bg-dark-3 ',
