@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
-import { IBoard } from '@models/interfaces/i-board';
+import { IBoard } from '@interfaces/i-board';
 import { BoardsService } from '@services/boards-service';
 
 export const boardResolver: ResolveFn<IBoard | null> = (route) => {

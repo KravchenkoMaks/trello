@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { IBoard } from '@models/interfaces/i-board';
-import { INewBoard } from '@models/interfaces/i-new-board';
+import { IBoard } from '@interfaces/i-board';
+import { INewBoard } from '@interfaces/i-new-board';
 import { BoardsService } from '@services/boards-service';
 import { getRandomColor } from '@shared/utils/colors';
 import { catchError, finalize, Observable, of, switchMap, tap, throwError } from 'rxjs';

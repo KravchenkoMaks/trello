@@ -14,7 +14,8 @@
       "@services/*": ["./src/app/features/services/*"],
       "@pages/*": ["./src/app/features/pages/*"],
       "@models/*": ["./src/app/features/models/*"],
-      "@interceptors/*": ["./src/app/features/interceptors/*"],
+      "@interfaces/*": ["./src/app/features/interfaces/*"],
+      "@interceptors/*": ["./src/app/features/interceptors/*"]
     }
   },
   "include": ["src/**/*.ts"],

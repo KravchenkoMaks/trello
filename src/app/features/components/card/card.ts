@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { ICard } from '@models/interfaces/i-card';
+import { ICard } from '@interfaces/i-card';
 
 @Component({
   selector: 'tr-card',

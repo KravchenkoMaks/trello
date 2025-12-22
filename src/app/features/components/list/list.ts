@@ -5,7 +5,7 @@ import { DialogService } from '@services/dialog-service';
 import { Btn } from '@shared/btn/btn';
 import { switchMap, filter } from 'rxjs';
 import { ToastService } from '@services/toast-service';
-import { IList } from '@models/interfaces/i-list';
+import { IList } from '@interfaces/i-list';
 import { BoardStore } from '@stores/board-store';
 
 @Component({
