@@ -78,7 +78,7 @@ export class TextInput implements ControlValueAccessor {
     this.onChange(this.value);
   }
 
-  baseClasses = 'text-stone-500 rounded-sm px-2 py-1 placeholder-stone-500 focus:outline-none';
+  baseClasses = 'text-t-14 text-light rounded-sm px-2 py-1 placeholder-stone-500 focus:outline-none';
 
   private readonly inputBgClassMap: Record<TBgColor, string> = {
     darkLight: 'bg-dark-1',

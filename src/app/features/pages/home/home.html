@@ -1,4 +1,4 @@
-<div class="bg-dark-3 container mx-auto mt-8 w-[80vw] rounded-2xl">
+<div class="bg-dark-3 container mx-auto mt-8 w-[80vw] rounded-(--r16)">
   <div class="grid gap-6 py-8">
     <h1 class="text-center font-bold">{{ title }}</h1>
 
@@ -8,7 +8,7 @@
         <a
           [ngStyle]="{background: board.custom.color}"
           [routerLink]="['/board', board.id]"
-          class="board-size block truncate rounded-md p-2 wrap-break-word text-black opacity-90 hover:opacity-100"
+          class="board-size block truncate rounded-(--r6) p-2 wrap-break-word text-dark-4 opacity-90 hover:opacity-100"
         >
           {{ board.title }}
         </a>
@@ -17,7 +17,7 @@
           role="delete"
           [action]="getDeleteBoardCallback(board.id, board.title)"
           [disabled]="store.isBoardDeleting()"
-          class="absolute right-1 bottom-1 p-0 text-xs"
+          class="absolute right-1 bottom-1 p-0"
         >
         </tr-btn>
       </div>

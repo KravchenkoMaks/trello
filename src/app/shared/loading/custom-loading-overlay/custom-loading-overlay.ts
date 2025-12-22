@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomLoadingOverlay {
-  text = input<string>('');
+  message = input<string>('');
   size = input<'sm' | 'md' | 'lg'>();
   color = input<'primary' | 'success' | 'error' | 'gray'>();
 

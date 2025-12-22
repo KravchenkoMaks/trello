@@ -1,10 +1,10 @@
-<div class="bg-dark-3 container mx-auto mt-8 w-[80vw] rounded-2xl pb-8">
+<div class="bg-dark-3 container mx-auto mt-8 w-[80vw] rounded-(--r16) pb-8">
   <a class="home-link mt-8 ml-8 inline-block" routerLink="/">&lt; Home</a>
 
   @if (store.board(); as b) {
-  <div class="flex flex-col gap-8">
+  <div class="flex flex-col gap-2">
     <div class="flex justify-center">
-      <tr-title-changing-form [currentTitle]="b.title" (updatedTitle)="changeTitle($event)"></tr-title-changing-form>
+      <tr-title-changing-form  [currentTitle]="b.title" (updatedTitle)="changeTitle($event)"></tr-title-changing-form>
     </div>
 
     <div class="scrollbar-modern flex gap-4 overflow-x-auto scroll-smooth px-4 py-2">
@@ -20,6 +20,6 @@
     </div>
   </div>
   } @else {
-  <tr-custom-loading-overlay size="sm" text="Board loading...'"></tr-custom-loading-overlay>
+  <tr-custom-loading-overlay size="sm" message="Board loading...'"></tr-custom-loading-overlay>
   }
 </div>

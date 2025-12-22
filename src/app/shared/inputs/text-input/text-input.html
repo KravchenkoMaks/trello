@@ -1,6 +1,6 @@
 @if (type() === 'text') {
 <label class="flex flex-col gap-1">
-  <span class="mb-0.5 text-xs text-stone-400">{{ label() }}</span>
+  <span class="mb-0.5 text-t-12 text-gray-1">{{ label() }}</span>
   <input
     [type]="type()"
     [placeholder]="placeholder()"
@@ -13,7 +13,7 @@
 </label>
 }@else {
 <label class="flex flex-col gap-1">
-  <span class="mb-0.5 text-xs text-stone-400">{{ label() }}</span>
+  <span class="mb-0.5 text-t-12 text-gray-1">{{ label() }}</span>
   <textarea
     [placeholder]="placeholder()"
     [value]="value"

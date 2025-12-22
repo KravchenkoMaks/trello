@@ -23,16 +23,16 @@ export class Btn {
   }
 
   baseClasses =
-    'cursor-pointer rounded-md px-2 py-1 font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center';
+    'text-t-12 cursor-pointer rounded-(--r6) px-2 py-1 font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center';
 
   private readonly btnClassMap: Record<TBtnAction, string> = {
     createBoard: 'bg-dark-2 board-size  hover:bg-dark-1',
     createList: 'bg-dark-2 list-w hover:bg-dark-1',
     createCard: 'bg-dark-3 hover:bg-dark-1',
-    cancel: ' w-full text-primary hover:text-light hover:bg-primary',
-    delete: 'text-unsuccess hover:text-light hover:bg-unsuccess',
     create: 'w-full bg-primary text-gray-1 disabled:bg-dark-1',
-    changeTitle: 'text-3xl font-bold text-title hover:bg-dark-2',
+    cancel: 'rounded-(--r12) text-primary hover:py-0  hover:ring-1 focus:ring-primary',
+    delete: 'rounded-(--r12) text-unsuccess hover:py-0  hover:ring-1 focus:ring-unsuccess',
+    changeTitle: 'text-t-24  text-title hover:bg-dark-2',
   };
 
   btnClass = computed(() => {
