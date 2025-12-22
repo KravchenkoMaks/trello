@@ -1,18 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, computed, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Btn } from '@shared/btn/btn';
-import { ValidationError } from '@shared/errors/validation-error/validation-error';
-import { TextInput } from '@shared/inputs/text-input/text-input';
+import { Btn } from '@buttons';
+import { ValidationError } from '@errors';
+import { TextInput } from '@inputs';
 
 @Component({
-  selector: 'tr-list-creating-form',
+  selector: 'tr-board-creating-form',
   imports: [ReactiveFormsModule, CommonModule, TextInput, Btn, ValidationError],
-  templateUrl: './list-creating-form.html',
+  templateUrl: './board-creating-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListCreatingForm {
+export class BoardCreatingForm {
   private fb = inject(FormBuilder);
   newTitle = output<string>();
 

@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, input, computed } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Card } from '@components/card/card';
-import { DialogService } from '@services/dialog-service';
-import { Btn } from '@shared/btn/btn';
 import { switchMap, filter } from 'rxjs';
-import { ToastService } from '@services/toast-service';
-import { IList } from '@interfaces/i-list';
-import { BoardStore } from '@stores/board-store';
+import { Card } from '@components';
+import { Btn } from '@buttons';
+import { BoardStore } from '@stores';
+import { DialogService, ToastService } from '@services';
+import { IList } from '@interfaces';
 
 @Component({
   selector: 'tr-list',

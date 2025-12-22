@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Btn } from '@shared/btn/btn';
-import { TModal } from '@services/dialog-service';
+import { TModal } from '@services';
+import { Btn } from '@buttons';
 
 @Component({
   selector: 'tr-delete-modal',

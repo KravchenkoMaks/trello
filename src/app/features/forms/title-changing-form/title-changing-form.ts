@@ -10,10 +10,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Btn } from '@shared/btn/btn';
-import { ValidationError } from '@shared/errors/validation-error/validation-error';
-import { TextInput } from '@shared/inputs/text-input/text-input';
-import { BoardStore } from '@stores/board-store';
+import { Btn } from '@buttons';
+import { ValidationError } from '@errors';
+import { TextInput } from '@inputs';
+
+import { BoardStore } from '@stores';
 
 @Component({
   selector: 'tr-title-changing-form',

@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject } from '@angular/core';
-import { List } from '@components/list/list';
+import { List } from '@components';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Btn } from '@shared/btn/btn';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest, filter, switchMap } from 'rxjs';
-import { ToastService } from '@services/toast-service';
-import { DialogService } from '@services/dialog-service';
-import { CustomLoadingOverlay } from '@shared/loading/custom-loading-overlay/custom-loading-overlay';
-import { BoardStore } from '@stores/board-store';
-import { TitleChangingForm } from '@components/forms/title-changing-form/title-changing-form';
+import { ToastService } from '@services';
+import { DialogService } from '@services';
+import { CustomLoadingOverlay } from '@loading';
+import { BoardStore } from '@stores';
+import { Btn } from '@buttons';
+import { TitleChangingForm } from '@forms';
 
 @Component({
   selector: 'tr-board',

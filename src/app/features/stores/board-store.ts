@@ -1,7 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { IBoard } from '@interfaces/i-board';
-import { INewCard } from '@interfaces/i-new-card';
-import { BoardsService } from '@services/boards-service';
+import { IBoard, INewCard } from '@interfaces';
+import { BoardsService } from '@services';
 import { catchError, EMPTY, finalize, Observable, switchMap, tap, throwError } from 'rxjs';
 
 @Injectable({

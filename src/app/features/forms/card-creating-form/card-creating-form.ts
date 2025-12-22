@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Btn } from '@shared/btn/btn';
-import { TextInput } from '@shared/inputs/text-input/text-input';
-import { ValidationError } from '@shared/errors/validation-error/validation-error';
+import { Btn } from '@buttons';
+import { ValidationError } from '@errors';
+import { TextInput } from '@inputs';
 
 @Component({
   selector: 'tr-card-creating-form',

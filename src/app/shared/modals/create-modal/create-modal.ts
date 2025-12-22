@@ -1,10 +1,8 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, inject, computed, signal } from '@angular/core';
-import { IModalData } from '@interfaces/i-modal-data';
-import { TModal } from '@services/dialog-service';
-import { CardCreatingForm } from '@components/forms/card-creating-form/card-creating-form';
-import { ListCreatingForm } from '@components/forms/list-creating-form/list-creating-form';
-import { BoardCreatingForm } from '@components/forms/board-creating-form/board-creating-form';
+import { BoardCreatingForm, CardCreatingForm, ListCreatingForm } from '@forms';
+import { IModalData } from '@interfaces';
+import { TModal } from '@services';
 
 @Component({
   selector: 'tr-create-modal',

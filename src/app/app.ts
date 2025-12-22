@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoadingService } from '@services/loading-service';
-import { ProgressBar } from '@shared/loading/progress-bar/progress-bar';
+import { ProgressBar } from '@loading';
+import { LoadingService } from '@services';
 
 @Component({
   selector: 'tr-root',

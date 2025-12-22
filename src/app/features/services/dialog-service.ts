@@ -1,7 +1,6 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { inject, Injectable } from '@angular/core';
-import { CreateModal } from '@shared/modals/create-modal/create-modal';
-import { DeleteModal } from '@shared/modals/delete-modal/delete-modal';
+import { CreateModal, DeleteModal } from '@modals';
 import { map, Observable } from 'rxjs';
 
 export type TModal = 'board' | 'list' | 'card' | 'element';

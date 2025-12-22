@@ -1,11 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '@environment/environment';
-import { IBoard } from '@interfaces/i-board';
-import { INewBoard } from '@interfaces/i-new-board';
-import { INewList } from '@interfaces/i-new-list';
-import { IResponse } from '@interfaces/i-response';
-import { INewCard } from '@interfaces/i-new-card';
+import { environment } from '@environments/environment';
+import { IBoard, INewBoard, INewCard, INewList, IResponse } from '@interfaces';
+
 import { map, Observable } from 'rxjs';
 
 @Injectable({

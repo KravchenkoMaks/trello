@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Btn } from '@shared/btn/btn';
 import { NgStyle } from '@angular/common';
-import { BoardsStore } from '@stores/boards-store';
+import { BoardsStore } from '@stores';
 import { filter, switchMap } from 'rxjs';
-import { DialogService } from '@services/dialog-service';
-import { ToastService } from '@services/toast-service';
+import { DialogService, ToastService } from '@services';
+import { Btn } from '@buttons';
 
 @Component({
   selector: 'tr-home',

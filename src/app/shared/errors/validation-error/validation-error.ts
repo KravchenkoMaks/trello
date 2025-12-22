@@ -1,6 +1,6 @@
 import { Component, input, Signal } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { ValidationMessagesPipe } from '@shared/pipes/validation-messages-pipe';
+import { ValidationMessagesPipe } from '@pipes';
 
 @Component({
   selector: 'tr-validation-error',
