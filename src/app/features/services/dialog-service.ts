@@ -18,10 +18,10 @@ export class DialogService {
     }).closed;
   }
 
-  openDeleteModal(type: TModal, name: string): Observable<boolean> {
+  openDeleteModal(type: TModal, elementName: string): Observable<boolean> {
     return this.dialog
       .open<boolean>(DeleteModal, {
-        data: { type, name },
+        data: { type, elementName },
       })
       .closed.pipe(map((result) => !!result));
   }

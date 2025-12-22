@@ -30,7 +30,7 @@ export class TextInput implements ControlValueAccessor {
   label = input<string>('');
   placeholder = input<string>('');
   bg = input<TInputBg>('dark');
-  ring = input<'color' | 'mono'>('color');
+  ring = input<'color' | 'mono' | 'none'>('color');
   type = input<'text' | 'email' | 'password' | 'textarea'>('text');
 
   value = '';
@@ -97,13 +97,13 @@ export class TextInput implements ControlValueAccessor {
     const ctrl = this.control();
     if (this.ring() === 'color' && ctrl) {
       if (ctrl.invalid) {
-        validationClasses = 'ring-1 ring-red-500 focus:ring-red-500';
+        validationClasses = 'ring-1 ring-red-500 focus:ring-red-500 focus-visible:ring-2  ';
       } else {
-        validationClasses = 'ring-1 ring-blue-600  focus:ring-blue-600';
+        validationClasses = 'ring-1 ring-blue-600  focus:ring-blue-600 focus-visible:ring-2';
       }
     }
-    if (this.type() === 'textarea') {
-      validationClasses = 'focus-visible:ring-1 focus-visible:ring-dark-1';
+    if (this.ring() === 'mono') {
+      validationClasses = 'focus-visible:ring-1';
     }
 
     return `${this.baseClasses} ${inputClasses} ${validationClasses}`.trim();

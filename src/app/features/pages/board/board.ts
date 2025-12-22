@@ -4,15 +4,15 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Btn } from '@shared/btn/btn';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest, filter, switchMap } from 'rxjs';
-import { TextChangingForm } from '@shared/forms/text-changing-form/text-changing-form';
 import { ToastService } from '@services/toast-service';
 import { DialogService } from '@services/dialog-service';
 import { CustomLoadingOverlay } from '@shared/loading/custom-loading-overlay/custom-loading-overlay';
 import { BoardStore } from '@stores/board-store';
+import { TitleChangingForm } from '@components/forms/title-changing-form/title-changing-form';
 
 @Component({
   selector: 'tr-board',
-  imports: [List, RouterLink, Btn, TextChangingForm, CustomLoadingOverlay],
+  imports: [List, RouterLink, Btn, CustomLoadingOverlay, TitleChangingForm],
   templateUrl: './board.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,8 +37,8 @@ export class Board {
 
   changeTitle(newTitle: string) {
     this.store.changeTitle(newTitle).subscribe({
-      next: () => this.toast.showSuccess('Назву дошки оновлено'),
-      error: () => this.toast.showError('Помилка при оновленні дошки'),
+      next: () => this.toast.showSuccess('The name of the board has been updated'),
+      error: () => this.toast.showError('Error updating the board'),
     });
   }
 
@@ -51,8 +51,8 @@ export class Board {
         switchMap((title) => this.store.createList(title))
       )
       .subscribe({
-        next: () => this.toast.showSuccess(`Створено новий список '.`),
-        error: () => this.toast.showError('Помилка при створенні списку'),
+        next: () => this.toast.showSuccess('A new list has been created'),
+        error: () => this.toast.showError('Error creating list'),
       });
   };
 }

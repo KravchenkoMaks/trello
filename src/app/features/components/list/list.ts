@@ -34,8 +34,8 @@ export class List {
         switchMap((title) => this.store.addCard(this.list().id, title))
       )
       .subscribe({
-        next: () => this.toast.showSuccess(`Створено нова картка.`),
-        error: () => this.toast.showError('Помилка при створенні картки'),
+        next: () => this.toast.showSuccess('New card created'),
+        error: () => this.toast.showError('Error creating card'),
       });
   };
 }

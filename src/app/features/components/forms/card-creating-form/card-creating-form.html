@@ -1,0 +1,31 @@
+<div class="m-4 grid gap-3">
+<form class="flex w-96 flex-col gap-4" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <div class="flex flex-col gap-2">
+    <tr-text-input
+      formControlName="title"
+      type="text"
+      label="Card name"
+      placeholder="Input card name"
+      ring="color"
+      bg="dark"
+      [control]="titleCtrl()"
+    ></tr-text-input>
+    <tr-validation-error [control]="titleCtrl"></tr-validation-error>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <tr-text-input
+      formControlName="description"
+      type="textarea"
+      label="Description"
+      placeholder="Input description"
+      ring="mono"
+      bg="dark"
+      [control]="descriptionCtrl()"
+    ></tr-text-input>
+    <tr-validation-error [control]="descriptionCtrl"></tr-validation-error>
+  </div>
+
+  <tr-btn type="submit" role="create" [disabled]="formGroup.invalid" label="Create"></tr-btn>
+</form>
+</div>

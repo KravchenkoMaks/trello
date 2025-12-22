@@ -9,25 +9,25 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Btn } from '@shared/btn/btn';
+import { ValidationError } from '@shared/errors/validation-error/validation-error';
 import { TextInput } from '@shared/inputs/text-input/text-input';
-import { ValidationMessagesPipe } from '@shared/pipes/validation-messages-pipe';
 import { BoardStore } from '@stores/board-store';
 
 @Component({
-  selector: 'tr-text-changing-form',
-  imports: [ReactiveFormsModule, Btn, TextInput, ValidationMessagesPipe],
-  templateUrl: './text-changing-form.html',
+  selector: 'tr-title-changing-form',
+  imports: [ReactiveFormsModule, Btn, TextInput, ValidationError],
+  templateUrl: './title-changing-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextChangingForm {
+export class TitleChangingForm {
   private fb = inject(FormBuilder);
   store = inject(BoardStore);
 
-  currentText = input<string>('');
-  updatedText = output<string>();
+  currentTitle = input<string>('');
+  updatedTitle = output<string>();
 
   @ViewChild('inputRef') inputRef!: TextInput;
 
@@ -35,9 +35,11 @@ export class TextChangingForm {
   isEditing = signal<boolean>(false);
   readonly isDisabled = computed(() => this.store.isBoardUpdating());
 
-  readonly form = this.fb.group({
-    inputText: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_]+$/)]],
+  readonly formGroup = this.fb.group({
+    title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_]+$/)]],
   });
+
+  titleCtrl = computed(() => this.formGroup.controls['title']);
 
   constructor() {
     effect(() => {
@@ -49,26 +51,22 @@ export class TextChangingForm {
     });
   }
 
-  get textControl() {
-    return this.form.controls['inputText'] as FormControl;
-  }
-
   enableEdit = (): void => {
     this.isEditing.set(true);
-    this.form.patchValue({ inputText: this.currentText() });
+    this.formGroup.patchValue({ title: this.currentTitle() });
   };
 
   saveEdit(source: 'enter' | 'blur') {
-    if (!this.isEditing() || this.form.invalid) {
+    if (!this.isEditing() || this.formGroup.invalid) {
       return;
     }
     if (source === 'blur' && this.lastSaveSource === 'enter') {
       return;
     }
-    const inputText = this.textControl.value.trim();
+    const inputText = this.formGroup.controls['title'].value?.trim();
 
-    if (inputText && inputText !== this.currentText()) {
-      this.updatedText.emit(inputText);
+    if (inputText && inputText !== this.currentTitle()) {
+      this.updatedTitle.emit(inputText);
     }
     this.isEditing.set(false);
     this.lastSaveSource = source;

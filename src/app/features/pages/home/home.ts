@@ -22,7 +22,7 @@ export class Home {
   store = inject(BoardsStore);
   toast = inject(ToastService);
 
-  protected title = 'Мої дошки';
+  protected title = 'My Boards';
 
   constructor() {
     this.route.data.pipe(takeUntilDestroyed()).subscribe(({ boards }) => {
@@ -39,25 +39,26 @@ export class Home {
         switchMap((title) => this.store.addBoard(title))
       )
       .subscribe({
-        error: (err) => console.error('Помилка при створенні дошки', err),
+        next: () => this.toast.showSuccess('Board created'),
+        error: () => this.toast.showError('Error creating board'),
       });
   };
 
-  getRemoveBoardCallback(boardId: number, boardTitle: string): () => void {
-    return () => this.removeBoard(boardId, boardTitle);
+  getDeleteBoardCallback(boardId: number, title: string): () => void {
+    return () => this.deleteBoard(boardId, title);
   }
 
-  removeBoard = (boardId: number, boardTitle: string): void => {
+  deleteBoard = (boardId: number, title: string): void => {
     this.dialog
-      .openDeleteModal('board', boardTitle)
+      .openDeleteModal('board', title)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         filter((confirmed) => confirmed),
-        switchMap(() => this.store.removeBoard(boardId))
+        switchMap(() => this.store.deleteBoard(boardId))
       )
       .subscribe({
-        next: () => this.toast.showSuccess(`Дошка '${boardTitle}' видалена`),
-        error: (err) => this.toast.showError('Помилка при видаленні дошки', err),
+        next: () => this.toast.showSuccess(`Board '${title}' deleted`),
+        error: (err) => this.toast.showError('Error during board removal', err),
       });
   };
 }

@@ -1,14 +1,14 @@
 <div class="text-gray-1 bg-dark-2 grid justify-items-center gap-3 rounded-xl p-4 text-xs">
-  <p>Ви впевнені, що хочете видалити {{ typeText }}?</p>
+  <p>Are you sure you want to delete {{ element() }}?</p>
 
   <p class="mt-1 flex font-bold text-orange-400">
     &apos;
-    <span class="line-clamp-1 max-w-48 truncate">{{ name }}</span>
+    <span class="line-clamp-1 max-w-48 truncate">{{ elementName() }}</span>
     &apos;
   </p>
 
   <div class="mt-1 flex justify-center gap-4">
-    <tr-btn [label]="'Скасувати'" [role]="'cancel'" [action]="close"></tr-btn>
-    <tr-btn [label]="'Видалити'" [role]="'delete'" [action]="confirm"></tr-btn>
+    <tr-btn label="Cancel" role="cancel" [action]="close"></tr-btn>
+    <tr-btn label="Delete" role="delete" [action]="confirm"></tr-btn>
   </div>
 </div>

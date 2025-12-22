@@ -1,17 +1,13 @@
 <div class="bg-dark-2 flex flex-col gap-2 rounded-xl">
   <h3 class="mt-4 text-center">{{ modalName() }}</h3>
 
-  @if(!isMultiForm()){
-  <div class="m-4 grid gap-3">
-    <tr-text-creating-form
-      [label]="label()"
-      [placeholder]="placeholder()"
-      (newTitle)="submit($event)"
-    ></tr-text-creating-form>
-  </div>
-  }@else {
-  <div class="m-4 grid gap-3">
-    <tr-multi-form></tr-multi-form>
-  </div>
+  @if(type() === 'board'){
+  <tr-board-creating-form (newTitle)="submit($event)"></tr-board-creating-form>
+  }
+   @if(type() === 'list'){
+  <tr-list-creating-form  (newTitle)="submit($event)"></tr-list-creating-form>
+  }
+  @if(type() === 'card'){
+  <tr-card-creating-form (newTitle)="submit($event)"></tr-card-creating-form>
   }
 </div>

@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { IBoard } from '@models/interfaces/i-board';
-import { INewCard } from '@models/interfaces/new-card';
+import { INewCard } from '@models/interfaces/i-new-card';
 import { BoardsService } from '@services/boards-service';
 import { catchError, EMPTY, finalize, Observable, switchMap, tap, throwError } from 'rxjs';
 
@@ -39,7 +39,7 @@ export class BoardStore {
     return this.boardsService.updateBoard(id, { title }).pipe(
       switchMap(() => this.refreshBoard(id)),
       catchError((err) => {
-        console.error('Помилка при оновленні дошки:', err);
+        console.error('Error updating the board:', err);
         return throwError(() => err);
       }),
       finalize(() => this.isBoardUpdating.set(false))
@@ -61,7 +61,7 @@ export class BoardStore {
     return this.boardsService.createList(boardId, { title, position }).pipe(
       switchMap(() => this.refreshBoard(boardId)),
       catchError((err) => {
-        console.error('Помилка при створенні списку:', err);
+        console.error('Error creating list:', err);
         return throwError(() => err);
       }),
       finalize(() => this.isListCreating.set(false))
@@ -92,7 +92,7 @@ export class BoardStore {
     return this.boardsService.createCard(board.id, dto).pipe(
       switchMap(() => this.refreshBoard(board.id)),
       catchError((err) => {
-        console.error('Помилка при створенні картки:', err);
+        console.error('Error creating card:', err);
         return throwError(() => err);
       }),
       finalize(() => this.isCardCreating.set(false))

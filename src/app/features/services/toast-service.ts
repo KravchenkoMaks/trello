@@ -8,7 +8,7 @@ export class ToastService {
   private snackBar = inject(MatSnackBar);
 
   showSuccess(message: string, config?: Partial<MatSnackBarConfig>) {
-    this.snackBar.open(message, 'Закрити', {
+    this.snackBar.open(message, 'Close', {
       duration: 2000,
       panelClass: ['snack-bar-success'],
       horizontalPosition: 'center',
@@ -18,7 +18,7 @@ export class ToastService {
   }
 
   showError(message: string, config?: Partial<MatSnackBarConfig>) {
-    this.snackBar.open(message, 'Закрити', {
+    this.snackBar.open(message, 'Close', {
       duration: 3000,
       panelClass: ['snack-bar-error'],
       horizontalPosition: 'center',

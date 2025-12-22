@@ -13,23 +13,16 @@
           {{ board.title }}
         </a>
         <tr-btn
-          [label]="'видалити'"
-          [role]="'delete'"
-          [action]="getRemoveBoardCallback(board.id, board.title)"
+          label="delete"
+          role="delete"
+          [action]="getDeleteBoardCallback(board.id, board.title)"
           [disabled]="store.isBoardDeleting()"
           class="absolute right-1 bottom-1 p-0 text-xs"
         >
         </tr-btn>
       </div>
-    }
-    <tr-btn
-    [label]="'+ Створити дошку'"
-    [role]="'createBoard'"
-    [action]="addBoard"
-    [disabled]="store.isBoardCreating()"
-    ></tr-btn>
+      }
+      <tr-btn label="+ add board" role="createBoard" [action]="addBoard" [disabled]="store.isBoardCreating()"></tr-btn>
+    </div>
   </div>
 </div>
-</div>
-
-

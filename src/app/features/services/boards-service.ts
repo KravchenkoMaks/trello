@@ -5,7 +5,7 @@ import { IBoard } from '@models/interfaces/i-board';
 import { INewBoard } from '@models/interfaces/i-new-board';
 import { INewList } from '@models/interfaces/i-new-list';
 import { IResponse } from '@models/interfaces/i-response';
-import { INewCard } from '@models/interfaces/new-card';
+import { INewCard } from '@models/interfaces/i-new-card';
 import { map, Observable } from 'rxjs';
 
 @Injectable({

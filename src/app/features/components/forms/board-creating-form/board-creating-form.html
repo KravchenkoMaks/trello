@@ -1,0 +1,17 @@
+<div class="m-4 grid gap-3">
+  <form class="flex flex-col gap-4" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div>
+      <tr-text-input
+        formControlName="title"
+        type="text"
+        placeholder="Create board"
+        label="Input board name"
+        [bg]="'dark'"
+        [control]="titleCtrl()"
+      ></tr-text-input>
+      <tr-validation-error [control]="titleCtrl"></tr-validation-error>
+    </div>
+
+    <tr-btn type="submit" role="create" [disabled]="formGroup.invalid" label="Create"></tr-btn>
+  </form>
+</div>
