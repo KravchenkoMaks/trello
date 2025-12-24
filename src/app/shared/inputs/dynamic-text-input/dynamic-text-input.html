@@ -1,0 +1,10 @@
+<label class="flex flex-col gap-1">
+  <input
+    type="text"
+    [value]="value"
+    [disabled]="disabled"
+    (input)="onInput($event)"
+    (blur)="handleBlur()"
+    [ngClass]="baseClasses"
+  />
+</label>

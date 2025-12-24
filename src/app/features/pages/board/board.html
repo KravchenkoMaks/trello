@@ -1,22 +1,18 @@
-<div class="bg-dark-3 container mx-auto mt-8 w-[80vw] rounded-(--r16) pb-8">
-  <a class="home-link mt-8 ml-8 inline-block" routerLink="/">&lt; Home</a>
-
+<div class="main-container">
   @if (store.board(); as b) {
-  <div class="flex flex-col gap-2">
-    <div class="flex justify-center">
-      <tr-title-changing-form  [currentTitle]="b.title" (updatedTitle)="changeTitle($event)"></tr-title-changing-form>
+  <div class="main-container-header flex gap-6">
+    <div>
+      <a class="home-link ml-8" routerLink="/">Home</a>
     </div>
+    <tr-title-changing-form [currentTitle]="b.title" (updatedTitle)="changeTitle($event)"></tr-title-changing-form>
+  </div>
 
-    <div class="scrollbar-modern flex gap-4 overflow-x-auto scroll-smooth px-4 py-2">
+  <div class="main-container-body">
+    <div class="main-scrollbar scrollbar-modern">
       @for (list of b.lists; track list.id) {
       <tr-list [list]="list"></tr-list>
       }
-      <tr-btn
-        role="createList"
-        label="+ add list"
-        [action]="createList"
-        [disabled]="isListCreating()"
-      ></tr-btn>
+      <tr-btn role="createList" label="+ add list" [action]="createList" [disabled]="isListCreating()"></tr-btn>
     </div>
   </div>
   } @else {

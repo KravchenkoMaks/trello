@@ -12,13 +12,13 @@ import {
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Btn } from '@buttons';
 import { ValidationError } from '@errors';
-import { TextInput } from '@inputs';
+import { DynamicTextInput, TextInput } from '@inputs';
 
 import { BoardStore } from '@stores';
 
 @Component({
   selector: 'tr-title-changing-form',
-  imports: [ReactiveFormsModule, Btn, TextInput, ValidationError],
+  imports: [ReactiveFormsModule, Btn, ValidationError, DynamicTextInput],
   templateUrl: './title-changing-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

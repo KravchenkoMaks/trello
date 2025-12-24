@@ -1,18 +1,15 @@
-<div class="m-4 grid gap-3">
+<div >
   <form [formGroup]="formGroup">
     @if (!isEditing()) {
     <tr-btn role="changeTitle" [label]="currentTitle()" [action]="enableEdit" [disabled]="isDisabled()"></tr-btn>
     } @else{
-    <tr-text-input
+    <tr-dynamic-text-input
       #inputRef
       formControlName="title"
       [control]="titleCtrl()"
-      type="text"
-      ring="none"
-      bg="darkMedium"
       (keydown.enter)="saveEdit('enter')"
       (blurEvent)="saveEdit('blur')"
-    ></tr-text-input>
+    ></tr-dynamic-text-input>
 
     <tr-validation-error [control]="titleCtrl"></tr-validation-error>
     }

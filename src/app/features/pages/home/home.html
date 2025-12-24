@@ -1,28 +1,45 @@
-<div class="bg-dark-3 container mx-auto mt-8 w-[80vw] rounded-(--r16)">
-  <div class="grid gap-6 py-8">
-    <h1 class="text-center font-bold">{{ title }}</h1>
+<div class="main-container">
+  <div class="main-container-header flex justify-center">
+    <h1 class="font-bold">{{ title }}</h1>
+  </div>
 
-    <div class="flex flex-wrap justify-center gap-4">
-      @for (board of store.boards(); track board.id){
-      <div class="relative">
-        <a
-          [ngStyle]="{background: board.custom.color}"
-          [routerLink]="['/board', board.id]"
-          class="board-size block truncate rounded-(--r6) p-2 wrap-break-word text-dark-4 opacity-90 hover:opacity-100"
-        >
-          {{ board.title }}
-        </a>
+  <div class="main-container-body justify-center">
+    <div>
+      <div class="flex flex-wrap justify-center gap-4">
+        @for (board of store.boards(); track board.id){
+        <div class="group relative">
+          <div class="board-h board-w relative grid grid-rows-[1fr_auto] overflow-hidden rounded-(--r8)">
+            <a
+              [routerLink]="['/board', board.id]"
+              class="absolute inset-0 z-10"
+              aria-label="Перейти до {{board.title}}"
+            ></a>
+
+            <div [ngStyle]="{background: board.custom.color}" class="text-dark-4 z-0 min-h-0"></div>
+
+            <div class="bg-dark-800 text-t-12 text-dark-200 relative z-0 px-4 py-0.5 wrap-break-word">
+              {{ board.title }}
+            </div>
+          </div>
+
+          <tr-btn
+            label="deleteR"
+            role="delete"
+            [action]="getDeleteBoardCallback(board.id, board.title)"
+            [disabled]="store.isBoardDeleting()"
+            aria-label="Delete board {{board.title}}"
+            class="absolute top-1 right-2 z-20 text-dark-400 hover:text-red-500 disabled:opacity-30"
+          >
+          </tr-btn>
+        </div>
+        }
         <tr-btn
-          label="delete"
-          role="delete"
-          [action]="getDeleteBoardCallback(board.id, board.title)"
-          [disabled]="store.isBoardDeleting()"
-          class="absolute right-1 bottom-1 p-0"
-        >
-        </tr-btn>
+          label="+ add board"
+          role="createBoard"
+          [action]="addBoard"
+          [disabled]="store.isBoardCreating()"
+        ></tr-btn>
       </div>
-      }
-      <tr-btn label="+ add board" role="createBoard" [action]="addBoard" [disabled]="store.isBoardCreating()"></tr-btn>
     </div>
   </div>
 </div>

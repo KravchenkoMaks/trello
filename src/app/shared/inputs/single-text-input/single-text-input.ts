@@ -2,26 +2,25 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, output } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { TBgColor } from '@types';
-
 const noop = () => {
   // no-op
 };
 
 @Component({
-  selector: 'tr-text-input',
+  selector: 'tr-single-text-input',
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './text-input.html',
+  templateUrl: './single-text-input.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TextInput),
+      useExisting: forwardRef(() => SingleTextInput),
       multi: true,
     },
   ],
 })
-export class TextInput implements ControlValueAccessor {
+export class SingleTextInput implements ControlValueAccessor {
   private el = inject(ElementRef);
   blurEvent = output<void>();
 
