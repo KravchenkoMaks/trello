@@ -3,11 +3,11 @@ import { ChangeDetectionStrategy, Component, inject, computed, output } from '@a
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Btn } from '@buttons';
 import { ValidationError } from '@errors';
-import { TextInput } from '@inputs';
+import { SingleTextInput } from '@inputs';
 
 @Component({
   selector: 'tr-board-creating-form',
-  imports: [ReactiveFormsModule, CommonModule, TextInput, Btn, ValidationError],
+  imports: [ReactiveFormsModule, CommonModule, Btn, ValidationError, SingleTextInput],
   templateUrl: './board-creating-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,12 +1,12 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, inject, computed, signal } from '@angular/core';
-import { BoardCreatingForm, CardCreatingForm, ListCreatingForm } from '@forms';
+import { BoardCreatingForm } from '@forms';
 import { IModalData } from '@interfaces';
 import { TItem } from '@types';
 
 @Component({
   selector: 'tr-create-modal',
-  imports: [CardCreatingForm, ListCreatingForm, BoardCreatingForm],
+  imports: [BoardCreatingForm],
   templateUrl: './create-modal.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

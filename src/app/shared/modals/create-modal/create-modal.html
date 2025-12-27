@@ -4,10 +4,4 @@
   @if(type() === 'board'){
   <tr-board-creating-form (newTitle)="submit($event)"></tr-board-creating-form>
   }
-   @if(type() === 'list'){
-  <tr-list-creating-form  (newTitle)="submit($event)"></tr-list-creating-form>
-  }
-  @if(type() === 'card'){
-  <tr-card-creating-form (newTitle)="submit($event)"></tr-card-creating-form>
-  }
 </div>

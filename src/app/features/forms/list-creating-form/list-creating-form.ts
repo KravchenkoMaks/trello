@@ -1,19 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Btn } from '@buttons';
 import { ValidationError } from '@errors';
-import { TextInput } from '@inputs';
+import { SingleTextInput } from '@inputs';
+import { BoardStore } from '@stores';
 
 @Component({
   selector: 'tr-list-creating-form',
-  imports: [ReactiveFormsModule, CommonModule, TextInput, Btn, ValidationError],
+  imports: [ReactiveFormsModule, CommonModule, SingleTextInput, Btn, ValidationError],
   templateUrl: './list-creating-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListCreatingForm {
   private fb = inject(FormBuilder);
+  store = inject(BoardStore);
+
+  onClose = input<() => void>();
   newTitle = output<string>();
 
   readonly formGroup = this.fb.group({
@@ -27,10 +31,20 @@ export class ListCreatingForm {
       this.formGroup.markAllAsTouched();
       return;
     }
-    const title = this.formGroup.controls['title'].value?.trim();
+
+    const titleControl = this.formGroup.get('title');
+    const title = titleControl?.value?.trim();
+
     if (!title) {
       return;
     }
+
     this.newTitle.emit(title);
+
+    this.formGroup.reset();
+  };
+
+  close = (): void => {
+    this.onClose()?.();
   };
 }

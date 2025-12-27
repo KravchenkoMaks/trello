@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, output } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 
 const noop = () => {
   // no-op
@@ -23,8 +23,6 @@ const noop = () => {
 export class DynamicTextInput implements ControlValueAccessor {
   private el = inject(ElementRef);
   blurEvent = output<void>();
-
-  control = input<FormControl>();
 
   value = '';
   disabled = false;
@@ -74,5 +72,5 @@ export class DynamicTextInput implements ControlValueAccessor {
     inputElement.style.width = `calc(${Math.min(this.value.length + 3, 96)}ch + 2px)`;
   }
 
-  baseClasses = 'bg-dark-900 text-t-18 text-light  rounded-(--r2) px-2 placeholder-dark-800 focus:outline-none';
+  baseClasses = 'bg-dark-900  text-zinc-300 font-medium rounded-(--r2) px-2 placeholder-dark-800 focus:outline-none';
 }

@@ -1,18 +1,23 @@
-<div class="m-4 grid gap-3">
-  <form class="flex flex-col gap-4" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+<div class="list-container list-w">
+  <form class="flex flex-col gap-1" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div>
-      <tr-text-input
-        formControlName="title"
+      <tr-single-text-input
         type="text"
-        placeholder="Create list"
-        label="Input list name"
-        [bg]="'dark'"
-        [control]="titleCtrl()"
-      ></tr-text-input>
+        label="+add list"
+        placeholder="Enter list name"
+        bg="darkMedium"
+        formControlName="title"
+      ></tr-single-text-input>
+
       <tr-validation-error [control]="titleCtrl"></tr-validation-error>
     </div>
 
-    <tr-btn type="submit" role="create" [disabled]="formGroup.invalid" label="Create"></tr-btn>
+    <div class="flex gap-1">
+
+      <tr-btn type="submit" label="Add list" name="confirm" [disabled]="formGroup.invalid || store.isListCreating()"  />
+      
+      <tr-btn name="closeSvg" [action]="close"></tr-btn>
+      
+    </div>
   </form>
 </div>
-

@@ -1,12 +1,10 @@
-<p>single-text-input works!</p>
 @if (type() === 'text') {
 <label class="flex flex-col gap-1">
-  <span class="text-t-16 text-gray-1 mb-0.5">{{ label() }}</span>
   <input
     [type]="type()"
     [placeholder]="placeholder()"
-    [value]="value"
     [disabled]="disabled"
+    [value]="value"
     (input)="onInput($event)"
     (blur)="handleBlur()"
     [ngClass]="getInputClasses()"
@@ -14,12 +12,12 @@
 </label>
 }@else {
 <label class="flex flex-col gap-1">
-  <span class="text-t-12 text-gray-1 mb-0.5">{{ label() }}</span>
   <textarea
     [placeholder]="placeholder()"
-    [value]="value"
     [disabled]="disabled"
-    (input)="onInput($event)"
+    [value]="value"
+    (input)="autoResize($event)"
+    (keydown.enter)="onEnter($any($event))"
     (blur)="handleBlur()"
     [ngClass]="getInputClasses()"
     rows="2"

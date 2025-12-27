@@ -1,18 +1,18 @@
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { List } from '@components';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { combineLatest, filter, switchMap } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { ToastService } from '@services';
 import { DialogService } from '@services';
 import { CustomLoadingOverlay } from '@loading';
 import { BoardStore } from '@stores';
 import { Btn } from '@buttons';
-import { TitleChangingForm } from '@forms';
+import { ListCreatingForm, TitleChangingForm } from '@forms';
 
 @Component({
   selector: 'tr-board',
-  imports: [List, RouterLink, Btn, CustomLoadingOverlay, TitleChangingForm],
+  imports: [List, RouterLink, Btn, CustomLoadingOverlay, ListCreatingForm, TitleChangingForm],
   templateUrl: './board.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,7 +24,7 @@ export class Board {
   store = inject(BoardStore);
   toast = inject(ToastService);
 
-  isListCreating = computed(() => this.store.isListCreating());
+  isListAdding = signal<boolean>(false);
 
   constructor() {
     combineLatest([this.route.paramMap, this.route.data])
@@ -35,24 +35,25 @@ export class Board {
       });
   }
 
-  changeTitle(newTitle: string) {
+  changeTitle(newTitle: string): void {
     this.store.changeTitle(newTitle).subscribe({
       next: () => this.toast.showSuccess('The name of the board has been updated'),
       error: () => this.toast.showError('Error updating the board'),
     });
   }
 
-  createList = (): void => {
-    this.dialog
-      .openCreateModal('list')
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        filter(Boolean),
-        switchMap((title) => this.store.createList(title))
-      )
-      .subscribe({
-        next: () => this.toast.showSuccess('A new list has been created'),
-        error: () => this.toast.showError('Error creating list'),
-      });
+  createList(title: string): void {
+    this.store.createList(title).subscribe({
+      next: () => this.toast.showSuccess('A new list has been created'),
+      error: () => this.toast.showError('Error creating list'),
+    });
+  }
+
+  openListAddingForm = (): void => {
+    this.isListAdding.set(true);
+  };
+
+  closeListAddingForm = (): void => {
+    this.isListAdding.set(false);
   };
 }

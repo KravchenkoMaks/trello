@@ -1,18 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  inject,
-  input,
-  output,
-  signal,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output, signal, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Btn } from '@buttons';
 import { ValidationError } from '@errors';
-import { DynamicTextInput, TextInput } from '@inputs';
+import { DynamicTextInput } from '@inputs';
 
 import { BoardStore } from '@stores';
 
@@ -30,27 +20,16 @@ export class TitleChangingForm {
   currentTitle = input<string>('');
   updatedTitle = output<string>();
 
-  @ViewChild('inputRef') inputRef!: TextInput;
+  @ViewChild('inputRef') inputRef!: DynamicTextInput;
 
   private lastSaveSource: 'enter' | 'blur' | null = null;
   isEditing = signal<boolean>(false);
-  readonly isDisabled = computed(() => this.store.isBoardUpdating());
 
   readonly formGroup = this.fb.group({
     title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_]+$/)]],
   });
 
   titleCtrl = computed(() => this.formGroup.controls['title']);
-
-  constructor() {
-    effect(() => {
-      if (this.isEditing()) {
-        setTimeout(() => {
-          this.inputRef?.focus();
-        });
-      }
-    });
-  }
 
   enableEdit = (): void => {
     this.isEditing.set(true);

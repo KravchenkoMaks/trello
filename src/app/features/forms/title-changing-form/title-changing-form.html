@@ -1,12 +1,11 @@
-<div >
+<div class="text-wrap break-normal">
   <form [formGroup]="formGroup">
     @if (!isEditing()) {
-    <tr-btn role="changeTitle" [label]="currentTitle()" [action]="enableEdit" [disabled]="isDisabled()"></tr-btn>
+    <tr-btn name="changeTitle" [label]="currentTitle()" [action]="enableEdit" [disabled]="store.isBoardUpdating()"></tr-btn>
     } @else{
     <tr-dynamic-text-input
       #inputRef
       formControlName="title"
-      [control]="titleCtrl()"
       (keydown.enter)="saveEdit('enter')"
       (blurEvent)="saveEdit('blur')"
     ></tr-dynamic-text-input>

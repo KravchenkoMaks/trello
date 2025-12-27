@@ -1,29 +1,30 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Btn } from '@buttons';
 import { ValidationError } from '@errors';
-import { TextInput } from '@inputs';
+import { SingleTextInput } from '@inputs';
+import { BoardStore } from '@stores';
 
 @Component({
   selector: 'tr-card-creating-form',
-  imports: [ReactiveFormsModule, CommonModule, Btn, TextInput, ValidationError],
+  imports: [ReactiveFormsModule, CommonModule, Btn, ValidationError, SingleTextInput],
   templateUrl: './card-creating-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardCreatingForm {
   fb = inject(FormBuilder);
+  store = inject(BoardStore);
+
+  onClose = input<() => void>();
   newTitle = output<string>();
 
   readonly formGroup = this.fb.group({
-    title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_]+$/)]],
-    description: ['', Validators.maxLength(4)],
-    custom: this.fb.array([]),
+    title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_ \n]+$/)]],
   });
 
   titleCtrl = computed(() => this.formGroup.controls['title']);
-  descriptionCtrl = computed(() => this.formGroup.controls['description']);
 
   onSubmit = (): void => {
     if (this.formGroup.invalid) {
@@ -35,5 +36,17 @@ export class CardCreatingForm {
       return;
     }
     this.newTitle.emit(title);
+
+    this.formGroup.reset();
   };
+
+  close = (): void => {
+    this.onClose()?.();
+  };
+
+  createFromInput(title: string): void {
+    if (!title.trim()) return;
+    this.newTitle.emit(title.trim());
+    this.formGroup.reset();
+  }
 }

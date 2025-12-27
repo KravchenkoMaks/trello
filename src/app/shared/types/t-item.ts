@@ -1,1 +1,1 @@
-export type TItem = 'board' | 'list' | 'card' | 'item';
+export type TItem = 'board' | 'item';

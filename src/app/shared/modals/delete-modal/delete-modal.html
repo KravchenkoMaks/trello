@@ -1,4 +1,4 @@
-<div class=" text-title-light bg-dark-2 grid justify-items-center gap-3 rounded-(--r12) p-4 text-t-12">
+<div class=" text-title-light bg-dark-2 grid justify-items-center gap-3 rounded-(--r12) p-4">
   
   <p>Are you sure you want to delete {{ itemType() }}?</p>
 
@@ -8,8 +8,8 @@
     &apos;
   </p>
 
-  <div class="mt-1 flex justify-center gap-4">
-    <tr-btn label="Cancel" role="cancel" [action]="close"></tr-btn>
-    <tr-btn label="Delete" role="delete" [action]="confirm"></tr-btn>
+  <div class="flex justify-center gap-4">
+    <tr-btn label="Cancel" name="deleteBoardCancel" [action]="close"></tr-btn>
+    <tr-btn label="Delete" name="deleteBoardBtn" [action]="confirm"></tr-btn>
   </div>
 </div>

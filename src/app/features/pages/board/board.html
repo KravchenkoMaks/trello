@@ -6,13 +6,20 @@
     </div>
     <tr-title-changing-form [currentTitle]="b.title" (updatedTitle)="changeTitle($event)"></tr-title-changing-form>
   </div>
-
+  
   <div class="main-container-body">
     <div class="main-scrollbar scrollbar-modern">
       @for (list of b.lists; track list.id) {
-      <tr-list [list]="list"></tr-list>
+        <tr-list [list]="list"></tr-list>
+      } 
+
+      @if(!isListAdding()){
+        <tr-btn name="addList" label="+ add another list" [action]="openListAddingForm" [disabled]="isListAdding()"></tr-btn>
+      }@else{
+      <tr-list-creating-form (newTitle)="createList($event)"
+      [onClose]="closeListAddingForm" ></tr-list-creating-form>
       }
-      <tr-btn role="createList" label="+ add list" [action]="createList" [disabled]="isListCreating()"></tr-btn>
+
     </div>
   </div>
   } @else {

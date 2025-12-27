@@ -12,30 +12,29 @@
             <a
               [routerLink]="['/board', board.id]"
               class="absolute inset-0 z-10"
-              aria-label="Перейти до {{board.title}}"
+              aria-label="Go to {{board.title}}"
             ></a>
 
-            <div [ngStyle]="{background: board.custom.color}" class="text-dark-4 z-0 min-h-0"></div>
+            <div [ngStyle]="{background: board.custom.color}" class="text-dark-4 z-0 min-h-10"></div>
 
-            <div class="bg-dark-800 text-t-12 text-dark-200 relative z-0 px-4 py-0.5 wrap-break-word">
+            <div class="bg-dark-800 text-zinc-400 font-bold relative z-0 px-4 py-0.5 wrap-break-word">
               {{ board.title }}
             </div>
           </div>
 
           <tr-btn
-            label="deleteR"
-            role="delete"
+            name="deleteBoardSvg"
             [action]="getDeleteBoardCallback(board.id, board.title)"
             [disabled]="store.isBoardDeleting()"
             aria-label="Delete board {{board.title}}"
-            class="absolute top-1 right-2 z-20 text-dark-400 hover:text-red-500 disabled:opacity-30"
+            class="absolute top-2 right-3 z-20"
           >
           </tr-btn>
         </div>
         }
         <tr-btn
-          label="+ add board"
-          role="createBoard"
+          label="+ Create new board"
+          name="createBoard"
           [action]="addBoard"
           [disabled]="store.isBoardCreating()"
         ></tr-btn>
