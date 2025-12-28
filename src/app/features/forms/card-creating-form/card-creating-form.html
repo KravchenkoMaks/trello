@@ -1,13 +1,14 @@
 <div>
   <form class="flex flex-col gap-1" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div>
-      <tr-single-text-input      
+      <tr-single-text-input
         type="textarea"
         label="+add card"
         placeholder="Enter a title"
         bg="darkLight"
         formControlName="title"
-        (saved)="createFromInput($event)"
+        (savedByEnter)="onSubmit('enter')"
+        (blurEvent)="onSubmit('blur')"
       ></tr-single-text-input>
 
       <tr-validation-error [control]="titleCtrl"></tr-validation-error>

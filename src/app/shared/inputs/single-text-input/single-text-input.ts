@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { TBgColor } from '@types';
-import { AutofocusDirective } from "@directives";
+import { AutofocusDirective } from '@directives';
 const noop = () => {
   // no-op
 };
@@ -37,7 +37,7 @@ export class SingleTextInput implements ControlValueAccessor {
   private injector = inject(Injector);
 
   blurEvent = output<void>();
-  saved = output<string>();
+  savedByEnter = output<void>();
 
   placeholder = input<string>('');
   bg = input<TBgColor>('dark');
@@ -101,7 +101,19 @@ export class SingleTextInput implements ControlValueAccessor {
 
     this.value = textarea.value ?? '';
     this.onChange(this.value);
-    this.cdr.markForCheck();
+  }
+
+  resetAndFocus(): void {
+    const textarea = this.el.nativeElement.querySelector('textarea') as HTMLTextAreaElement | null;
+
+    if (textarea) {
+      textarea.value = '';
+      textarea.style.height = 'auto';
+      textarea.focus();
+    }
+
+    this.value = '';
+    this.onChange(this.value);
   }
 
   onEnter(event: KeyboardEvent): void {
@@ -114,7 +126,7 @@ export class SingleTextInput implements ControlValueAccessor {
 
     this.value = currentValue;
     this.onChange(this.value);
-    this.saved.emit(currentValue);
+    this.savedByEnter.emit();
 
     textarea.value = '';
     textarea.style.height = 'auto';
@@ -162,22 +174,17 @@ export class SingleTextInput implements ControlValueAccessor {
 
     const bgColor = inputBg ? this.inputBgClassMap[inputBg] : '';
 
-    const styles =
-      this.type() === 'textarea'
-        ? 'w-full overflow-hidden resize-none leading-relaxed text-dark-100 bg-dark-800 rounded-(--r8) outline-none '
-        : 'rounded-(--r2)';
-
     let validationClasses = '';
 
     const ctrl = this.ngControl?.control;
     if (this.ring() === 'color' && ctrl) {
-      if (ctrl.invalid) {
+      if (ctrl.touched && ctrl.invalid) {
         validationClasses = 'ring-1 ring-red-500  focus:ring-red-500 focus-visible:ring-2';
       } else {
         validationClasses = 'ring-1 ring-blue-600  focus:ring-blue-600 focus-visible:ring-2';
       }
     }
 
-    return `${this.baseClasses} ${styles} ${bgColor} ${validationClasses}`.trim();
+    return `${this.baseClasses} ${bgColor} ${validationClasses}`.trim();
   }
 }

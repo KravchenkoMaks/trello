@@ -16,6 +16,7 @@ export class Btn {
   disabled = input<boolean>(false);
   ariaLabel = input<string>('');
   action = input<() => void>();
+
   handleClick() {
     if (!this.disabled()) {
       this.action()?.();
