@@ -1,4 +1,4 @@
-<div class="list-container list-w">
+<div class="list-container list-w" trClickOutside (trClickOutside)="close()">
   <form class="flex flex-col gap-1" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div>
       <tr-single-text-input

@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Btn } from '@buttons';
+import { ClickOutsideDirective } from '@directives';
 import { ValidationError } from '@errors';
 import { SingleTextInput } from '@inputs';
 import { BoardStore } from '@stores';
 
 @Component({
   selector: 'tr-list-creating-form',
-  imports: [ReactiveFormsModule, CommonModule, SingleTextInput, Btn, ValidationError],
+  imports: [ReactiveFormsModule, CommonModule, SingleTextInput, Btn, ValidationError, ClickOutsideDirective],
   templateUrl: './list-creating-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +26,8 @@ export class ListCreatingForm {
   });
 
   titleCtrl = computed(() => this.formGroup.controls['title']);
+
+  private isClickOutside = false;
 
   onSubmit = (): void => {
     if (this.formGroup.invalid) {

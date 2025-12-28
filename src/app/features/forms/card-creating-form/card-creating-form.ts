@@ -11,13 +11,14 @@ import {
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Btn } from '@buttons';
+import { ClickOutsideDirective } from '@directives';
 import { ValidationError } from '@errors';
 import { SingleTextInput } from '@inputs';
 import { BoardStore } from '@stores';
 
 @Component({
   selector: 'tr-card-creating-form',
-  imports: [ReactiveFormsModule, CommonModule, Btn, ValidationError, SingleTextInput],
+  imports: [ReactiveFormsModule, CommonModule, Btn, ValidationError, SingleTextInput, ClickOutsideDirective],
   templateUrl: './card-creating-form.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,19 +33,6 @@ export class CardCreatingForm {
   onClose = input<() => void>();
   newTitle = output<string>();
 
-  private isClickOutside = false;
-
-  constructor() {
-    setTimeout(() => {
-      document.addEventListener('mousedown', this.onDocumentClick);
-    });
-  }
-
-  private onDocumentClick = (event: MouseEvent) => {
-    const target = event.target as HTMLElement;
-    this.isClickOutside = !this.el.nativeElement.contains(target);
-  };
-
   readonly formGroup = this.fb.group({
     title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_ \n]+$/)]],
   });
@@ -54,19 +42,17 @@ export class CardCreatingForm {
   private lastSaveSource: 'enter' | 'blur' | null = null;
 
   onSubmit = (source: 'enter' | 'blur' = 'enter') => {
-    if (source === 'blur' && !this.isClickOutside) {
+    const title = this.formGroup.controls['title'].value?.trim();
+    if (!title) {
+      this.close();
       return;
     }
-
-    this.isClickOutside = false;
-
     if (source === 'blur' && this.lastSaveSource === 'enter') {
       return;
     }
 
-    const title = this.formGroup.controls['title'].value?.trim();
-    if (!title) {
-      this.close();
+    if (this.formGroup.invalid) {
+      this.formGroup.markAllAsTouched();
       return;
     }
 
