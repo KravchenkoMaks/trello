@@ -12,13 +12,14 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { TBgColor } from '@types';
+import { AutofocusDirective } from "@directives";
 const noop = () => {
   // no-op
 };
 
 @Component({
   selector: 'tr-single-text-input',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, AutofocusDirective],
   templateUrl: './single-text-input.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,

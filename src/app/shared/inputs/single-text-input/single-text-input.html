@@ -1,6 +1,7 @@
 @if (type() === 'text') {
 <label class="flex flex-col gap-1">
   <input
+    trAutofocus
     [type]="type()"
     [placeholder]="placeholder()"
     [disabled]="disabled"
@@ -13,6 +14,7 @@
 }@else {
 <label class="flex flex-col gap-1">
   <textarea
+    trAutofocus
     [placeholder]="placeholder()"
     [disabled]="disabled"
     [value]="value"

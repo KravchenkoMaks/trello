@@ -36,6 +36,7 @@
       // "@pipes/*": ["./src/app/shared/pipes/*"],
       "@pipes": ["./src/app/shared/pipes/index.ts"],
       // "@utils/*": ["./src/app/shared/utils/*"],
+      "@directives": ["./src/app/shared/directives/index.ts"],
       "@utils": ["./src/app/shared/utils/index.ts"],
       // "@errors/*": ["./src/app/shared/errors/*"],
       "@errors": ["./src/app/shared/errors/index.ts"]

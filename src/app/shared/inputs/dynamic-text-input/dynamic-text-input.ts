@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { AutofocusDirective } from "@directives";
 
 const noop = () => {
   // no-op
@@ -8,7 +9,7 @@ const noop = () => {
 
 @Component({
   selector: 'tr-dynamic-text-input',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, AutofocusDirective],
   templateUrl: './dynamic-text-input.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
