@@ -157,12 +157,12 @@ export class SingleTextInput implements ControlValueAccessor {
     return textWidth > containerWidth;
   }
 
-  baseClasses = 'text-dark-500  px-2  focus:outline-none';
+  baseClasses = 'text-main-500  px-2  focus:outline-none';
 
   private readonly inputBgClassMap: Record<TBgColor, string> = {
-    darkLight: 'bg-dark-700',
-    darkMedium: 'bg-dark-800',
-    dark: 'bg-dark-900',
+    darkLight: 'bg-main-700',
+    darkMedium: 'bg-main-800',
+    dark: 'bg-main-900',
   };
 
   get ngControl(): NgControl | null {
@@ -177,11 +177,12 @@ export class SingleTextInput implements ControlValueAccessor {
     let validationClasses = '';
 
     const ctrl = this.ngControl?.control;
+
     if (this.ring() === 'color' && ctrl) {
-      if (ctrl.touched && ctrl.invalid) {
-        validationClasses = 'ring-1 ring-red-500  focus:ring-red-500 focus-visible:ring-2';
+      if ((ctrl.touched || ctrl.dirty) && ctrl.invalid) {
+        validationClasses = 'ring-1 ring-danger  focus:ring-danger focus-visible:ring-2';
       } else {
-        validationClasses = 'ring-1 ring-blue-600  focus:ring-blue-600 focus-visible:ring-2';
+        validationClasses = 'ring-1 ring-primary  focus:ring-primary focus-visible:ring-2';
       }
     }
 

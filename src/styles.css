@@ -1,35 +1,24 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-dark-100: #f4f4f5;
-  --color-dark-200: #e4e4e7;
-  --color-dark-300: #d4d4d8;
-  --color-dark-400: #9f9fa9;
-  --color-dark-500: #71717b;
-  --color-dark-600: #52525c;
-  --color-dark-700: #3f3f46;
-  --color-dark-800: #27272a;
-  --color-dark-900: #18181b;
-  --color-dark-950: #09090b;
-  --color-unsuccess: #fb2c36; /* red-500 */
+  --color-main-100: #f4f4f5;
+  --color-main-200: #e4e4e7;
+  --color-main-300: #d4d4d8;
+  --color-main-400: #9f9fa9;
+  --color-main-500: #71717b;
+  --color-main-600: #52525c;
+  --color-main-700: #3f3f46;
+  --color-main-800: #27272a;
+  --color-main-900: #18181b;
+  --color-main-950: #09090b;
+
   --color-primary: oklch(70.7% 0.165 254.624); /* blue-400 */
-  --color-primary-light: oklch(80.9% 0.105 251.813); /* blue-400 */
+  --color-primary-light: oklch(80.9% 0.105 251.813); /* blue-300 */
   --color-success: oklch(72.3% 0.219 149.579); /* green-500 */
-  --color-danger: #fb2c36; /* red-500 */
-
-  --color-cardBody: #27272a; /* zinc-800 */
-
-  --color-dark-1: #3f3f46;
-  --color-dark-2: #27272a;
-  --color-dark-3: #18181b;
-  --color-dark-4: #09090b;
-
-  /* ================== */
-
-  --color-light: ##a6a09b; /*stone-400 */
-  --color-gray-1: #a1a1a1; /* neutral-400 */
+  --color-danger: oklch(70.4% 0.191 22.216); /* red-400 */
   --color-title-light: oklch(83.7% 0.128 66.29); /* orange-300 */
   --color-title: oklch(75% 0.183 55.934); /* orange-400 */
+  
   --text-t-2: 0.125rem;
   --text-t-4: 0.25rem;
   --text-t-6: 0.375rem;
@@ -52,19 +41,19 @@
 
 @layer components {
   .main-container {
-    @apply grid h-[100vh] w-[100vw] grid-rows-[10%_90%];
+    @apply mx-auto my-[5vh] grid h-[90vh] w-[80vw] grid-rows-[10%_90%];
   }
   .main-container-header {
-    @apply bg-dark-300 flex items-center;
+    @apply bg-main-300 flex items-center rounded-t-(--r16);
   }
   .main-container-body {
-    @apply bg-dark-400 flex p-40;
+    @apply bg-main-400 flex rounded-b-(--r16) p-4;
   }
   .main-scrollbar {
-    @apply flex w-[100vw] gap-4 overflow-x-auto scroll-smooth;
+    @apply flex w-[80vw] gap-4 overflow-x-auto scroll-smooth;
   }
   .home-link {
-    @apply bg-dark-300 hover:bg-dark-400 text-dark-700 rounded-(--r8) px-2 py-1 font-semibold;
+    @apply bg-main-300 hover:bg-main-400 text-main-700 rounded-(--r8) px-2 py-1 font-semibold;
   }
   .board-w {
     @apply w-72;
@@ -76,7 +65,7 @@
     @apply w-64;
   }
   .list-container {
-    @apply bg-dark-900 flex flex-col gap-4 rounded-(--r8) p-2;
+    @apply bg-main-900 flex flex-col gap-4 rounded-(--r8) p-2;
   }
 
   /* ================= */
@@ -84,7 +73,7 @@
   @layer utilities {
     .scrollbar-modern {
       scrollbar-width: thin;
-      scrollbar-color: var(--color-dark900) transparent;
+      scrollbar-color: var(--color-main-400) transparent;
     }
 
     .scrollbar-modern::-webkit-scrollbar {
@@ -109,28 +98,28 @@
 }
 
 body {
-  background: var(--color-dark-800);
-  color: var(--color-dark-200);
+  background: var(--color-main-800);
+  color: var(--color-main-200);
   font-size: var(--text-t-16);
 }
 
 h1 {
   font-size: var(--text-t-30);
-  color: var(--color-dark-700);
+  color: var(--color-main-700);
 }
 h3 {
   font-size: var(--text-t-18);
-  color: var(--color-dark-200);
+  color: var(--color-main-200);
 }
 
 .snack-bar-success {
-  background: var(--color-dark-1);
-  color: var(--color-gray-1);
+  background: var(--color-main-700);
+  color: var(--color-main-400);
 }
 
 .snack-bar-error {
   background-color: rgb(161, 78, 72);
-  color: var(--color-light);
+  color: var(--color-main-400);
 }
 
 .loading-overlay {

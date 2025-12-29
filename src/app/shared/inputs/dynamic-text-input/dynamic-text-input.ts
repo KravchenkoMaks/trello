@@ -80,5 +80,5 @@ export class DynamicTextInput implements ControlValueAccessor {
     }
   }
 
-  baseClasses = 'bg-zinc-800  text-zinc-300 font-medium rounded-(--r2) px-2 placeholder-zinc-800 focus:outline-none';
+  baseClasses = 'bg-main-800  text-main-300 font-medium rounded-(--r2) px-2 placeholder-main-800 focus:outline-none';
 }

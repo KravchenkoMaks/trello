@@ -33,9 +33,9 @@ export class CustomLoadingOverlay {
       case 'success':
         return 'border-success';
       case 'error':
-        return 'border-unsuccess';
+        return 'border-danger';
       case 'gray':
-        return 'border-gray';
+        return 'border-main-400';
       default:
         return '';
     }
