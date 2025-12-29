@@ -157,7 +157,7 @@ export class SingleTextInput implements ControlValueAccessor {
     return textWidth > containerWidth;
   }
 
-  baseClasses = 'text-t-16 text-dark-500  px-2  focus:outline-none';
+  baseClasses = 'text-dark-500  px-2  focus:outline-none';
 
   private readonly inputBgClassMap: Record<TBgColor, string> = {
     darkLight: 'bg-dark-700',

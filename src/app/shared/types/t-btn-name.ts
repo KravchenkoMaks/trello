@@ -8,4 +8,5 @@ export type TBtnName =
   | 'deleteBoardCancel'
   | 'confirm'
   | 'closeSvg'
-  | 'changeTitle';
+  | 'changeListTitle'
+  | 'changeBoardTitle';

@@ -7,10 +7,10 @@
     <tr-title-changing-form [currentTitle]="b.title" (updatedTitle)="changeTitle($event)"></tr-title-changing-form>
   </div>
   
-  <div class="main-container-body">
+  <div class="main-container-body box-border" [ngStyle]="{background: b.custom.color}">
     <div class="main-scrollbar scrollbar-modern">
       @for (list of b.lists; track list.id) {
-        <tr-list [list]="list"></tr-list>
+        <tr-list [list]="list" ></tr-list>
       } 
 
       @if(!isListAdding()){

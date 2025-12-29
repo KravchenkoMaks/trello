@@ -9,10 +9,11 @@ import { CustomLoadingOverlay } from '@loading';
 import { BoardStore } from '@stores';
 import { Btn } from '@buttons';
 import { ListCreatingForm, TitleChangingForm } from '@forms';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'tr-board',
-  imports: [List, RouterLink, Btn, CustomLoadingOverlay, ListCreatingForm, TitleChangingForm],
+  imports: [List, RouterLink, Btn, CustomLoadingOverlay, ListCreatingForm, TitleChangingForm, NgStyle],
   templateUrl: './board.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,7 +37,7 @@ export class Board {
   }
 
   changeTitle(newTitle: string): void {
-    this.store.changeTitle(newTitle).subscribe({
+    this.store.changeBoardTitle(newTitle).subscribe({
       next: () => this.toast.showSuccess('The name of the board has been updated'),
       error: () => this.toast.showError('Error updating the board'),
     });

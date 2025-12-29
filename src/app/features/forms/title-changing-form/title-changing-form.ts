@@ -5,6 +5,7 @@ import { ValidationError } from '@errors';
 import { DynamicTextInput } from '@inputs';
 
 import { BoardStore } from '@stores';
+import { TBtnName } from '@types';
 
 @Component({
   selector: 'tr-title-changing-form',
@@ -18,6 +19,8 @@ export class TitleChangingForm {
   store = inject(BoardStore);
 
   currentTitle = input<string>('');
+  btnName = input<TBtnName>('changeBoardTitle');
+  length = input<'short' | 'long'>('long');
   updatedTitle = output<string>();
 
   @ViewChild('inputRef') inputRef!: DynamicTextInput;

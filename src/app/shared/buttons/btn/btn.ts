@@ -34,10 +34,12 @@ export class Btn {
     deleteBoardCancel: 'rounded-(--r12) text-primary font-medium hover:py-0  hover:ring-1 focus:ring-primary',
     addList: 'bg-zinc-300 text-zinc-700 font-medium list-w h-10 hover:bg-zinc-500 rounded-(--r8)',
     addCard: 'bg-dark-3 hover:bg-zinc-800 rounded-(--r8) font-medium',
-    changeTitle:
+    changeBoardTitle:
       'inline-block truncate  w-full max-w-150 px-1 py-0  text-zinc-700 font-bold  hover:rounded-(--r2)  hover:bg-dark-400',
-    confirm: 'h-7 bg-primary text-zinc-700 font-medium hover:bg-primary-light',
-    closeSvg: 'h-7 font-medium hover:bg-zinc-800',
+    changeListTitle:
+      'inline-block truncate  w-full max-w-40 px-1 py-0  text-zinc-200 font-bold  hover:rounded-(--r2)  hover:bg-dark-800',
+    confirm: 'h-8 bg-primary text-zinc-700 font-medium hover:bg-primary-light',
+    closeSvg: 'h-8 font-medium hover:bg-zinc-800',
   };
 
   btnClass = computed(() => {

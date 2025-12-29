@@ -1,5 +1,9 @@
 <div class="list-container list-w">
-  <h3>{{list().title}}</h3>
+  <h3>
+    <tr-title-changing-form btnName="changeListTitle" length="short" [currentTitle]="list().title" (updatedTitle)="changeTitle($event)" class="flex"></tr-title-changing-form>
+  </h3>
+
+    
 
   <div class="flex flex-col gap-3">
     @for(card of list().cards; track card.id){

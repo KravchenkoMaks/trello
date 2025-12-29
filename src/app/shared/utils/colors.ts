@@ -12,8 +12,8 @@ export function getRandomColor(): string {
   usedHues.push(hue);
   if (usedHues.length > 10) usedHues.shift();
 
-  const saturation = Math.floor(65 + Math.random() * 30);
-  const lightness = Math.floor(40 + Math.random() * 30);
+  const saturation = Math.floor(60 + Math.random() * 20);
+  const lightness = Math.floor(55 + Math.random() * 25);
 
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }

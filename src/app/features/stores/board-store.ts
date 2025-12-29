@@ -13,6 +13,7 @@ export class BoardStore {
   readonly board = this.boardSignal.asReadonly();
 
   isBoardUpdating = signal(false);
+  isListUpdating = signal(false);
   isListCreating = signal(false);
   isCardCreating = signal(false);
 
@@ -24,7 +25,7 @@ export class BoardStore {
     return this.boardsService.getBoard(boardId).pipe(tap((board) => this.setBoard({ ...board, id: boardId })));
   }
 
-  changeTitle(newTitle: string): Observable<IBoard> {
+  changeBoardTitle(newTitle: string): Observable<IBoard> {
     const board = this.board();
     const title = newTitle.trim();
 
@@ -64,6 +65,27 @@ export class BoardStore {
         return throwError(() => err);
       }),
       finalize(() => this.isListCreating.set(false))
+    );
+  }
+
+  changeListTitle(newTitle: string, listId: number): Observable<IBoard> {
+    const board = this.board();
+    const title = newTitle.trim();
+
+    if (!board || !title || this.isBoardUpdating()) {
+      return EMPTY;
+    }
+
+    this.isListUpdating.set(true);
+    const id = board.id;
+
+    return this.boardsService.updateList(id, listId, { title }).pipe(
+      switchMap(() => this.refreshBoard(id)),
+      catchError((err) => {
+        console.error('Error updating the board:', err);
+        return throwError(() => err);
+      }),
+      finalize(() => this.isListUpdating.set(false))
     );
   }
 

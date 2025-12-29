@@ -52,16 +52,16 @@
 
 @layer components {
   .main-container {
-    @apply mx-auto my-[5vh] grid h-[90vh] w-[80vw] grid-rows-[10%_90%];
+    @apply grid h-[100vh] w-[100vw] grid-rows-[10%_90%];
   }
   .main-container-header {
-    @apply bg-dark-300 flex items-center rounded-t-(--r16);
+    @apply bg-dark-300 flex items-center;
   }
   .main-container-body {
-    @apply bg-dark-400 flex rounded-b-(--r16) p-4;
+    @apply bg-dark-400 flex p-40;
   }
   .main-scrollbar {
-    @apply flex w-[80vw] gap-4 overflow-x-auto scroll-smooth;
+    @apply flex w-[100vw] gap-4 overflow-x-auto scroll-smooth;
   }
   .home-link {
     @apply bg-dark-300 hover:bg-dark-400 text-dark-700 rounded-(--r8) px-2 py-1 font-semibold;

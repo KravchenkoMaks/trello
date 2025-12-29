@@ -4,11 +4,11 @@ import { Btn } from '@buttons';
 import { BoardStore } from '@stores';
 import { DialogService, ToastService } from '@services';
 import { IList } from '@interfaces';
-import { CardCreatingForm } from '@forms';
+import { CardCreatingForm, TitleChangingForm } from '@forms';
 
 @Component({
   selector: 'tr-list',
-  imports: [Card, Btn, CardCreatingForm],
+  imports: [Card, Btn, CardCreatingForm, TitleChangingForm],
   templateUrl: './list.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,4 +37,11 @@ export class List {
   closeCardAddingForm = (): void => {
     this.isCardAdding.set(false);
   };
+
+  changeTitle(newTitle: string): void {
+    this.store.changeListTitle(newTitle, this.list().id).subscribe({
+      next: () => this.toast.showSuccess('The name of the list has been updated'),
+      error: () => this.toast.showError('Error updating the list'),
+    });
+  }
 }

@@ -40,6 +40,12 @@ export class BoardsService {
     return this.httpClient.post<IResponse>(`${this.apiUrl}/board/${id}/list`, dto, { headers: this.headers });
   }
 
+  updateList(boardId: number, listId: number, updateData: Partial<IBoard>): Observable<IResponse> {
+    return this.httpClient.put<IResponse>(`${this.apiUrl}/board/${boardId}/list/${listId}`, updateData, {
+      headers: this.headers,
+    });
+  }
+
   createCard(id: number, dto: INewCard): Observable<IResponse> {
     return this.httpClient.post<IResponse>(`${this.apiUrl}/board/${id}/card`, dto, { headers: this.headers });
   }
