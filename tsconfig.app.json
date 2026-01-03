@@ -22,9 +22,8 @@
       "@services": ["./src/app/features/services/index.ts"],
       // "@stores/*": ["./src/app/features/stores/*"],
       "@stores": ["./src/app/features/stores/index.ts"],
-      "@forms": ["./src/app/features/forms/index.ts"],
-      // "@forms/*": ["./src/app/features/forms/*"],
-
+      "@forms": ["./src/app/shared/forms/index.ts"],
+      // "@forms/*": ["./src/app/shared/forms/*"],
       // "@buttons/*": ["./src/app/shared/buttons/*"],
       "@buttons": ["./src/app/shared/buttons/index.ts"],
       // "@inputs/*": ["./src/app/shared/inputs/*"],
