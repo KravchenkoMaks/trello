@@ -56,11 +56,6 @@ export class CardCreatingForm {
       return;
     }
 
-    if (this.formGroup.invalid) {
-      this.formGroup.markAllAsTouched();
-      return;
-    }
-
     this.newTitle.emit(title);
     this.formGroup.reset();
 
