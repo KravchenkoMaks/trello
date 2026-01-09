@@ -21,6 +21,7 @@ export class ListCreatingForm {
   onClose = input<() => void>();
   newTitle = output<string>();
 
+  // I saw the same regexp in other components. Can be added to utils and reused.
   readonly formGroup = this.fb.group({
     title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_]+$/)]],
   });

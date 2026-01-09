@@ -10,7 +10,7 @@ import { TBtnName } from '@types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Btn {
-  label = input<string>('');
+  label = input<string>(''); // Please use `<ng-content></ng-content>` instead in the template (allows any layout, not only strings)
   name = input<TBtnName>();
   type = input<'button' | 'submit'>('button');
   disabled = input<boolean>(false);
@@ -26,6 +26,7 @@ export class Btn {
   baseClasses =
     'cursor-pointer px-2 py-1  transition-colors duration-200 disabled:cursor-not-allowed flex items-center justify-center  rounded-(--r4)';
 
+  // Why do we need all these variants? The approach in the `SingleTextInput` is better
   private readonly btnClassMap: Record<TBtnName, string> = {
     createBoard: 'board-w board-h bg-main-800 text-main-500 font-medium rounded-(--r8) hover:bg-dark-1',
     createBoardConfirm: 'w-full bg-primary text-main-800 font-medium disabled:bg-main-700 hover:bg-primary-light',

@@ -11,7 +11,7 @@
         (savedByEnter)="onSubmit('enter')"
       ></tr-single-text-input>
 
-      <tr-validation-error [control]="titleCtrl"></tr-validation-error>
+      <tr-validation-error [control]="titleCtrl" [errorName]="'forbiddenPattern'" />
     </div>
 
     <div class="flex gap-1">

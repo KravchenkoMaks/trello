@@ -10,6 +10,7 @@
 /.angular/cache
 
 /notes
+*.stackdump
 
 # === Node dependencies ===
 /node_modules

@@ -31,8 +31,41 @@ export class CardCreatingForm {
   @ViewChild(SingleTextInput) inputRef!: SingleTextInput;
 
   onClose = input<() => void>();
+  onSubmitProp = input<(title: string) => Promise<unknown>>();
+
   newTitle = output<string>();
 
+  // Could we provide the error message here. I believe there is a way of providing a message for each validation rule. Something like:
+  /*
+    import { AbstractControl, ValidatorFn } from '@angular/forms';
+
+    export function forbiddenCharactersPattern(message: string): ValidatorFn {
+      return (control: AbstractControl): { [key: string]: any } | null => {
+        const regex = /^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_ \n]+$/;
+        if (!control.value || regex.test(control.value)) {
+          return null;
+        }
+        return { forbiddenPattern: { message } };
+      };
+    }
+  */
+
+  /*
+  // In component:
+  readonly formGroup = this.fb.group({
+    title: ['', [Validators.required, forbiddenCharactersPattern('The card title should only include letters and numbers')]],
+  });
+   */
+
+  /*
+  // Then in template:
+  <div *ngIf="titleControl?.hasError('forbiddenPattern')">
+    {{ titleControl?.errors?.['forbiddenPattern'].message }}
+  </div>
+
+  // Or you could update the `tr-validation-error` to catch the actual error there (as you want to have reusable error message rendering)
+  <tr-validation-error [control]="titleCtrl" [error]="'forbiddenPattern'"></tr-validation-error>
+   */
   readonly formGroup = this.fb.group({
     title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_ \n]+$/)]],
   });
@@ -41,7 +74,7 @@ export class CardCreatingForm {
 
   private lastSaveSource: 'enter' | 'blur' | null = null;
 
-  onSubmit = (source: 'enter' | 'blur' = 'enter') => {
+  async onSubmit(source: 'enter' | 'blur' = 'enter'): Promise<void> {
     const title = this.formGroup.controls['title'].value?.trim();
     if (!title) {
       this.close();
@@ -56,7 +89,7 @@ export class CardCreatingForm {
       return;
     }
 
-    this.newTitle.emit(title);
+    await this.onSubmitProp()?.(title);
     this.formGroup.reset();
 
     setTimeout(() => {

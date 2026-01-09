@@ -12,4 +12,10 @@ export class ValidationMessagesPipe implements PipeTransform {
     if (control.errors?.['pattern']) return 'invalid characters present';
     return '';
   }
+  //  todo: create control errors pattern
+  // transform(control: AbstractControl | null, errorName?: string): string {
+  //   if (!control || (!control.touched && !control.dirty)) return '\u00A0';
+  //   if (control.errors?.[errorName].message) return control.errors?.[errorName].message;
+  //   return '';
+  // }
 }

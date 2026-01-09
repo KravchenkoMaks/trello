@@ -134,6 +134,7 @@ export class SingleTextInput implements ControlValueAccessor {
     this.onChange(this.value);
   }
 
+  // Complex logic logic
   private calculateExtraSpace(textarea: HTMLTextAreaElement): number {
     const lineHeight = parseFloat(getComputedStyle(textarea).lineHeight || '20');
     const value = textarea.value;

@@ -72,9 +72,9 @@ export class DynamicTextInput implements ControlValueAccessor {
     this.value = inputElement.value;
     this.onChange(this.value);
 
-    console.log(this.inputLength());
+    console.log(this.inputLength()); // Please remove the log()
     if (this.inputLength() === 'long') {
-      inputElement.style.width = `calc(${Math.min(this.value.length + 3, 96)}ch + 2px)`;
+      inputElement.style.width = `calc(${Math.min(this.value.length + 3, 96)}ch + 2px)`; // Looks complicated. You cannot expect that his will work correctly as the font usually doesn't have constant char width. I would prefer simple constant element width.
     } else {
       inputElement.style.width = `calc(${Math.min(this.value.length + 3, 20)}ch + 2px)`;
     }

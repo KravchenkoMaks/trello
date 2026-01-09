@@ -3,6 +3,7 @@ import { IBoard, INewCard } from '@interfaces';
 import { BoardsService } from '@services';
 import { catchError, EMPTY, finalize, Observable, switchMap, tap, throwError } from 'rxjs';
 
+// I wouldn't make it a singleton
 @Injectable({
   providedIn: 'root',
 })
