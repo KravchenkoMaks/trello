@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Btn } from '@buttons';
+import { TITLE_PATTERN, TITLE_PATTERN_MESSAGE, TITLE_REQUIRED_MESSAGE } from '@constants';
 import { ClickOutsideDirective } from '@directives';
 import { ValidationError } from '@errors';
 import { SingleTextInput } from '@inputs';
 import { BoardStore } from '@stores';
+import { forbiddenCharactersPattern, requiredWithMessage } from '@validators';
 
 @Component({
   selector: 'tr-list-creating-form',
@@ -21,9 +23,11 @@ export class ListCreatingForm {
   onClose = input<() => void>();
   newTitle = output<string>();
 
-  // I saw the same regexp in other components. Can be added to utils and reused.
   readonly formGroup = this.fb.group({
-    title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_]+$/)]],
+    title: [
+      '',
+      [requiredWithMessage(TITLE_REQUIRED_MESSAGE), forbiddenCharactersPattern(TITLE_PATTERN, TITLE_PATTERN_MESSAGE)],
+    ],
   });
 
   titleCtrl = computed(() => this.formGroup.controls['title']);

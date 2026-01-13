@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, computed, output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Btn } from '@buttons';
 import { ValidationError } from '@errors';
 import { SingleTextInput } from '@inputs';
+import { forbiddenCharactersPattern, requiredWithMessage } from '@validators';
+import { TITLE_PATTERN, TITLE_PATTERN_MESSAGE, TITLE_REQUIRED_MESSAGE } from '@constants';
 
 @Component({
   selector: 'tr-board-creating-form',
@@ -17,7 +19,10 @@ export class BoardCreatingForm {
   newTitle = output<string>();
 
   readonly formGroup = this.fb.group({
-    title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_]+$/)]],
+    title: [
+      '',
+      [requiredWithMessage(TITLE_REQUIRED_MESSAGE), forbiddenCharactersPattern(TITLE_PATTERN, TITLE_PATTERN_MESSAGE)],
+    ],
   });
 
   titleCtrl = computed(() => this.formGroup.controls['title']);

@@ -22,7 +22,9 @@
       "@pipes": ["./src/app/shared/pipes/index.ts"],
       "@directives": ["./src/app/shared/directives/index.ts"],
       "@utils": ["./src/app/shared/utils/index.ts"],
-      "@errors": ["./src/app/shared/errors/index.ts"]
+      "@errors": ["./src/app/shared/errors/index.ts"],
+      "@validators": ["./src/app/shared/validators/index.ts"],
+      "@constants": ["./src/app/shared/constants/index.ts"]
     }
   },
   "include": ["src/**/*.ts"],

@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, output, signal, ViewChild } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Btn } from '@buttons';
 import { ValidationError } from '@errors';
 import { DynamicTextInput } from '@inputs';
+import { forbiddenCharactersPattern, requiredWithMessage } from '@validators';
+import { TITLE_PATTERN, TITLE_PATTERN_MESSAGE, TITLE_REQUIRED_MESSAGE } from '@constants';
 
 import { BoardStore } from '@stores';
 import { TBtnName } from '@types';
@@ -29,7 +31,10 @@ export class TitleChangingForm {
   isEditing = signal<boolean>(false);
 
   readonly formGroup = this.fb.group({
-    title: ['', [Validators.required, Validators.pattern(/^(?!.*[эЭёЁ])[a-zA-Zа-яА-ЯїЇіІєЄґҐ0-9 .\-_]+$/)]],
+    title: [
+      '',
+      [requiredWithMessage(TITLE_REQUIRED_MESSAGE), forbiddenCharactersPattern(TITLE_PATTERN, TITLE_PATTERN_MESSAGE)],
+    ],
   });
 
   titleCtrl = computed(() => this.formGroup.controls['title']);
